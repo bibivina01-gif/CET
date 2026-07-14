@@ -177,6 +177,36 @@
       animation:pulse 1.8s infinite;
     }
 
+    .topbar-right{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+
+    .auth-btn{
+      border:1px solid var(--line-bright);
+      background:rgba(255,255,255,.03);
+      color:#d7dae0;
+      font-size:.72rem;
+      letter-spacing:.1em;
+      padding:8px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:border-color .2s ease,background .2s ease;
+    }
+
+    .auth-btn:hover{
+      border-color:var(--red-bright);
+      background:rgba(143,23,32,.14);
+    }
+
+    .auth-btn.is-authed{
+      border-color:rgba(194,43,53,.5);
+      color:#fff;
+      background:linear-gradient(90deg,rgba(143,23,32,.28),rgba(143,23,32,.05));
+    }
+
     @keyframes pulse{
       0%,100%{opacity:.45}
       50%{opacity:1}
@@ -963,6 +993,230 @@
       transform:none;
     }
 
+    /* ---- Auth modal ---- */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:90;
+      background:rgba(3,3,4,.78);
+      backdrop-filter:blur(4px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .modal-backdrop.open{display:flex}
+
+    .modal{
+      width:min(400px,100%);
+      border:1px solid var(--line-bright);
+      border-radius:16px;
+      background:linear-gradient(180deg,rgba(255,255,255,.03),transparent),#0c0d10;
+      box-shadow:var(--shadow);
+      padding:30px;
+      position:relative;
+    }
+
+    .modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:26px;
+      height:26px;
+      border:1px solid var(--line);
+      border-radius:50%;
+      background:transparent;
+      color:var(--muted);
+      cursor:pointer;
+      font-size:.85rem;
+      line-height:1;
+    }
+
+    .modal-close:hover{color:#fff;border-color:var(--red-bright)}
+
+    .modal-eyebrow{
+      color:var(--red-bright);
+      font-size:.68rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+
+    .modal h3{
+      margin:0 0 6px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.5rem;
+      letter-spacing:-.02em;
+    }
+
+    .modal-sub{
+      margin:0 0 22px;
+      color:var(--muted);
+      font-size:.84rem;
+    }
+
+    .modal-tabs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      border:1px solid var(--line);
+      border-radius:10px;
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+
+    .modal-tab{
+      padding:10px;
+      text-align:center;
+      font-size:.78rem;
+      letter-spacing:.08em;
+      color:var(--muted);
+      background:var(--panel);
+      cursor:pointer;
+      border:none;
+      font-family:inherit;
+    }
+
+    .modal-tab.active{
+      color:#fff;
+      background:linear-gradient(90deg,rgba(143,23,32,.4),rgba(143,23,32,.18));
+    }
+
+    .auth-form{display:none;flex-direction:column;gap:14px}
+    .auth-form.active{display:flex}
+
+    .form-field{display:flex;flex-direction:column;gap:6px}
+
+    .form-field label{
+      font-size:.72rem;
+      letter-spacing:.08em;
+      color:var(--dim);
+      text-transform:uppercase;
+    }
+
+    .form-field input{
+      background:#08090b;
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:11px 12px;
+      color:var(--text);
+      font-size:.9rem;
+      font-family:inherit;
+    }
+
+    .form-field input:focus{
+      outline:none;
+      border-color:var(--red-bright);
+    }
+
+    .form-submit{
+      margin-top:6px;
+      padding:12px;
+      border:1px solid var(--red-bright);
+      background:linear-gradient(90deg,var(--red-dark),var(--red));
+      color:#fff;
+      font-size:.85rem;
+      letter-spacing:.08em;
+      border-radius:9px;
+      cursor:pointer;
+    }
+
+    .form-submit:hover{filter:brightness(1.12)}
+
+    .form-error{
+      min-height:16px;
+      color:#e77680;
+      font-size:.78rem;
+    }
+
+    .form-note{
+      margin-top:16px;
+      color:var(--dim);
+      font-size:.72rem;
+      line-height:1.6;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+    }
+
+    /* ---- Clearance-gated roster ---- */
+    .roster-gate{
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+      padding:16px 20px;
+      border:1px solid rgba(194,43,53,.4);
+      border-radius:12px;
+      background:linear-gradient(90deg,rgba(143,23,32,.14),rgba(143,23,32,.02));
+    }
+
+    body:not(.authed) .roster-gate{display:flex}
+
+    .roster-gate p{
+      margin:0;
+      color:#c9ccd2;
+      font-size:.84rem;
+    }
+
+    .person{position:relative}
+
+    .person-lock{
+      position:absolute;
+      inset:0;
+      z-index:3;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      background:rgba(6,7,8,.72);
+      backdrop-filter:blur(2px);
+      border-radius:16px;
+      text-align:center;
+      padding:20px;
+    }
+
+    body.authed .person-lock{display:none}
+
+    .person-lock svg{opacity:.8}
+
+    .person-lock span{
+      color:#c7cad0;
+      font-size:.74rem;
+      letter-spacing:.04em;
+    }
+
+    .person > p,
+    .dossier{filter:blur(6px);transition:filter .3s ease}
+    body.authed .person > p,
+    body.authed .dossier{filter:none}
+
+    .dossier{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      display:grid;
+      gap:8px;
+    }
+
+    .dossier-row{
+      display:grid;
+      grid-template-columns:74px minmax(0,1fr);
+      gap:10px;
+      font-size:.8rem;
+    }
+
+    .dossier-row span:first-child{
+      color:var(--dim);
+      letter-spacing:.04em;
+    }
+
+    .dossier-row span:last-child{
+      color:#b8bcc4;
+    }
+
     @media (prefers-reduced-motion: reduce){
       body::before,
       body::after,
@@ -1009,7 +1263,9 @@
       .shell{width:min(100% - 24px,1180px)}
       .topbar-inner{min-height:58px}
       .brand-copy span{display:none}
-      .security{font-size:.62rem}
+      .security{display:none}
+      .topbar-right{gap:10px}
+      .auth-btn{font-size:.64rem;padding:7px 10px}
       .hero{padding:78px 0 54px}
       .full-name{letter-spacing:.12em;line-height:1.7}
       .hero-summary{font-size:.94rem}
@@ -1043,7 +1299,10 @@
           <span>Capital Punishment Enforcement Team</span>
         </span>
       </a>
-      <div class="security">Classified / Level Black</div>
+      <div class="topbar-right">
+        <div class="security">Classified / Level Black</div>
+        <button class="auth-btn" id="authBtn" type="button">요원 정보 열람 · 로그인</button>
+      </div>
     </div>
   </header>
 
@@ -1372,8 +1631,20 @@
           </div>
         </div>
 
+        <div class="roster-gate">
+          <p>행맨 신상 정보는 인가된 이용자만 열람할 수 있습니다. 가입 후 즉시 열람 등급이 부여됩니다.</p>
+          <button class="auth-btn" id="rosterAuthBtn" type="button">로그인 / 가입하기</button>
+        </div>
+
         <div class="roster">
           <article class="person">
+            <div class="person-lock">
+              <svg width="26" height="30" viewBox="0 0 26 30" fill="none" aria-hidden="true">
+                <rect x="2" y="13" width="22" height="15" rx="2" stroke="#c22b35" stroke-width="2"/>
+                <path d="M6 13V8a7 7 0 0 1 14 0v5" stroke="#c22b35" stroke-width="2"/>
+              </svg>
+              <span>인가 등급 미달</span>
+            </div>
             <div class="person-role">Team Leader</div>
             <h3>Dilemma</h3>
             <div class="ko">딜레마</div>
@@ -1381,9 +1652,21 @@
               C.E.T.의 팀장. 부서 전체를 하나의 폐쇄적 공동체로 묶어 유지하며,
               내부 징계와 작전 재량에 막강한 영향력을 행사한다.
             </p>
+            <div class="dossier">
+              <div class="dossier-row"><span>각성 등급</span><span>Class-S (추정)</span></div>
+              <div class="dossier-row"><span>집행 성향</span><span>결정은 신속하게, 책임은 전적으로 홀로 진다.</span></div>
+              <div class="dossier-row"><span>특이사항</span><span>팀 전원의 파장 기록을 열람할 수 있는 유일한 인가자.</span></div>
+            </div>
           </article>
 
           <article class="person">
+            <div class="person-lock">
+              <svg width="26" height="30" viewBox="0 0 26 30" fill="none" aria-hidden="true">
+                <rect x="2" y="13" width="22" height="15" rx="2" stroke="#c22b35" stroke-width="2"/>
+                <path d="M6 13V8a7 7 0 0 1 14 0v5" stroke="#c22b35" stroke-width="2"/>
+              </svg>
+              <span>인가 등급 미달</span>
+            </div>
             <div class="person-role">Dedicated Guide</div>
             <h3>Simon</h3>
             <div class="ko">시몬</div>
@@ -1391,9 +1674,21 @@
               행맨들의 파장 안정과 회복을 전담하는 가이드. 신규 인원 영입 시
               최종 파장 적합성 평가에도 참여한다.
             </p>
+            <div class="dossier">
+              <div class="dossier-row"><span>담당 인원</span><span>소속 행맨 전원</span></div>
+              <div class="dossier-row"><span>정기 업무</span><span>매주 정신 오염 수치 기록, 이상 징후 시 격리 권고</span></div>
+              <div class="dossier-row"><span>매칭률</span><span>비공개</span></div>
+            </div>
           </article>
 
           <article class="person">
+            <div class="person-lock">
+              <svg width="26" height="30" viewBox="0 0 26 30" fill="none" aria-hidden="true">
+                <rect x="2" y="13" width="22" height="15" rx="2" stroke="#c22b35" stroke-width="2"/>
+                <path d="M6 13V8a7 7 0 0 1 14 0v5" stroke="#c22b35" stroke-width="2"/>
+              </svg>
+              <span>인가 등급 미달</span>
+            </div>
             <div class="person-role">Hangman</div>
             <h3>Pandora</h3>
             <div class="ko">판도라</div>
@@ -1401,9 +1696,21 @@
               사형 집행 대상자의 추적과 최종 집행을 수행하는 현장 요원.
               각자의 방식으로 부서의 신조를 구현한다.
             </p>
+            <div class="dossier">
+              <div class="dossier-row"><span>각성 능력</span><span>비공개 (열람 등급 미달)</span></div>
+              <div class="dossier-row"><span>집행 스타일</span><span>대상과의 대화를 마친 뒤에만 집행한다.</span></div>
+              <div class="dossier-row"><span>누적 집행</span><span>기밀</span></div>
+            </div>
           </article>
 
           <article class="person">
+            <div class="person-lock">
+              <svg width="26" height="30" viewBox="0 0 26 30" fill="none" aria-hidden="true">
+                <rect x="2" y="13" width="22" height="15" rx="2" stroke="#c22b35" stroke-width="2"/>
+                <path d="M6 13V8a7 7 0 0 1 14 0v5" stroke="#c22b35" stroke-width="2"/>
+              </svg>
+              <span>인가 등급 미달</span>
+            </div>
             <div class="person-role">Hangman</div>
             <h3>Cosmos</h3>
             <div class="ko">코스모스</div>
@@ -1411,6 +1718,11 @@
               포획 작전과 단독 집행을 수행하는 현장 요원.
               C.E.T. 특유의 원칙과 모순을 동시에 상징한다.
             </p>
+            <div class="dossier">
+              <div class="dossier-row"><span>각성 능력</span><span>비공개 (열람 등급 미달)</span></div>
+              <div class="dossier-row"><span>집행 스타일</span><span>최소한의 절차, 최단 시간 집행을 선호한다.</span></div>
+              <div class="dossier-row"><span>누적 집행</span><span>기밀</span></div>
+            </div>
           </article>
         </div>
       </div>
@@ -1509,6 +1821,55 @@
     </div>
   </footer>
 
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" type="button" aria-label="닫기">✕</button>
+      <div class="modal-eyebrow">Access Terminal</div>
+      <h3>요원 정보 열람 인가</h3>
+      <p class="modal-sub">로그인 또는 가입 시 행맨 신상 파일 열람 권한이 부여됩니다.</p>
+
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tabLogin" type="button">로그인</button>
+        <button class="modal-tab" id="tabSignup" type="button">가입</button>
+      </div>
+
+      <form class="auth-form active" id="loginForm">
+        <div class="form-field">
+          <label for="loginId">아이디</label>
+          <input id="loginId" type="text" autocomplete="username" required />
+        </div>
+        <div class="form-field">
+          <label for="loginPw">비밀번호</label>
+          <input id="loginPw" type="password" autocomplete="current-password" required />
+        </div>
+        <div class="form-error" id="loginError"></div>
+        <button class="form-submit" type="submit">로그인</button>
+      </form>
+
+      <form class="auth-form" id="signupForm">
+        <div class="form-field">
+          <label for="signupId">아이디</label>
+          <input id="signupId" type="text" autocomplete="username" required minlength="3" />
+        </div>
+        <div class="form-field">
+          <label for="signupPw">비밀번호</label>
+          <input id="signupPw" type="password" autocomplete="new-password" required minlength="4" />
+        </div>
+        <div class="form-field">
+          <label for="signupPw2">비밀번호 확인</label>
+          <input id="signupPw2" type="password" autocomplete="new-password" required minlength="4" />
+        </div>
+        <div class="form-error" id="signupError"></div>
+        <button class="form-submit" type="submit">가입하고 열람하기</button>
+      </form>
+
+      <p class="form-note">
+        본 계정 시스템은 이 페이지를 열람 중인 브라우저에만 저장되는 데모 기능입니다.
+        다른 기기·브라우저와 동기화되지 않으며, 실제 개인정보나 재사용 중인 비밀번호는 입력하지 마세요.
+      </p>
+    </div>
+  </div>
+
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -1581,6 +1942,135 @@
         });
       }, { threshold: 0.4 });
       tallyObserver.observe(wrap.closest('.hero'));
+    })();
+
+    // ---- Access terminal: local, demo-only account system ----
+    (function(){
+      const STORAGE_USERS = 'cet_users';
+      const STORAGE_SESSION = 'cet_session';
+
+      const modal = document.getElementById('authModal');
+      const modalClose = document.getElementById('modalClose');
+      const authBtn = document.getElementById('authBtn');
+      const rosterAuthBtn = document.getElementById('rosterAuthBtn');
+      const tabLogin = document.getElementById('tabLogin');
+      const tabSignup = document.getElementById('tabSignup');
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const loginError = document.getElementById('loginError');
+      const signupError = document.getElementById('signupError');
+
+      function getUsers(){
+        try { return JSON.parse(localStorage.getItem(STORAGE_USERS)) || {}; }
+        catch(e){ return {}; }
+      }
+      function saveUsers(users){
+        localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
+      }
+      function getSession(){
+        return localStorage.getItem(STORAGE_SESSION);
+      }
+      function setSession(id){
+        localStorage.setItem(STORAGE_SESSION, id);
+        applyAuthState();
+      }
+      function clearSession(){
+        localStorage.removeItem(STORAGE_SESSION);
+        applyAuthState();
+      }
+
+      function applyAuthState(){
+        const id = getSession();
+        if (id) {
+          document.body.classList.add('authed');
+          [authBtn, rosterAuthBtn].forEach((btn) => {
+            if (!btn) return;
+            btn.textContent = `인가됨 · ${id} (로그아웃)`;
+            btn.classList.add('is-authed');
+          });
+        } else {
+          document.body.classList.remove('authed');
+          [authBtn, rosterAuthBtn].forEach((btn) => {
+            if (!btn) return;
+            btn.textContent = '요원 정보 열람 · 로그인';
+            btn.classList.remove('is-authed');
+          });
+        }
+      }
+
+      function openModal(){
+        if (getSession()) { clearSession(); return; }
+        modal.classList.add('open');
+        loginError.textContent = '';
+        signupError.textContent = '';
+      }
+      function closeModal(){
+        modal.classList.remove('open');
+      }
+
+      function switchTab(which){
+        const loginActive = which === 'login';
+        tabLogin.classList.toggle('active', loginActive);
+        tabSignup.classList.toggle('active', !loginActive);
+        loginForm.classList.toggle('active', loginActive);
+        signupForm.classList.toggle('active', !loginActive);
+        loginError.textContent = '';
+        signupError.textContent = '';
+      }
+
+      authBtn.addEventListener('click', openModal);
+      if (rosterAuthBtn) rosterAuthBtn.addEventListener('click', openModal);
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+      tabLogin.addEventListener('click', () => switchTab('login'));
+      tabSignup.addEventListener('click', () => switchTab('signup'));
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('loginId').value.trim();
+        const pw = document.getElementById('loginPw').value;
+        const users = getUsers();
+        if (!users[id] || users[id] !== pw) {
+          loginError.textContent = '아이디 또는 비밀번호가 일치하지 않습니다.';
+          return;
+        }
+        setSession(id);
+        closeModal();
+      });
+
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('signupId').value.trim();
+        const pw = document.getElementById('signupPw').value;
+        const pw2 = document.getElementById('signupPw2').value;
+        const users = getUsers();
+
+        if (id.length < 3) {
+          signupError.textContent = '아이디는 3자 이상이어야 합니다.';
+          return;
+        }
+        if (users[id]) {
+          signupError.textContent = '이미 등록된 아이디입니다.';
+          return;
+        }
+        if (pw.length < 4) {
+          signupError.textContent = '비밀번호는 4자 이상이어야 합니다.';
+          return;
+        }
+        if (pw !== pw2) {
+          signupError.textContent = '비밀번호가 일치하지 않습니다.';
+          return;
+        }
+
+        users[id] = pw;
+        saveUsers(users);
+        setSession(id);
+        closeModal();
+      });
+
+      applyAuthState();
     })();
   </script>
 </body>
