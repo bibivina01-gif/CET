@@ -1687,6 +1687,25 @@
     .admin-row-actions{display:flex;gap:8px;flex-wrap:wrap}
     .admin-row-actions .auth-btn{padding:7px 12px;font-size:.68rem}
 
+    .admin-delete-btn{
+      border-color:rgba(231,63,75,.72);
+      color:#ff9ca4;
+      background:rgba(143,23,32,.12);
+    }
+
+    .admin-delete-btn:hover{
+      border-color:#ef4652;
+      color:#fff;
+      background:rgba(143,23,32,.32);
+    }
+
+    .admin-delete-btn:disabled{
+      border-color:var(--line);
+      color:var(--dim);
+      background:rgba(255,255,255,.02);
+      cursor:not-allowed;
+    }
+
     @media (prefers-reduced-motion: reduce){
       body::before,
       body::after,
@@ -1849,6 +1868,18 @@
       min-height:150px;
       padding:14px;
       resize:vertical;
+    }
+
+    #postAuthorName{
+      grid-column:1 / -1;
+    }
+
+    .post-author-help{
+      grid-column:1 / -1;
+      margin-top:-3px;
+      color:var(--dim);
+      font-size:.7rem;
+      line-height:1.5;
     }
 
     .cafe-write-form select:focus,
@@ -2175,6 +2206,77 @@
       .post-detail-images{grid-template-columns:1fr;padding-left:20px;padding-right:20px}
       .post-detail-actions{padding-left:20px;padding-right:20px}
       .comment-section{padding-left:20px;padding-right:20px}
+    }
+
+  
+
+    /* ---- Mobile modal scrolling fix ---- */
+    .modal-backdrop{
+      overflow-y:auto;
+      overscroll-behavior-y:contain;
+      -webkit-overflow-scrolling:touch;
+      touch-action:pan-y;
+    }
+
+    #agentModal .modal,
+    #postComposeModal .modal{
+      max-height:calc(100dvh - 40px);
+      overflow-y:auto;
+      overscroll-behavior-y:contain;
+      -webkit-overflow-scrolling:touch;
+      touch-action:pan-y;
+      scrollbar-gutter:stable;
+    }
+
+    @supports not (height:100dvh){
+      #agentModal .modal,
+      #postComposeModal .modal{
+        max-height:calc(100vh - 40px);
+      }
+    }
+
+    @media (max-width:760px){
+      .modal-backdrop{
+        align-items:flex-start;
+        justify-content:center;
+        padding-top:max(10px, env(safe-area-inset-top));
+        padding-right:10px;
+        padding-bottom:max(22px, env(safe-area-inset-bottom));
+        padding-left:10px;
+      }
+
+      #agentModal .modal,
+      #postComposeModal .modal{
+        width:100% !important;
+        max-height:calc(100dvh - 32px);
+        margin:0;
+        border-radius:13px;
+      }
+
+      #agentModal .modal-close,
+      #postComposeModal .modal-close{
+        position:sticky;
+        top:10px;
+        float:right;
+        z-index:10;
+        margin-bottom:-28px;
+        background:#0c0d10;
+      }
+
+      #agentModal .auth-form,
+      #postComposeModal .cafe-write-form{
+        touch-action:pan-y;
+      }
+
+      #agentModal textarea,
+      #postComposeModal textarea{
+        min-height:120px;
+      }
+
+      #agentModal .form-submit,
+      #postComposeModal .form-submit{
+        min-height:44px;
+      }
     }
 
   </style>
@@ -2613,8 +2715,8 @@
               <span>인가 등급 미달</span>
             </div>
             <div class="person-role">Hangman</div>
-            <h3>Cosmo</h3>
-            <div class="ko">코스모</div>
+            <h3>Cosmos</h3>
+            <div class="ko">코스모스</div>
             <p>
               포획 작전과 단독 집행을 수행하는 현장 요원.
               C.E.T. 특유의 원칙과 모순을 동시에 상징한다.
@@ -2849,7 +2951,7 @@
       <button class="modal-close" id="adminModalClose" type="button" aria-label="닫기">✕</button>
       <div class="modal-eyebrow">Admin Console</div>
       <h3>회원 관리</h3>
-      <p class="modal-sub">게시 권한과 관리자 지정을 즉시 변경할 수 있습니다.</p>
+      <p class="modal-sub">게시 권한·관리자 지정·회원 계정 삭제를 관리할 수 있습니다. 회원 삭제 후에도 기존 게시글과 댓글은 기록으로 유지됩니다.</p>
       <div class="admin-list" id="adminUserList">
         <p class="post-empty">불러오는 중…</p>
       </div>
@@ -2956,6 +3058,8 @@
             <option value="자유">자유</option>
           </select>
           <input id="postTitle" type="text" placeholder="제목" maxlength="60" required />
+          <input id="postAuthorName" type="text" placeholder="글에 표시할 요원 이름" maxlength="30" required />
+          <span class="post-author-help">로그인 계정과 별개로 이 게시글에 표시할 요원 이름을 자유롭게 입력할 수 있습니다.</span>
         </div>
         <textarea id="postBody" placeholder="내용을 입력하세요" maxlength="3000" required></textarea>
         <div class="post-upload-row">
@@ -3000,6 +3104,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js"></script>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -3162,6 +3267,8 @@
       const auth = firebase.auth();
       const db = firebase.firestore();
       const storage = firebase.storage();
+      const cloudFunctions = firebase.app().functions('us-east1');
+      const deleteMemberAccountFn = cloudFunctions.httpsCallable('deleteMemberAccount');
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
 
       let currentUserDoc = null;
@@ -3184,6 +3291,7 @@
       const postComposeModal = document.getElementById('postComposeModal');
       const postComposeClose = document.getElementById('postComposeClose');
       const postForm = document.getElementById('postForm');
+      const postAuthorName = document.getElementById('postAuthorName');
       const postError = document.getElementById('postError');
       const postList = document.getElementById('postList');
       const postImages = document.getElementById('postImages');
@@ -3356,7 +3464,17 @@
       function openPostComposer(){
         if (!auth.currentUser || !currentUserDoc || !currentUserDoc.canPost) return;
         postError.textContent = '';
+        if (!postAuthorName.value.trim()) {
+          postAuthorName.value = localStorage.getItem('cetPostAuthorName')
+            || currentUserDoc.username
+            || emailToId(auth.currentUser.email);
+        }
         postComposeModal.classList.add('open');
+        requestAnimationFrame(() => {
+          const panel = postComposeModal.querySelector('.modal');
+          if (panel) panel.scrollTop = 0;
+          postComposeModal.scrollTop = 0;
+        });
         window.setTimeout(() => document.getElementById('postTitle').focus(), 0);
       }
 
@@ -3616,7 +3734,13 @@
         }
         const category = document.getElementById('postCategory').value;
         const title = document.getElementById('postTitle').value.trim();
+        const authorName = postAuthorName.value.trim();
         const body = document.getElementById('postBody').value.trim();
+        if (!authorName) {
+          postError.textContent = '글에 표시할 요원 이름을 입력해주세요.';
+          postAuthorName.focus();
+          return;
+        }
         if (!title || !body) return;
 
         const submitBtn = postForm.querySelector('.form-submit');
@@ -3628,13 +3752,14 @@
           const imageUrls = await uploadPostImages(selectedPostFiles);
           await db.collection('posts').add({
             authorUid: auth.currentUser.uid,
-            authorName: currentUserDoc.username || emailToId(auth.currentUser.email),
+            authorName,
             category,
             title,
             body,
             imageUrls,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           });
+          localStorage.setItem('cetPostAuthorName', authorName);
           postForm.reset();
           selectedPostFiles = [];
           renderSelectedPostImages();
@@ -3815,7 +3940,14 @@
         agentError.textContent = '';
       }
 
-      function openAgentModal(){ agentModal.classList.add('open'); }
+      function openAgentModal(){
+        agentModal.classList.add('open');
+        requestAnimationFrame(() => {
+          const panel = agentModal.querySelector('.modal');
+          if (panel) panel.scrollTop = 0;
+          agentModal.scrollTop = 0;
+        });
+      }
       function closeAgentModal(){ agentModal.classList.remove('open'); resetAgentForm(); }
       function openAgentDetail(){ agentDetailModal.classList.add('open'); }
       function closeAgentDetail(){ agentDetailModal.classList.remove('open'); agentDetailBody.innerHTML = ''; }
@@ -4098,24 +4230,76 @@
       });
 
       // ---- Admin console ----
-      function loadAdminUsers(){
+      function describeFunctionError(err){
+        const code = String(err && err.code ? err.code : '');
+        if (code.includes('unauthenticated')) return '로그인이 풀렸습니다. 다시 로그인해주세요.';
+        if (code.includes('permission-denied')) return '관리자 권한이 확인되지 않았습니다.';
+        if (code.includes('failed-precondition')) return err.message || '현재 상태에서는 삭제할 수 없습니다.';
+        if (code.includes('not-found')) return '이미 삭제되었거나 존재하지 않는 회원입니다.';
+        if (code.includes('unavailable')) return '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.';
+        return err && err.message ? err.message : '회원 삭제 중 오류가 발생했습니다.';
+      }
+
+      async function deleteMemberFromAdmin(uid, username, button){
+        if (!auth.currentUser || !currentUserDoc || currentUserDoc.role !== 'admin') {
+          alert('관리자만 회원을 삭제할 수 있습니다.');
+          return;
+        }
+        if (uid === auth.currentUser.uid) {
+          alert('현재 로그인한 본인 계정은 관리자 패널에서 삭제할 수 없습니다.');
+          return;
+        }
+
+        const confirmed = confirm(
+          `회원 "${username}"의 계정을 영구 삭제할까요?\n\n` +
+          '· 해당 아이디로 다시 로그인할 수 없습니다.\n' +
+          '· 회원 프로필은 삭제됩니다.\n' +
+          '· 기존 게시글·댓글·요원 기록은 유지됩니다.'
+        );
+        if (!confirmed) return;
+
+        const typed = prompt(`삭제 확인을 위해 회원 아이디 "${username}"를 그대로 입력해주세요.`);
+        if (typed === null) return;
+        if (typed.trim() !== username) {
+          alert('입력한 회원 아이디가 일치하지 않아 삭제하지 않았습니다.');
+          return;
+        }
+
+        const original = button.textContent;
+        button.disabled = true;
+        button.textContent = '삭제 중…';
+        try {
+          await deleteMemberAccountFn({ uid });
+          alert(`회원 "${username}" 계정을 삭제했습니다.`);
+          await loadAdminUsers();
+        } catch (err) {
+          alert(describeFunctionError(err));
+          button.disabled = false;
+          button.textContent = original;
+        }
+      }
+
+      async function loadAdminUsers(){
         adminUserList.innerHTML = '<p class="post-empty">불러오는 중…</p>';
-        db.collection('users').orderBy('createdAt', 'asc').get().then((snap) => {
+        try {
+          const snap = await db.collection('users').orderBy('createdAt', 'asc').get();
           adminUserList.innerHTML = '';
           if (snap.empty) {
             adminUserList.innerHTML = '<p class="post-empty">등록된 회원이 없습니다.</p>';
             return;
           }
+
           snap.forEach((doc) => {
             const u = doc.data();
             const uid = doc.id;
+            const username = String(u.username || uid);
             const isSelf = auth.currentUser && uid === auth.currentUser.uid;
 
             const row = document.createElement('div');
             row.className = 'admin-row';
             row.innerHTML = `
               <div class="admin-row-info">
-                <strong>${escapeHtml(u.username)}${isSelf ? ' (나)' : ''}</strong>
+                <strong>${escapeHtml(username)}${isSelf ? ' (나)' : ''}</strong>
                 <span>${u.role === 'admin' ? '관리자' : '일반회원'} · 게시 ${u.canPost ? '가능' : '불가'}</span>
               </div>
             `;
@@ -4127,8 +4311,15 @@
             postToggle.type = 'button';
             postToggle.className = 'auth-btn';
             postToggle.textContent = u.canPost ? '게시 권한 회수' : '게시 권한 부여';
-            postToggle.addEventListener('click', () => {
-              db.collection('users').doc(uid).update({ canPost: !u.canPost }).then(loadAdminUsers);
+            postToggle.addEventListener('click', async () => {
+              postToggle.disabled = true;
+              try {
+                await db.collection('users').doc(uid).update({ canPost: !u.canPost });
+                await loadAdminUsers();
+              } catch (err) {
+                alert(`게시 권한 변경에 실패했습니다: ${describeDataError(err)}`);
+                postToggle.disabled = false;
+              }
             });
             actions.appendChild(postToggle);
 
@@ -4137,18 +4328,38 @@
               roleToggle.type = 'button';
               roleToggle.className = 'auth-btn';
               roleToggle.textContent = u.role === 'admin' ? '관리자 해제' : '관리자 지정';
-              roleToggle.addEventListener('click', () => {
-                db.collection('users').doc(uid).update({ role: u.role === 'admin' ? 'member' : 'admin' }).then(loadAdminUsers);
+              roleToggle.addEventListener('click', async () => {
+                roleToggle.disabled = true;
+                try {
+                  await db.collection('users').doc(uid).update({ role: u.role === 'admin' ? 'member' : 'admin' });
+                  await loadAdminUsers();
+                } catch (err) {
+                  alert(`관리자 권한 변경에 실패했습니다: ${describeDataError(err)}`);
+                  roleToggle.disabled = false;
+                }
               });
               actions.appendChild(roleToggle);
+
+              const deleteMemberBtn = document.createElement('button');
+              deleteMemberBtn.type = 'button';
+              deleteMemberBtn.className = 'auth-btn admin-delete-btn';
+              deleteMemberBtn.textContent = u.role === 'admin' ? '관리자 먼저 해제' : '회원 삭제';
+              deleteMemberBtn.disabled = u.role === 'admin';
+              deleteMemberBtn.title = u.role === 'admin'
+                ? '다른 관리자 계정은 관리자 권한을 먼저 해제한 뒤 삭제할 수 있습니다.'
+                : 'Firebase Authentication 계정과 회원 프로필을 영구 삭제합니다.';
+              deleteMemberBtn.addEventListener('click', () => {
+                deleteMemberFromAdmin(uid, username, deleteMemberBtn);
+              });
+              actions.appendChild(deleteMemberBtn);
             }
 
             row.appendChild(actions);
             adminUserList.appendChild(row);
           });
-        }).catch((err) => {
-          adminUserList.innerHTML = `<p class="post-empty">회원 목록을 불러오지 못했습니다 (${err.message}).</p>`;
-        });
+        } catch (err) {
+          adminUserList.innerHTML = `<p class="post-empty">회원 목록을 불러오지 못했습니다 (${escapeHtml(err.message || 'unknown error')}).</p>`;
+        }
       }
 
       if (adminBtn) {
