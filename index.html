@@ -1122,6 +1122,8 @@
     }
 
     .form-submit:hover{filter:brightness(1.12)}
+    .form-submit:disabled,
+    .auth-btn:disabled{opacity:.55;cursor:default;filter:none}
 
     .form-error{
       min-height:16px;
@@ -1217,6 +1219,120 @@
       color:#b8bcc4;
     }
 
+    /* ---- Bulletin board ---- */
+    .post-form{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding:24px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:var(--panel);
+      margin-bottom:24px;
+    }
+
+    .post-form input,
+    .post-form textarea{
+      background:#08090b;
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:11px 12px;
+      color:var(--text);
+      font-size:.9rem;
+      font-family:inherit;
+      resize:vertical;
+    }
+
+    .post-form textarea{min-height:110px}
+
+    .post-form input:focus,
+    .post-form textarea:focus{outline:none;border-color:var(--red-bright)}
+
+    .post-form .form-submit{align-self:flex-start;padding:10px 22px}
+
+    .post-list{display:grid;gap:14px}
+
+    .post-item{
+      position:relative;
+      padding:22px 24px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.02),transparent),
+        var(--panel);
+    }
+
+    .post-meta{
+      display:flex;
+      justify-content:space-between;
+      color:var(--dim);
+      font-size:.72rem;
+      letter-spacing:.05em;
+      margin-bottom:10px;
+    }
+
+    .post-item h4{
+      margin:0 0 8px;
+      font-size:1.02rem;
+      color:#ececef;
+    }
+
+    .post-item p{
+      margin:0;
+      color:#aeb2ba;
+      font-size:.88rem;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .post-empty{
+      color:var(--dim);
+      font-size:.85rem;
+      padding:20px 0;
+      text-align:center;
+    }
+
+    .post-delete{
+      margin-top:12px;
+      border:1px solid rgba(194,43,53,.4);
+      background:transparent;
+      color:#e08088;
+      font-size:.72rem;
+      padding:6px 12px;
+      border-radius:999px;
+      cursor:pointer;
+    }
+
+    .post-delete:hover{background:rgba(143,23,32,.18)}
+
+    /* ---- Admin console ---- */
+    .admin-list{
+      display:grid;
+      gap:10px;
+      max-height:52vh;
+      overflow-y:auto;
+      padding-right:4px;
+    }
+
+    .admin-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:var(--panel);
+    }
+
+    .admin-row-info{display:flex;flex-direction:column;gap:4px}
+    .admin-row-info strong{font-size:.92rem;color:#ececef}
+    .admin-row-info span{font-size:.74rem;color:var(--dim)}
+
+    .admin-row-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .admin-row-actions .auth-btn{padding:7px 12px;font-size:.68rem}
+
     @media (prefers-reduced-motion: reduce){
       body::before,
       body::after,
@@ -1302,6 +1418,7 @@
       <div class="topbar-right">
         <div class="security">Classified / Level Black</div>
         <button class="auth-btn" id="authBtn" type="button">요원 정보 열람 · 로그인</button>
+        <button class="auth-btn" id="adminBtn" type="button" style="display:none">관리자 패널</button>
       </div>
     </div>
   </header>
@@ -1337,7 +1454,7 @@
           </div>
           <div class="meta-block">
             <span class="meta-label">Uniform Code</span>
-            <span class="meta-value">무채색 · Black Tone</span>
+            <span class="meta-value">완전 무채색 · Black Tone</span>
           </div>
           <div class="meta-block">
             <span class="meta-label">Cumulative Executions</span>
@@ -1798,6 +1915,38 @@
       </div>
     </section>
 
+    <section class="section reveal" id="bulletin">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-index">09 / BULLETIN</div>
+          <div>
+            <h2 class="section-title">내부 게시판</h2>
+            <p class="section-desc">
+              인가된 이용자만 열람·작성할 수 있는 내부 기록입니다.
+              게시 권한은 관리자가 개별적으로 부여하거나 회수할 수 있습니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="roster-gate" id="bulletinGate">
+          <p>게시판 열람은 로그인 후 가능합니다.</p>
+          <button class="auth-btn" id="bulletinAuthBtn" type="button">로그인 / 가입하기</button>
+        </div>
+
+        <div id="bulletinArea" style="display:none">
+          <form class="post-form" id="postForm">
+            <input id="postTitle" type="text" placeholder="제목" maxlength="60" required />
+            <textarea id="postBody" placeholder="내용을 입력하세요" maxlength="1000" required></textarea>
+            <div class="form-error" id="postError"></div>
+            <button class="form-submit" type="submit">게시하기</button>
+          </form>
+          <div class="post-list" id="postList">
+            <p class="post-empty">불러오는 중…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="closing reveal">
       <div class="shell">
         <div class="closing-mark" aria-hidden="true"></div>
@@ -1853,7 +2002,7 @@
         </div>
         <div class="form-field">
           <label for="signupPw">비밀번호</label>
-          <input id="signupPw" type="password" autocomplete="new-password" required minlength="4" />
+          <input id="signupPw" type="password" autocomplete="new-password" required minlength="6" />
         </div>
         <div class="form-field">
           <label for="signupPw2">비밀번호 확인</label>
@@ -1864,11 +2013,28 @@
       </form>
 
       <p class="form-note">
-        본 계정 시스템은 이 페이지를 열람 중인 브라우저에만 저장되는 데모 기능입니다.
-        다른 기기·브라우저와 동기화되지 않으며, 실제 개인정보나 재사용 중인 비밀번호는 입력하지 마세요.
+        이 계정은 실제 서버(Firebase Authentication)에 저장됩니다. 가입 후에는
+        어떤 기기·브라우저에서든 동일한 아이디와 비밀번호로 로그인할 수 있습니다.
       </p>
     </div>
   </div>
+
+  <div class="modal-backdrop" id="adminModal">
+    <div class="modal" style="width:min(640px,100%)">
+      <button class="modal-close" id="adminModalClose" type="button" aria-label="닫기">✕</button>
+      <div class="modal-eyebrow">Admin Console</div>
+      <h3>회원 관리</h3>
+      <p class="modal-sub">게시 권한과 관리자 지정을 즉시 변경할 수 있습니다.</p>
+      <div class="admin-list" id="adminUserList">
+        <p class="post-empty">불러오는 중…</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Authentication — see setup instructions at bottom of file -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -1944,10 +2110,18 @@
       tallyObserver.observe(wrap.closest('.hero'));
     })();
 
-    // ---- Access terminal: local, demo-only account system ----
+    // ---- Access terminal: real account system (Firebase Authentication) ----
+    // Setup instructions are at the bottom of this file / in the chat reply.
     (function(){
-      const STORAGE_USERS = 'cet_users';
-      const STORAGE_SESSION = 'cet_session';
+      const firebaseConfig = {
+        apiKey: "AIzaSyDi6Xb4LHlAG_VDzscj-OFkoxL7jaVbmLU",
+        authDomain: "capital-punishment-enforcement.firebaseapp.com",
+        projectId: "capital-punishment-enforcement",
+        storageBucket: "capital-punishment-enforcement.firebasestorage.app",
+        messagingSenderId: "799615284483",
+        appId: "1:799615284483:web:249d4d593dddfd243e2536",
+        measurementId: "G-C6JP9VPZM9"
+      };
 
       const modal = document.getElementById('authModal');
       const modalClose = document.getElementById('modalClose');
@@ -1960,33 +2134,83 @@
       const loginError = document.getElementById('loginError');
       const signupError = document.getElementById('signupError');
 
-      function getUsers(){
-        try { return JSON.parse(localStorage.getItem(STORAGE_USERS)) || {}; }
-        catch(e){ return {}; }
-      }
-      function saveUsers(users){
-        localStorage.setItem(STORAGE_USERS, JSON.stringify(users));
-      }
-      function getSession(){
-        return localStorage.getItem(STORAGE_SESSION);
-      }
-      function setSession(id){
-        localStorage.setItem(STORAGE_SESSION, id);
-        applyAuthState();
-      }
-      function clearSession(){
-        localStorage.removeItem(STORAGE_SESSION);
-        applyAuthState();
+      // Firebase requires an email-shaped identifier. Users still type a plain
+      // "아이디" — we translate it to a fake internal address behind the scenes
+      // so no real email address or delivery is ever needed.
+      const ID_DOMAIN = '@cet-internal.app';
+      const idToEmail = (id) => `${id.trim().toLowerCase()}${ID_DOMAIN}`;
+      const emailToId = (email) => (email || '').replace(ID_DOMAIN, '');
+
+      if (firebaseConfig.apiKey === 'YOUR_API_KEY') {
+        console.warn('[C.E.T.] Firebase가 아직 설정되지 않았습니다. firebaseConfig 값을 채워주세요.');
+        const notice = document.createElement('div');
+        notice.textContent = '⚠ Firebase 설정이 필요합니다 — firebaseConfig 값을 채워주세요 (콘솔 참고).';
+        Object.assign(notice.style, {
+          position: 'fixed', bottom: '0', left: '0', right: '0', zIndex: '99',
+          background: '#4b0c12', color: '#fff', fontSize: '.75rem',
+          padding: '10px', textAlign: 'center', letterSpacing: '.04em'
+        });
+        document.body.appendChild(notice);
       }
 
-      function applyAuthState(){
-        const id = getSession();
-        if (id) {
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
+
+      let currentUserDoc = null;
+      let unsubscribePosts = null;
+
+      const adminBtn = document.getElementById('adminBtn');
+      const adminModal = document.getElementById('adminModal');
+      const adminModalClose = document.getElementById('adminModalClose');
+      const adminUserList = document.getElementById('adminUserList');
+
+      const bulletinGate = document.getElementById('bulletinGate');
+      const bulletinAuthBtn = document.getElementById('bulletinAuthBtn');
+      const bulletinArea = document.getElementById('bulletinArea');
+      const postForm = document.getElementById('postForm');
+      const postError = document.getElementById('postError');
+      const postList = document.getElementById('postList');
+
+      function escapeHtml(str){
+        const div = document.createElement('div');
+        div.textContent = str == null ? '' : String(str);
+        return div.innerHTML;
+      }
+
+      const ERROR_MESSAGES = {
+        'auth/email-already-in-use': '이미 등록된 아이디입니다.',
+        'auth/invalid-email': '아이디는 영문/숫자만 사용할 수 있습니다.',
+        'auth/weak-password': '비밀번호는 6자 이상이어야 합니다.',
+        'auth/wrong-password': '아이디 또는 비밀번호가 일치하지 않습니다.',
+        'auth/invalid-credential': '아이디 또는 비밀번호가 일치하지 않습니다.',
+        'auth/user-not-found': '등록되지 않은 아이디입니다.',
+        'auth/too-many-requests': '시도가 너무 많습니다. 잠시 후 다시 시도해주세요.',
+        'auth/network-request-failed': '네트워크 오류입니다. 연결 상태를 확인해주세요.'
+      };
+      function describeError(err){
+        return ERROR_MESSAGES[err.code] || `오류가 발생했습니다 (${err.code || err.message}).`;
+      }
+
+      function setButtonsBusy(busy, label){
+        [loginForm, signupForm].forEach((form) => {
+          const btn = form.querySelector('.form-submit');
+          btn.disabled = busy;
+          if (busy) { btn.dataset.original = btn.dataset.original || btn.textContent; btn.textContent = label; }
+          else if (btn.dataset.original) { btn.textContent = btn.dataset.original; }
+        });
+      }
+
+      function applyAuthState(user){
+        if (user) {
           document.body.classList.add('authed');
+          const id = emailToId(user.email);
           [authBtn, rosterAuthBtn].forEach((btn) => {
             if (!btn) return;
             btn.textContent = `인가됨 · ${id} (로그아웃)`;
             btn.classList.add('is-authed');
+            btn.disabled = false;
           });
         } else {
           document.body.classList.remove('authed');
@@ -1994,12 +2218,181 @@
             if (!btn) return;
             btn.textContent = '요원 정보 열람 · 로그인';
             btn.classList.remove('is-authed');
+            btn.disabled = false;
           });
         }
       }
 
+      // Show a neutral "확인 중" state until Firebase reports the real session.
+      [authBtn, rosterAuthBtn].forEach((btn) => {
+        if (!btn) return;
+        btn.textContent = '접속 확인 중…';
+        btn.disabled = true;
+      });
+
+      // Every account gets a matching Firestore profile the first time it's
+      // seen. New accounts default to role "member" with posting enabled —
+      // admins can revoke posting rights or promote other admins later.
+      function ensureUserDoc(user){
+        const ref = db.collection('users').doc(user.uid);
+        return ref.get().then((snap) => {
+          if (snap.exists) return snap.data();
+          const data = {
+            username: emailToId(user.email),
+            role: 'member',
+            canPost: true,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          };
+          return ref.set(data).then(() => data);
+        });
+      }
+
+      function updatePermissionUI(){
+        const loggedIn = !!currentUserDoc;
+
+        bulletinGate.style.display = loggedIn ? 'none' : 'flex';
+        bulletinArea.style.display = loggedIn ? 'block' : 'none';
+
+        if (loggedIn) {
+          const canPost = !!currentUserDoc.canPost;
+          postForm.style.display = canPost ? 'flex' : 'none';
+          postError.textContent = canPost ? '' : '게시 권한이 없습니다. 관리자에게 문의해주세요.';
+        }
+
+        if (adminBtn) {
+          adminBtn.style.display = (loggedIn && currentUserDoc.role === 'admin') ? 'inline-block' : 'none';
+        }
+      }
+
+      function renderPosts(snapshot){
+        postList.innerHTML = '';
+        if (snapshot.empty) {
+          postList.innerHTML = '<p class="post-empty">아직 게시된 글이 없습니다.</p>';
+          return;
+        }
+        snapshot.forEach((doc) => {
+          const p = doc.data();
+          const canModerate = currentUserDoc && (currentUserDoc.role === 'admin' || (auth.currentUser && p.authorUid === auth.currentUser.uid));
+          const date = p.createdAt && p.createdAt.toDate ? p.createdAt.toDate().toLocaleString('ko-KR') : '';
+
+          const item = document.createElement('article');
+          item.className = 'post-item';
+          item.innerHTML = `
+            <div class="post-meta"><span>${escapeHtml(p.authorName || '익명')}</span><span>${escapeHtml(date)}</span></div>
+            <h4>${escapeHtml(p.title)}</h4>
+            <p>${escapeHtml(p.body)}</p>
+          `;
+          if (canModerate) {
+            const delBtn = document.createElement('button');
+            delBtn.className = 'post-delete';
+            delBtn.type = 'button';
+            delBtn.textContent = '삭제';
+            delBtn.addEventListener('click', () => {
+              if (confirm('이 글을 삭제할까요?')) db.collection('posts').doc(doc.id).delete();
+            });
+            item.appendChild(delBtn);
+          }
+          postList.appendChild(item);
+        });
+      }
+
+      function startPostsListener(){
+        if (unsubscribePosts) return;
+        unsubscribePosts = db.collection('posts').orderBy('createdAt', 'desc').limit(50)
+          .onSnapshot(renderPosts, (err) => {
+            postList.innerHTML = `<p class="post-empty">게시글을 불러오지 못했습니다 (${err.message}).</p>`;
+          });
+      }
+
+      postForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!currentUserDoc || !currentUserDoc.canPost || !auth.currentUser) return;
+        const title = document.getElementById('postTitle').value.trim();
+        const body = document.getElementById('postBody').value.trim();
+        if (!title || !body) return;
+
+        const submitBtn = postForm.querySelector('.form-submit');
+        submitBtn.disabled = true;
+        db.collection('posts').add({
+          authorUid: auth.currentUser.uid,
+          authorName: currentUserDoc.username,
+          title, body,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+          postForm.reset();
+          postError.textContent = '';
+        }).catch((err) => {
+          postError.textContent = `게시 중 오류가 발생했습니다: ${err.message}`;
+        }).finally(() => { submitBtn.disabled = false; });
+      });
+
+      if (bulletinAuthBtn) bulletinAuthBtn.addEventListener('click', () => openModal());
+
+      // ---- Admin console ----
+      function loadAdminUsers(){
+        adminUserList.innerHTML = '<p class="post-empty">불러오는 중…</p>';
+        db.collection('users').orderBy('createdAt', 'asc').get().then((snap) => {
+          adminUserList.innerHTML = '';
+          if (snap.empty) {
+            adminUserList.innerHTML = '<p class="post-empty">등록된 회원이 없습니다.</p>';
+            return;
+          }
+          snap.forEach((doc) => {
+            const u = doc.data();
+            const uid = doc.id;
+            const isSelf = auth.currentUser && uid === auth.currentUser.uid;
+
+            const row = document.createElement('div');
+            row.className = 'admin-row';
+            row.innerHTML = `
+              <div class="admin-row-info">
+                <strong>${escapeHtml(u.username)}${isSelf ? ' (나)' : ''}</strong>
+                <span>${u.role === 'admin' ? '관리자' : '일반회원'} · 게시 ${u.canPost ? '가능' : '불가'}</span>
+              </div>
+            `;
+
+            const actions = document.createElement('div');
+            actions.className = 'admin-row-actions';
+
+            const postToggle = document.createElement('button');
+            postToggle.type = 'button';
+            postToggle.className = 'auth-btn';
+            postToggle.textContent = u.canPost ? '게시 권한 회수' : '게시 권한 부여';
+            postToggle.addEventListener('click', () => {
+              db.collection('users').doc(uid).update({ canPost: !u.canPost }).then(loadAdminUsers);
+            });
+            actions.appendChild(postToggle);
+
+            if (!isSelf) {
+              const roleToggle = document.createElement('button');
+              roleToggle.type = 'button';
+              roleToggle.className = 'auth-btn';
+              roleToggle.textContent = u.role === 'admin' ? '관리자 해제' : '관리자 지정';
+              roleToggle.addEventListener('click', () => {
+                db.collection('users').doc(uid).update({ role: u.role === 'admin' ? 'member' : 'admin' }).then(loadAdminUsers);
+              });
+              actions.appendChild(roleToggle);
+            }
+
+            row.appendChild(actions);
+            adminUserList.appendChild(row);
+          });
+        }).catch((err) => {
+          adminUserList.innerHTML = `<p class="post-empty">회원 목록을 불러오지 못했습니다 (${err.message}).</p>`;
+        });
+      }
+
+      if (adminBtn) {
+        adminBtn.addEventListener('click', () => {
+          adminModal.classList.add('open');
+          loadAdminUsers();
+        });
+      }
+      if (adminModalClose) adminModalClose.addEventListener('click', () => adminModal.classList.remove('open'));
+      if (adminModal) adminModal.addEventListener('click', (e) => { if (e.target === adminModal) adminModal.classList.remove('open'); });
+
       function openModal(){
-        if (getSession()) { clearSession(); return; }
+        if (auth.currentUser) { auth.signOut(); return; }
         modal.classList.add('open');
         loginError.textContent = '';
         signupError.textContent = '';
@@ -2031,13 +2424,12 @@
         e.preventDefault();
         const id = document.getElementById('loginId').value.trim();
         const pw = document.getElementById('loginPw').value;
-        const users = getUsers();
-        if (!users[id] || users[id] !== pw) {
-          loginError.textContent = '아이디 또는 비밀번호가 일치하지 않습니다.';
-          return;
-        }
-        setSession(id);
-        closeModal();
+        loginError.textContent = '';
+        setButtonsBusy(true, '확인 중…');
+        auth.signInWithEmailAndPassword(idToEmail(id), pw)
+          .then(() => { closeModal(); })
+          .catch((err) => { loginError.textContent = describeError(err); })
+          .finally(() => setButtonsBusy(false));
       });
 
       signupForm.addEventListener('submit', (e) => {
@@ -2045,18 +2437,10 @@
         const id = document.getElementById('signupId').value.trim();
         const pw = document.getElementById('signupPw').value;
         const pw2 = document.getElementById('signupPw2').value;
-        const users = getUsers();
+        signupError.textContent = '';
 
-        if (id.length < 3) {
-          signupError.textContent = '아이디는 3자 이상이어야 합니다.';
-          return;
-        }
-        if (users[id]) {
-          signupError.textContent = '이미 등록된 아이디입니다.';
-          return;
-        }
-        if (pw.length < 4) {
-          signupError.textContent = '비밀번호는 4자 이상이어야 합니다.';
+        if (id.length < 3 || /[^a-zA-Z0-9_]/.test(id)) {
+          signupError.textContent = '아이디는 3자 이상의 영문/숫자만 사용해주세요.';
           return;
         }
         if (pw !== pw2) {
@@ -2064,13 +2448,27 @@
           return;
         }
 
-        users[id] = pw;
-        saveUsers(users);
-        setSession(id);
-        closeModal();
+        setButtonsBusy(true, '등록 중…');
+        auth.createUserWithEmailAndPassword(idToEmail(id), pw)
+          .then(() => { closeModal(); })
+          .catch((err) => { signupError.textContent = describeError(err); })
+          .finally(() => setButtonsBusy(false));
       });
 
-      applyAuthState();
+      auth.onAuthStateChanged((user) => {
+        applyAuthState(user);
+        if (user) {
+          ensureUserDoc(user).then((data) => {
+            currentUserDoc = data;
+            updatePermissionUI();
+            startPostsListener();
+          });
+        } else {
+          currentUserDoc = null;
+          if (unsubscribePosts) { unsubscribePosts(); unsubscribePosts = null; }
+          updatePermissionUI();
+        }
+      });
     })();
   </script>
 </body>
