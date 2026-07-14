@@ -2951,7 +2951,7 @@
       <button class="modal-close" id="adminModalClose" type="button" aria-label="닫기">✕</button>
       <div class="modal-eyebrow">Admin Console</div>
       <h3>회원 관리</h3>
-      <p class="modal-sub">게시 권한·관리자 지정·회원 계정 삭제를 관리할 수 있습니다. 회원 삭제 후에도 기존 게시글과 댓글은 기록으로 유지됩니다.</p>
+      <p class="modal-sub">게시 권한·관리자 지정·회원 숨김을 관리할 수 있습니다. 회원 삭제를 누르면 목록에서 사라지고 해당 계정은 사이트 이용이 중지되며, 기존 게시글과 댓글은 기록으로 유지됩니다.</p>
       <div class="admin-list" id="adminUserList">
         <p class="post-empty">불러오는 중…</p>
       </div>
@@ -3267,8 +3267,6 @@
       const auth = firebase.auth();
       const db = firebase.firestore();
       const storage = firebase.storage();
-      const cloudFunctions = firebase.app().functions('us-east1');
-      const deleteMemberAccountFn = cloudFunctions.httpsCallable('deleteMemberAccount');
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
 
       let currentUserDoc = null;
@@ -4229,18 +4227,8 @@
         }
       });
 
-      // ---- Admin console ----
-      function describeFunctionError(err){
-        const code = String(err && err.code ? err.code : '');
-        if (code.includes('unauthenticated')) return '로그인이 풀렸습니다. 다시 로그인해주세요.';
-        if (code.includes('permission-denied')) return '관리자 권한이 확인되지 않았습니다.';
-        if (code.includes('failed-precondition')) return err.message || '현재 상태에서는 삭제할 수 없습니다.';
-        if (code.includes('not-found')) return '이미 삭제되었거나 존재하지 않는 회원입니다.';
-        if (code.includes('unavailable')) return '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.';
-        return err && err.message ? err.message : '회원 삭제 중 오류가 발생했습니다.';
-      }
-
-      async function deleteMemberFromAdmin(uid, username, button){
+      // ---- Admin console: client-side soft deletion ----
+      async function hideMemberFromAdmin(uid, username, button){
         if (!auth.currentUser || !currentUserDoc || currentUserDoc.role !== 'admin') {
           alert('관리자만 회원을 삭제할 수 있습니다.');
           return;
@@ -4251,29 +4239,29 @@
         }
 
         const confirmed = confirm(
-          `회원 "${username}"의 계정을 영구 삭제할까요?\n\n` +
-          '· 해당 아이디로 다시 로그인할 수 없습니다.\n' +
-          '· 회원 프로필은 삭제됩니다.\n' +
+          `회원 "${username}"을 회원 목록에서 삭제할까요?\n\n` +
+          '· 회원 관리 목록에서 즉시 사라집니다.\n' +
+          '· 해당 계정은 사이트에 로그인할 수 없게 됩니다.\n' +
+          '· Firebase Authentication 계정 자체는 남아 있습니다.\n' +
           '· 기존 게시글·댓글·요원 기록은 유지됩니다.'
         );
         if (!confirmed) return;
-
-        const typed = prompt(`삭제 확인을 위해 회원 아이디 "${username}"를 그대로 입력해주세요.`);
-        if (typed === null) return;
-        if (typed.trim() !== username) {
-          alert('입력한 회원 아이디가 일치하지 않아 삭제하지 않았습니다.');
-          return;
-        }
 
         const original = button.textContent;
         button.disabled = true;
         button.textContent = '삭제 중…';
         try {
-          await deleteMemberAccountFn({ uid });
-          alert(`회원 "${username}" 계정을 삭제했습니다.`);
+          await db.collection('users').doc(uid).update({
+            hidden: true,
+            canPost: false,
+            role: 'member',
+            hiddenAt: firebase.firestore.FieldValue.serverTimestamp(),
+            hiddenBy: auth.currentUser.uid
+          });
+          alert(`회원 "${username}"을 목록에서 삭제했습니다.`);
           await loadAdminUsers();
         } catch (err) {
-          alert(describeFunctionError(err));
+          alert(`회원 삭제에 실패했습니다: ${describeDataError(err)}`);
           button.disabled = false;
           button.textContent = original;
         }
@@ -4291,6 +4279,7 @@
 
           snap.forEach((doc) => {
             const u = doc.data();
+            if (u.hidden === true) return;
             const uid = doc.id;
             const username = String(u.username || uid);
             const isSelf = auth.currentUser && uid === auth.currentUser.uid;
@@ -4347,9 +4336,9 @@
               deleteMemberBtn.disabled = u.role === 'admin';
               deleteMemberBtn.title = u.role === 'admin'
                 ? '다른 관리자 계정은 관리자 권한을 먼저 해제한 뒤 삭제할 수 있습니다.'
-                : 'Firebase Authentication 계정과 회원 프로필을 영구 삭제합니다.';
+                : '회원 목록에서 숨기고 사이트 이용을 중지합니다.';
               deleteMemberBtn.addEventListener('click', () => {
-                deleteMemberFromAdmin(uid, username, deleteMemberBtn);
+                hideMemberFromAdmin(uid, username, deleteMemberBtn);
               });
               actions.appendChild(deleteMemberBtn);
             }
@@ -4439,6 +4428,12 @@
         applyAuthState(user);
         if (user) {
           ensureUserDoc(user).then((data) => {
+            if (data && data.hidden === true) {
+              currentUserDoc = null;
+              updatePermissionUI();
+              alert('관리자에 의해 이용이 중지된 계정입니다.');
+              return auth.signOut();
+            }
             currentUserDoc = data;
             updatePermissionUI();
             startPostsListener();
