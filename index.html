@@ -1094,7 +1094,8 @@
       text-transform:uppercase;
     }
 
-    .form-field input{
+    .form-field input,
+    .form-field select{
       background:#08090b;
       border:1px solid var(--line);
       border-radius:8px;
@@ -1104,9 +1105,28 @@
       font-family:inherit;
     }
 
-    .form-field input:focus{
+    .form-field select{
+      appearance:none;
+      background-image:linear-gradient(45deg,transparent 50%,#8f939c 50%),linear-gradient(135deg,#8f939c 50%,transparent 50%);
+      background-position:calc(100% - 18px) center,calc(100% - 13px) center;
+      background-size:5px 5px,5px 5px;
+      background-repeat:no-repeat;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus{
       outline:none;
       border-color:var(--red-bright);
+    }
+
+    .person-photo{
+      width:76px;
+      height:76px;
+      border-radius:50%;
+      object-fit:cover;
+      border:1px solid var(--line-bright);
+      margin-bottom:14px;
+      display:block;
     }
 
     .form-submit{
@@ -1305,6 +1325,340 @@
 
     .post-delete:hover{background:rgba(143,23,32,.18)}
 
+    .form-grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .dossier-input-row{
+      display:grid;
+      grid-template-columns:100px minmax(0,1fr);
+      gap:8px;
+      margin-top:8px;
+    }
+
+    .dossier-input-row input{
+      background:#08090b;
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:9px 10px;
+      color:var(--text);
+      font-size:.82rem;
+      font-family:inherit;
+    }
+
+    .dossier-input-row input:focus{outline:none;border-color:var(--red-bright)}
+
+    /* ---- Side navigation ---- */
+    .nav-toggle{
+      position:fixed;
+      top:50%;
+      left:0;
+      transform:translateY(-50%);
+      z-index:60;
+      writing-mode:vertical-rl;
+      padding:18px 8px;
+      border:1px solid var(--line-bright);
+      border-left:none;
+      border-radius:0 10px 10px 0;
+      background:rgba(11,13,16,.9);
+      color:#c7cad0;
+      font-size:.72rem;
+      letter-spacing:.14em;
+      cursor:pointer;
+      backdrop-filter:blur(6px);
+    }
+
+    .nav-toggle:hover{color:#fff;border-color:var(--red-bright)}
+
+    .side-nav-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:79;
+      background:rgba(3,3,4,.7);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .25s ease;
+    }
+
+    .side-nav-backdrop.open{opacity:1;pointer-events:auto}
+
+    .side-nav{
+      position:fixed;
+      top:0;
+      left:0;
+      height:100%;
+      width:min(260px,80vw);
+      z-index:80;
+      background:linear-gradient(180deg,rgba(255,255,255,.02),transparent),#0a0b0e;
+      border-right:1px solid var(--line-bright);
+      padding:90px 24px 24px;
+      transform:translateX(-100%);
+      transition:transform .3s ease;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .side-nav.open{transform:translateX(0)}
+
+    .side-nav-close{
+      position:absolute;
+      top:20px;
+      right:20px;
+      width:28px;
+      height:28px;
+      border:1px solid var(--line);
+      border-radius:50%;
+      background:transparent;
+      color:var(--muted);
+      cursor:pointer;
+    }
+
+    .side-nav-close:hover{color:#fff;border-color:var(--red-bright)}
+
+    .side-nav-eyebrow{
+      color:var(--red-bright);
+      font-size:.68rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      margin-bottom:16px;
+    }
+
+    .side-nav-link{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 10px;
+      border-bottom:1px solid var(--line);
+      color:#d7dae0;
+      font-size:.92rem;
+      letter-spacing:.03em;
+    }
+
+    .side-nav-link:hover{color:#fff;background:rgba(143,23,32,.14)}
+
+    .side-nav-link::before{
+      content:"";
+      width:6px;
+      height:6px;
+      background:var(--red-bright);
+      transform:rotate(45deg);
+      flex-shrink:0;
+    }
+
+    /* ---- Standalone pages (bulletin / agent registry) ---- */
+    #pageBulletin,
+    #pageAgents{
+      padding:100px 0 120px;
+      min-height:100vh;
+    }
+
+    .page-hidden{
+      display:none !important;
+    }
+
+    .back-home{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      color:var(--muted);
+      font-size:.82rem;
+      letter-spacing:.04em;
+      margin-bottom:32px;
+    }
+
+    .back-home:hover{color:#fff}
+
+    .page-header{margin-bottom:38px}
+    .page-header .section-index{margin-bottom:14px;display:block}
+    .page-header .section-title{margin:0 0 16px}
+
+    /* ---- Agent gallery ---- */
+    .agents-page-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+
+    .register-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--red-bright);
+      background:linear-gradient(90deg,var(--red-dark),var(--red));
+      color:#fff;
+      padding:12px 22px;
+      border-radius:999px;
+      font-size:.85rem;
+      letter-spacing:.04em;
+      cursor:pointer;
+      white-space:nowrap;
+      font-family:inherit;
+    }
+
+    .register-btn:hover{filter:brightness(1.12)}
+    .register-btn-plus{font-size:1.15rem;line-height:1}
+
+    .agent-gallery{display:grid;gap:52px}
+
+    .gallery-section-title{
+      display:inline-block;
+      margin:0;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.2rem;
+      letter-spacing:.01em;
+      color:#e9e9eb;
+      padding-bottom:12px;
+      border-bottom:2px solid var(--line-bright);
+      min-width:140px;
+    }
+
+    .gallery-section-title.leadership{border-bottom-color:#4f7cad}
+    .gallery-section-title.field{border-bottom-color:var(--red-bright)}
+
+    .gallery-grid{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+      gap:16px;
+    }
+
+    .gallery-grid-centered{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .gallery-grid-centered .gallery-card{
+      flex:0 1 180px;
+      width:180px;
+    }
+
+    .gallery-card{
+      position:relative;
+      aspect-ratio:3/4;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:linear-gradient(160deg,#181b21,#0a0b0d);
+      cursor:pointer;
+      transition:transform .2s ease,border-color .2s ease;
+    }
+
+    .gallery-card:hover{transform:translateY(-4px);border-color:var(--red-bright)}
+
+    .gallery-card-photo{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .gallery-card-placeholder{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#33363d;
+    }
+
+    .gallery-card-scrim{
+      position:absolute;
+      inset:auto 0 0 0;
+      height:64%;
+      background:linear-gradient(180deg,transparent,rgba(4,4,5,.94) 80%);
+      pointer-events:none;
+    }
+
+    .gallery-card-info{
+      position:absolute;
+      left:0;right:0;bottom:0;
+      padding:14px;
+    }
+
+    .gallery-card-role{
+      display:inline-block;
+      color:#ff8f96;
+      background:rgba(6,7,8,.62);
+      border:1px solid rgba(255,255,255,.14);
+      padding:3px 9px;
+      border-radius:999px;
+      font-size:.66rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+
+    .gallery-card-name{
+      color:#fff;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.05rem;
+      line-height:1.15;
+      text-shadow:0 1px 4px rgba(0,0,0,.8);
+    }
+
+    .gallery-card-ko{
+      color:#d5d8dd;
+      font-size:.72rem;
+      margin-top:2px;
+      text-shadow:0 1px 4px rgba(0,0,0,.8);
+    }
+
+    /* ---- Agent detail modal ---- */
+    .detail-photo,
+    .detail-placeholder{
+      width:100%;
+      aspect-ratio:1/1;
+      max-height:280px;
+      object-fit:cover;
+      border-radius:14px;
+      border:1px solid var(--line-bright);
+      margin-bottom:20px;
+      display:block;
+    }
+
+    .detail-placeholder{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(160deg,#181b21,#0a0b0d);
+      color:#33363d;
+    }
+
+    .detail-role{
+      color:var(--red-bright);
+      font-size:.7rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .detail-name{
+      margin:8px 0 2px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.6rem;
+    }
+
+    .detail-ko{color:#858a93;font-size:.86rem;margin-bottom:14px}
+    .detail-summary{color:#b4b8c0;font-size:.9rem;line-height:1.8}
+
+    @media (max-width:640px){
+      .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
+      .agents-page-header{align-items:stretch}
+      .register-btn{justify-content:center}
+    }
+
+    @media (max-width:640px){
+      .form-grid-2{grid-template-columns:1fr}
+      .dossier-input-row{grid-template-columns:1fr}
+    }
+
     /* ---- Admin console ---- */
     .admin-list{
       display:grid;
@@ -1408,7 +1762,7 @@
 <body>
   <header class="topbar">
     <div class="shell topbar-inner">
-      <a href="#top" class="brand" aria-label="CET 홈으로 이동">
+      <a href="#top" class="brand" data-page="pageHome" aria-label="CET 홈으로 이동">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-copy">
           <strong>C.E.T.</strong>
@@ -1422,6 +1776,16 @@
       </div>
     </div>
   </header>
+
+  <button class="nav-toggle" id="navToggle" type="button">MENU</button>
+  <div class="side-nav-backdrop" id="sideNavBackdrop"></div>
+  <nav class="side-nav" id="sideNav" aria-label="사이트 메뉴">
+    <button class="side-nav-close" id="sideNavClose" type="button" aria-label="닫기">✕</button>
+    <div class="side-nav-eyebrow">Navigate</div>
+    <a class="side-nav-link" href="#top" data-page="pageHome">홈</a>
+    <a class="side-nav-link" href="#" data-page="pageBulletin">게시판</a>
+    <a class="side-nav-link" href="#" data-page="pageAgents">요원 등록</a>
+  </nav>
 
   <section class="hero" id="top">
     <svg class="hero-rope" viewBox="0 0 150 340" aria-hidden="true">
@@ -1475,7 +1839,7 @@
     </div>
   </section>
 
-  <main>
+  <main id="pageHome">
     <section class="section reveal">
       <div class="shell">
         <div class="section-head">
@@ -1735,7 +2099,7 @@
       </div>
     </section>
 
-    <section class="section reveal">
+    <section class="section reveal" id="roster">
       <div class="shell">
         <div class="section-head">
           <div class="section-index">06 / ROSTER</div>
@@ -1829,8 +2193,8 @@
               <span>인가 등급 미달</span>
             </div>
             <div class="person-role">Hangman</div>
-            <h3>Cosmo</h3>
-            <div class="ko">코스모</div>
+            <h3>Cosmos</h3>
+            <div class="ko">코스모스</div>
             <p>
               포획 작전과 단독 집행을 수행하는 현장 요원.
               C.E.T. 특유의 원칙과 모순을 동시에 상징한다.
@@ -1915,38 +2279,6 @@
       </div>
     </section>
 
-    <section class="section reveal" id="bulletin">
-      <div class="shell">
-        <div class="section-head">
-          <div class="section-index">09 / BULLETIN</div>
-          <div>
-            <h2 class="section-title">내부 게시판</h2>
-            <p class="section-desc">
-              인가된 이용자만 열람·작성할 수 있는 내부 기록입니다.
-              게시 권한은 관리자가 개별적으로 부여하거나 회수할 수 있습니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="roster-gate" id="bulletinGate">
-          <p>게시판 열람은 로그인 후 가능합니다.</p>
-          <button class="auth-btn" id="bulletinAuthBtn" type="button">로그인 / 가입하기</button>
-        </div>
-
-        <div id="bulletinArea" style="display:none">
-          <form class="post-form" id="postForm">
-            <input id="postTitle" type="text" placeholder="제목" maxlength="60" required />
-            <textarea id="postBody" placeholder="내용을 입력하세요" maxlength="1000" required></textarea>
-            <div class="form-error" id="postError"></div>
-            <button class="form-submit" type="submit">게시하기</button>
-          </form>
-          <div class="post-list" id="postList">
-            <p class="post-empty">불러오는 중…</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="closing reveal">
       <div class="shell">
         <div class="closing-mark" aria-hidden="true"></div>
@@ -1962,6 +2294,67 @@
       </div>
     </section>
   </main>
+
+  <div id="pageBulletin" class="page-hidden">
+    <div class="shell">
+      <a href="#" class="back-home" data-page="pageHome">← 홈으로</a>
+      <div class="page-header">
+        <div class="section-index">BULLETIN</div>
+        <h2 class="section-title">내부 게시판</h2>
+        <p class="section-desc">
+          인가된 이용자만 열람·작성할 수 있는 내부 기록입니다.
+          게시 권한은 관리자가 개별적으로 부여하거나 회수할 수 있습니다.
+        </p>
+      </div>
+
+      <div class="roster-gate" id="bulletinGate">
+        <p>게시판 열람은 로그인 후 가능합니다.</p>
+        <button class="auth-btn" id="bulletinAuthBtn" type="button">로그인 / 가입하기</button>
+      </div>
+
+      <div id="bulletinArea" style="display:none">
+        <form class="post-form" id="postForm">
+          <input id="postTitle" type="text" placeholder="제목" maxlength="60" required />
+          <textarea id="postBody" placeholder="내용을 입력하세요" maxlength="1000" required></textarea>
+          <div class="form-error" id="postError"></div>
+          <button class="form-submit" type="submit">게시하기</button>
+        </form>
+        <div class="post-list" id="postList">
+          <p class="post-empty">불러오는 중…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pageAgents" class="page-hidden">
+    <div class="shell">
+      <a href="#" class="back-home" data-page="pageHome">← 홈으로</a>
+      <div class="page-header agents-page-header">
+        <div>
+          <div class="section-index">AGENT REGISTRY</div>
+          <h2 class="section-title">요원 명부</h2>
+          <p class="section-desc">
+            팀장·전담 가이드·행맨 전원의 전체 명부입니다. 인원 구성 섹션과는 별도로 관리되며,
+            게시 권한이 있는 회원 누구나 신규 요원을 등록할 수 있습니다.
+          </p>
+        </div>
+        <button class="register-btn" id="openAgentModalBtn" type="button" style="display:none">
+          <span class="register-btn-plus">+</span> 요원 등록
+        </button>
+      </div>
+
+      <div class="roster-gate" id="agentsGate">
+        <p>요원 명부 열람은 로그인 후 가능합니다.</p>
+        <button class="auth-btn" id="agentsAuthBtn" type="button">로그인 / 가입하기</button>
+      </div>
+
+      <div id="agentsArea" style="display:none">
+        <div id="dynamicAgents">
+          <p class="post-empty">불러오는 중…</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="shell footer-inner">
@@ -2031,6 +2424,83 @@
     </div>
   </div>
 
+  <div class="modal-backdrop" id="agentModal">
+    <div class="modal" style="width:min(480px,100%)">
+      <button class="modal-close" id="agentModalClose" type="button" aria-label="닫기">✕</button>
+      <div class="modal-eyebrow" id="agentFormEyebrow">Register New Hangman</div>
+      <h3 id="agentFormTitle">신규 요원 등록</h3>
+      <p class="modal-sub">등록한 요원은 명부에 즉시 카드로 추가되며, 등록자 본인과 관리자만 수정·삭제할 수 있습니다.</p>
+
+      <form class="auth-form active" id="agentForm">
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label for="agentName">이름 (영문)</label>
+            <input id="agentName" type="text" maxlength="30" required />
+          </div>
+          <div class="form-field">
+            <label for="agentKo">한글 이름</label>
+            <input id="agentKo" type="text" maxlength="20" required />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="agentRole">직책</label>
+          <select id="agentRole" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="Hangman">Hangman (행맨 · 현장 집행 요원)</option>
+            <option value="Team Leader">Team Leader (팀장)</option>
+            <option value="Dedicated Guide">Dedicated Guide (전담 가이드)</option>
+            <option value="Other">기타 (직접 입력)</option>
+          </select>
+        </div>
+
+        <div class="form-field" id="agentRoleOtherWrap" style="display:none">
+          <label for="agentRoleOther">직책 직접 입력</label>
+          <input id="agentRoleOther" type="text" maxlength="30" />
+        </div>
+
+        <div class="form-field">
+          <label for="agentPhoto">프로필 사진 URL (선택)</label>
+          <input id="agentPhoto" type="url" placeholder="https://... (이미지 링크)" />
+        </div>
+
+        <div class="form-field">
+          <label for="agentSummary">소개</label>
+          <textarea id="agentSummary" maxlength="300" required></textarea>
+        </div>
+
+        <div class="form-field">
+          <label>기밀 정보 (선택, 최대 3개)</label>
+          <div class="dossier-input-row">
+            <input id="agentRow1Label" type="text" placeholder="항목명 (예: 각성 능력)" maxlength="12" />
+            <input id="agentRow1Value" type="text" placeholder="내용" maxlength="60" />
+          </div>
+          <div class="dossier-input-row">
+            <input id="agentRow2Label" type="text" placeholder="항목명" maxlength="12" />
+            <input id="agentRow2Value" type="text" placeholder="내용" maxlength="60" />
+          </div>
+          <div class="dossier-input-row">
+            <input id="agentRow3Label" type="text" placeholder="항목명" maxlength="12" />
+            <input id="agentRow3Value" type="text" placeholder="내용" maxlength="60" />
+          </div>
+        </div>
+
+        <div class="form-error" id="agentError"></div>
+        <div style="display:flex;gap:10px">
+          <button class="form-submit" type="submit" id="agentSubmitBtn">요원 등록하기</button>
+          <button class="auth-btn" type="button" id="agentCancelEdit" style="display:none">수정 취소</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="agentDetailModal">
+    <div class="modal" style="width:min(420px,100%)">
+      <button class="modal-close" id="agentDetailClose" type="button" aria-label="닫기">✕</button>
+      <div id="agentDetailBody"></div>
+    </div>
+  </div>
+
   <!-- Firebase Authentication — see setup instructions at bottom of file -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -2047,6 +2517,42 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Page switcher: home / bulletin / agent registry are separate top-level views
+    const PAGE_IDS = ['pageHome', 'pageBulletin', 'pageAgents'];
+    function showPage(id){
+      PAGE_IDS.forEach((pid) => {
+        const el = document.getElementById(pid);
+        if (!el) return;
+        el.classList.toggle('page-hidden', pid !== id);
+      });
+      window.scrollTo(0, 0);
+    }
+    document.querySelectorAll('[data-page]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPage(el.dataset.page);
+      });
+    });
+
+    // Side navigation drawer
+    (function(){
+      const toggle = document.getElementById('navToggle');
+      const nav = document.getElementById('sideNav');
+      const backdrop = document.getElementById('sideNavBackdrop');
+      const closeBtn = document.getElementById('sideNavClose');
+
+      function openNav(){ nav.classList.add('open'); backdrop.classList.add('open'); }
+      function closeNav(){ nav.classList.remove('open'); backdrop.classList.remove('open'); }
+
+      toggle.addEventListener('click', openNav);
+      closeBtn.addEventListener('click', closeNav);
+      backdrop.addEventListener('click', closeNav);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+      nav.querySelectorAll('.side-nav-link').forEach((link) => {
+        link.addEventListener('click', closeNav);
+      });
+    })();
 
     // Execution tally — groups of five strokes, Korean-style
     (function(){
@@ -2160,6 +2666,7 @@
 
       let currentUserDoc = null;
       let unsubscribePosts = null;
+      let unsubscribeAgents = null;
 
       const adminBtn = document.getElementById('adminBtn');
       const adminModal = document.getElementById('adminModal');
@@ -2172,6 +2679,13 @@
       const postForm = document.getElementById('postForm');
       const postError = document.getElementById('postError');
       const postList = document.getElementById('postList');
+
+      const agentForm = document.getElementById('agentForm');
+      const agentError = document.getElementById('agentError');
+      const dynamicAgents = document.getElementById('dynamicAgents');
+      const agentsGate = document.getElementById('agentsGate');
+      const agentsAuthBtn = document.getElementById('agentsAuthBtn');
+      const agentsArea = document.getElementById('agentsArea');
 
       function escapeHtml(str){
         const div = document.createElement('div');
@@ -2253,10 +2767,16 @@
         bulletinGate.style.display = loggedIn ? 'none' : 'flex';
         bulletinArea.style.display = loggedIn ? 'block' : 'none';
 
+        agentsGate.style.display = loggedIn ? 'none' : 'flex';
+        agentsArea.style.display = loggedIn ? 'block' : 'none';
+
         if (loggedIn) {
           const canPost = !!currentUserDoc.canPost;
           postForm.style.display = canPost ? 'flex' : 'none';
           postError.textContent = canPost ? '' : '게시 권한이 없습니다. 관리자에게 문의해주세요.';
+          openAgentModalBtn.style.display = canPost ? 'inline-flex' : 'none';
+        } else {
+          openAgentModalBtn.style.display = 'none';
         }
 
         if (adminBtn) {
@@ -2327,6 +2847,283 @@
       });
 
       if (bulletinAuthBtn) bulletinAuthBtn.addEventListener('click', () => openModal());
+      if (agentsAuthBtn) agentsAuthBtn.addEventListener('click', () => openModal());
+
+      // ---- Roster registration: members with canPost can add/edit agent cards ----
+      const PLACEHOLDER_ICON = `
+        <svg width="34%" height="34%" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M4 20c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      `;
+
+      const openAgentModalBtn = document.getElementById('openAgentModalBtn');
+      const agentModal = document.getElementById('agentModal');
+      const agentModalClose = document.getElementById('agentModalClose');
+      const agentDetailModal = document.getElementById('agentDetailModal');
+      const agentDetailClose = document.getElementById('agentDetailClose');
+      const agentDetailBody = document.getElementById('agentDetailBody');
+
+      const agentRoleSelect = document.getElementById('agentRole');
+      const agentRoleOtherWrap = document.getElementById('agentRoleOtherWrap');
+      const agentRoleOther = document.getElementById('agentRoleOther');
+      const agentPhoto = document.getElementById('agentPhoto');
+      const agentSubmitBtn = document.getElementById('agentSubmitBtn');
+      const agentCancelEdit = document.getElementById('agentCancelEdit');
+      const agentFormTitle = document.getElementById('agentFormTitle');
+      const agentFormEyebrow = document.getElementById('agentFormEyebrow');
+
+      let editingAgentId = null;
+      let agentsCache = [];
+
+      agentRoleSelect.addEventListener('change', () => {
+        const isOther = agentRoleSelect.value === 'Other';
+        agentRoleOtherWrap.style.display = isOther ? 'flex' : 'none';
+        agentRoleOther.required = isOther;
+      });
+
+      function resetAgentForm(){
+        agentForm.reset();
+        agentRoleOtherWrap.style.display = 'none';
+        editingAgentId = null;
+        agentFormEyebrow.textContent = 'Register New Hangman';
+        agentFormTitle.textContent = '신규 요원 등록';
+        agentSubmitBtn.textContent = '요원 등록하기';
+        agentCancelEdit.style.display = 'none';
+        agentError.textContent = '';
+      }
+
+      function openAgentModal(){ agentModal.classList.add('open'); }
+      function closeAgentModal(){ agentModal.classList.remove('open'); resetAgentForm(); }
+      function openAgentDetail(){ agentDetailModal.classList.add('open'); }
+      function closeAgentDetail(){ agentDetailModal.classList.remove('open'); agentDetailBody.innerHTML = ''; }
+
+      openAgentModalBtn.addEventListener('click', () => { resetAgentForm(); openAgentModal(); });
+      agentModalClose.addEventListener('click', closeAgentModal);
+      agentModal.addEventListener('click', (e) => { if (e.target === agentModal) closeAgentModal(); });
+      agentDetailClose.addEventListener('click', closeAgentDetail);
+      agentDetailModal.addEventListener('click', (e) => { if (e.target === agentDetailModal) closeAgentDetail(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        closeAgentModal();
+        closeAgentDetail();
+      });
+
+      function startEditAgent(id, a){
+        editingAgentId = id;
+        document.getElementById('agentName').value = a.name || '';
+        document.getElementById('agentKo').value = a.ko || '';
+        document.getElementById('agentSummary').value = a.summary || '';
+        agentPhoto.value = a.photoUrl || '';
+
+        const knownRoles = ['Hangman', 'Team Leader', 'Dedicated Guide'];
+        if (knownRoles.includes(a.role)) {
+          agentRoleSelect.value = a.role;
+          agentRoleOtherWrap.style.display = 'none';
+        } else {
+          agentRoleSelect.value = 'Other';
+          agentRoleOtherWrap.style.display = 'flex';
+          agentRoleOther.value = a.role || '';
+        }
+
+        const rows = Array.isArray(a.dossier) ? a.dossier : [];
+        [1, 2, 3].forEach((n) => {
+          document.getElementById(`agentRow${n}Label`).value = rows[n - 1] ? rows[n - 1].label : '';
+          document.getElementById(`agentRow${n}Value`).value = rows[n - 1] ? rows[n - 1].value : '';
+        });
+
+        agentFormEyebrow.textContent = 'Edit Hangman Record';
+        agentFormTitle.textContent = `'${a.name}' 요원 정보 수정`;
+        agentSubmitBtn.textContent = '수정 완료';
+        agentCancelEdit.style.display = 'inline-block';
+        agentError.textContent = '';
+        closeAgentDetail();
+        openAgentModal();
+      }
+
+      agentCancelEdit.addEventListener('click', closeAgentModal);
+
+      function canModerateAgent(a){
+        return !!(currentUserDoc && (currentUserDoc.role === 'admin' || (auth.currentUser && a.authorUid === auth.currentUser.uid)));
+      }
+
+      // Builds the photo (or placeholder) element via DOM APIs only — never
+      // string-interpolates the photo URL into an HTML attribute, since a
+      // stray quote in the URL could otherwise break out of the attribute.
+      function makePhotoElement(url, alt, photoClass, placeholderClass){
+        function placeholder(){
+          const div = document.createElement('div');
+          div.className = placeholderClass;
+          div.innerHTML = PLACEHOLDER_ICON;
+          return div;
+        }
+        if (!url) return placeholder();
+
+        const img = document.createElement('img');
+        img.className = photoClass;
+        img.loading = 'lazy';
+        img.alt = alt || '';
+        img.src = url;
+        img.addEventListener('error', () => { img.replaceWith(placeholder()); });
+        return img;
+      }
+
+      function openAgentDetailFor(id, a){
+        const rows = Array.isArray(a.dossier) ? a.dossier : [];
+        const canModerate = canModerateAgent(a);
+
+        agentDetailBody.innerHTML = '';
+        agentDetailBody.appendChild(makePhotoElement(a.photoUrl, a.name, 'detail-photo', 'detail-placeholder'));
+
+        const info = document.createElement('div');
+        info.innerHTML = `
+          <div class="detail-role">${escapeHtml(a.role)}</div>
+          <h3 class="detail-name">${escapeHtml(a.name)}</h3>
+          <div class="detail-ko">${escapeHtml(a.ko)}</div>
+          <p class="detail-summary">${escapeHtml(a.summary)}</p>
+          ${rows.length ? `<div class="dossier">${rows.map((r) => `<div class="dossier-row"><span>${escapeHtml(r.label)}</span><span>${escapeHtml(r.value)}</span></div>`).join('')}</div>` : ''}
+        `;
+        agentDetailBody.appendChild(info);
+
+        if (canModerate) {
+          const actions = document.createElement('div');
+          actions.style.cssText = 'display:flex;gap:8px;margin-top:20px;flex-wrap:wrap';
+
+          const editBtn = document.createElement('button');
+          editBtn.className = 'auth-btn';
+          editBtn.type = 'button';
+          editBtn.textContent = '수정';
+          editBtn.addEventListener('click', () => startEditAgent(id, a));
+
+          const delBtn = document.createElement('button');
+          delBtn.className = 'post-delete';
+          delBtn.type = 'button';
+          delBtn.textContent = '요원 삭제';
+          delBtn.addEventListener('click', () => {
+            if (confirm(`'${a.name}' 요원 카드를 삭제할까요?`)) {
+              db.collection('agents').doc(id).delete();
+              closeAgentDetail();
+            }
+          });
+
+          actions.appendChild(editBtn);
+          actions.appendChild(delBtn);
+          agentDetailBody.appendChild(actions);
+        }
+
+        openAgentDetail();
+      }
+
+      function buildGalleryCard(id, a){
+        const card = document.createElement('article');
+        card.className = 'gallery-card';
+        card.appendChild(makePhotoElement(a.photoUrl, a.name, 'gallery-card-photo', 'gallery-card-placeholder'));
+
+        const scrim = document.createElement('div');
+        scrim.className = 'gallery-card-scrim';
+        card.appendChild(scrim);
+
+        const info = document.createElement('div');
+        info.className = 'gallery-card-info';
+        info.innerHTML = `
+          <div class="gallery-card-role">${escapeHtml(a.role)}</div>
+          <div class="gallery-card-name">${escapeHtml(a.name)}</div>
+          <div class="gallery-card-ko">${escapeHtml(a.ko)}</div>
+        `;
+        card.appendChild(info);
+
+        card.addEventListener('click', () => openAgentDetailFor(id, a));
+        return card;
+      }
+
+      function renderAgents(snapshot){
+        agentsCache = snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }));
+        dynamicAgents.innerHTML = '';
+
+        if (!agentsCache.length) {
+          dynamicAgents.innerHTML = '<p class="post-empty">아직 등록된 요원이 없습니다.</p>';
+          return;
+        }
+
+        agentsCache.sort((x, y) => {
+          const ta = x.data.createdAt && x.data.createdAt.toMillis ? x.data.createdAt.toMillis() : 0;
+          const tb = y.data.createdAt && y.data.createdAt.toMillis ? y.data.createdAt.toMillis() : 0;
+          return ta - tb;
+        });
+
+        const leaders = agentsCache.filter((x) => x.data.role === 'Team Leader');
+        const guides = agentsCache.filter((x) => x.data.role === 'Dedicated Guide');
+        const field = agentsCache.filter((x) => x.data.role !== 'Team Leader' && x.data.role !== 'Dedicated Guide');
+
+        const gallery = document.createElement('div');
+        gallery.className = 'agent-gallery';
+
+        function addSection(title, cls, items){
+          if (!items.length) return;
+          const section = document.createElement('div');
+          section.className = 'gallery-section';
+          const heading = document.createElement('h3');
+          heading.className = `gallery-section-title ${cls}`;
+          heading.textContent = title;
+          const grid = document.createElement('div');
+          grid.className = 'gallery-grid gallery-grid-centered';
+          items.forEach((item) => grid.appendChild(buildGalleryCard(item.id, item.data)));
+          section.appendChild(heading);
+          section.appendChild(grid);
+          gallery.appendChild(section);
+        }
+
+        addSection('팀장', 'leadership', leaders);
+        addSection('전담 가이드', 'leadership', guides);
+        addSection('행맨', 'field', field);
+
+        dynamicAgents.appendChild(gallery);
+      }
+
+      function startAgentsListener(){
+        if (unsubscribeAgents) return;
+        unsubscribeAgents = db.collection('agents').orderBy('createdAt', 'asc')
+          .onSnapshot(renderAgents, (err) => {
+            dynamicAgents.innerHTML = `<p class="post-empty">요원 목록을 불러오지 못했습니다 (${err.message}).</p>`;
+          });
+      }
+
+      agentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!currentUserDoc || !currentUserDoc.canPost || !auth.currentUser) return;
+
+        const name = document.getElementById('agentName').value.trim();
+        const ko = document.getElementById('agentKo').value.trim();
+        const roleChoice = agentRoleSelect.value;
+        const role = roleChoice === 'Other' ? agentRoleOther.value.trim() : roleChoice;
+        const summary = document.getElementById('agentSummary').value.trim();
+        const photoUrl = agentPhoto.value.trim();
+        if (!name || !ko || !role || !summary) return;
+
+        const dossier = [1, 2, 3].map((n) => ({
+          label: document.getElementById(`agentRow${n}Label`).value.trim(),
+          value: document.getElementById(`agentRow${n}Value`).value.trim()
+        })).filter((r) => r.label && r.value);
+
+        const payload = { name, ko, role, summary, photoUrl, dossier };
+
+        agentSubmitBtn.disabled = true;
+        agentError.textContent = '';
+
+        const request = editingAgentId
+          ? db.collection('agents').doc(editingAgentId).update(payload)
+          : db.collection('agents').add(Object.assign({
+              authorUid: auth.currentUser.uid,
+              authorName: currentUserDoc.username,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            }, payload));
+
+        request.then(() => {
+          closeAgentModal();
+        }).catch((err) => {
+          agentError.textContent = `저장 중 오류가 발생했습니다: ${err.message}`;
+        }).finally(() => { agentSubmitBtn.disabled = false; });
+      });
 
       // ---- Admin console ----
       function loadAdminUsers(){
@@ -2462,10 +3259,17 @@
             currentUserDoc = data;
             updatePermissionUI();
             startPostsListener();
+            startAgentsListener();
           });
         } else {
           currentUserDoc = null;
           if (unsubscribePosts) { unsubscribePosts(); unsubscribePosts = null; }
+          if (unsubscribeAgents) { unsubscribeAgents(); unsubscribeAgents = null; }
+          dynamicAgents.innerHTML = '';
+          resetAgentForm();
+          agentModal.classList.remove('open');
+          agentDetailModal.classList.remove('open');
+          agentDetailBody.innerHTML = '';
           updatePermissionUI();
         }
       });
