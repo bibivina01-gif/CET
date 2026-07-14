@@ -2090,6 +2090,216 @@
 
     .cafe-attach.has-image{color:var(--red-bright);font-weight:700}
 
+
+    /* ---- Readable categorized bulletin ---- */
+    .board-category-tabs{
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      gap:8px;
+      margin-bottom:14px;
+      padding:8px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(10,11,14,.92);
+      box-shadow:0 14px 35px rgba(0,0,0,.24);
+    }
+
+    .board-category-tab{
+      min-height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border:1px solid transparent;
+      border-radius:10px;
+      background:transparent;
+      color:#979ca6;
+      font-family:inherit;
+      font-size:.78rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+    }
+
+    .board-category-tab:hover{
+      color:#fff;
+      background:rgba(255,255,255,.045);
+      transform:translateY(-1px);
+    }
+
+    .board-category-tab.active{
+      color:#fff;
+      border-color:rgba(255,255,255,.14);
+      background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+      box-shadow:inset 0 -2px 0 var(--tab-accent,var(--red-bright));
+    }
+
+    .board-category-tab[data-category="공지"]{--tab-accent:#ff626d}
+    .board-category-tab[data-category="작전 기록"]{--tab-accent:#68a7ff}
+    .board-category-tab[data-category="정보 공유"]{--tab-accent:#e7b85d}
+    .board-category-tab[data-category="자유"]{--tab-accent:#71d3a0}
+
+    .board-category-tab em{
+      min-width:22px;
+      padding:2px 6px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      color:#7f858f;
+      font-style:normal;
+      font-size:.64rem;
+      line-height:1.45;
+    }
+
+    .board-category-tab.active em{color:#dfe2e8;background:rgba(255,255,255,.1)}
+
+    .pinned-notice-board{
+      margin-bottom:14px;
+      border:1px solid rgba(255,98,109,.32);
+      border-radius:13px;
+      overflow:hidden;
+      background:linear-gradient(135deg,rgba(116,17,25,.24),rgba(12,13,17,.96) 55%);
+      box-shadow:0 14px 35px rgba(0,0,0,.25);
+    }
+
+    .pinned-notice-head{
+      min-height:46px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:0 18px;
+      border-bottom:1px solid rgba(255,98,109,.2);
+    }
+
+    .pinned-notice-head strong{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      color:#fff;
+      font-size:.84rem;
+    }
+
+    .pinned-notice-head strong::before{
+      content:"PIN";
+      padding:2px 7px;
+      border-radius:999px;
+      color:#fff;
+      background:#8f1720;
+      font-size:.58rem;
+      letter-spacing:.12em;
+    }
+
+    .pinned-notice-head span{color:#9d777b;font-size:.68rem}
+
+    .pinned-notice-row{
+      width:100%;
+      display:grid;
+      grid-template-columns:82px minmax(0,1fr) 120px 90px;
+      align-items:center;
+      gap:14px;
+      min-height:58px;
+      padding:11px 18px;
+      border:0;
+      border-bottom:1px solid rgba(255,255,255,.055);
+      background:rgba(8,9,12,.45);
+      color:inherit;
+      text-align:left;
+      font-family:inherit;
+      cursor:pointer;
+      transition:background .18s ease;
+    }
+
+    .pinned-notice-row:last-child{border-bottom:0}
+    .pinned-notice-row:hover{background:rgba(143,23,32,.19)}
+    .pinned-notice-title{min-width:0;color:#f2f2f4;font-size:.87rem;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .pinned-notice-author,.pinned-notice-date{color:#9b8b8e;font-size:.7rem;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+    .cafe-board{
+      background:#0b0d11;
+      box-shadow:0 18px 48px rgba(0,0,0,.34);
+    }
+
+    .cafe-board-toolbar{
+      min-height:54px;
+      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+    }
+
+    .cafe-board-toolbar strong{font-size:.94rem}
+    .cafe-board-toolbar span{font-size:.72rem}
+
+    .cafe-board-head{
+      min-height:42px;
+      color:#8c929d;
+      background:#080a0d;
+    }
+
+    .cafe-post-row{
+      min-height:74px;
+      padding-top:15px;
+      padding-bottom:15px;
+      background:#0f1116;
+      box-shadow:inset 3px 0 0 var(--row-accent,#525762);
+    }
+
+    .cafe-post-row:nth-child(even){background:#0c0e12}
+    .cafe-post-row:hover{background:#151820}
+    .cafe-post-row.category-notice{--row-accent:#ff626d}
+    .cafe-post-row.category-operation{--row-accent:#68a7ff}
+    .cafe-post-row.category-info{--row-accent:#e7b85d}
+    .cafe-post-row.category-free{--row-accent:#71d3a0}
+
+    .cafe-category{
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+
+    .cafe-category.category-notice{color:#ff7b84;border-color:rgba(255,98,109,.42);background:rgba(143,23,32,.15)}
+    .cafe-category.category-operation{color:#82b9ff;border-color:rgba(104,167,255,.4);background:rgba(44,91,154,.16)}
+    .cafe-category.category-info{color:#f0c97a;border-color:rgba(231,184,93,.4);background:rgba(129,91,24,.16)}
+    .cafe-category.category-free{color:#8adfb5;border-color:rgba(113,211,160,.4);background:rgba(33,112,72,.16)}
+
+    .cafe-title-line strong{
+      color:#f1f1f3;
+      font-size:.92rem;
+      line-height:1.45;
+    }
+
+    .cafe-title-cell small{
+      margin-top:4px;
+      color:#858b95;
+      font-size:.72rem;
+      line-height:1.5;
+    }
+
+    .cafe-author,.cafe-date,.cafe-attach{color:#a4a9b2}
+
+    .board-empty-state{
+      padding:48px 20px;
+      text-align:center;
+      color:#707680;
+      font-size:.84rem;
+    }
+
+    @media (max-width:760px){
+      .board-category-tabs{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:7px;
+      }
+      .board-category-tab:first-child{grid-column:1 / -1}
+      .board-category-tab{min-height:42px}
+      .pinned-notice-row{
+        grid-template-columns:64px minmax(0,1fr);
+        grid-template-areas:"badge title" "author date";
+        gap:4px 10px;
+        padding:12px 14px;
+      }
+      .pinned-notice-row .cafe-category{grid-area:badge;justify-self:start}
+      .pinned-notice-title{grid-area:title}
+      .pinned-notice-author{grid-area:author;text-align:left}
+      .pinned-notice-date{grid-area:date;text-align:right}
+      .cafe-post-row{min-height:84px}
+    }
+
     .board-detail-modal{
       width:min(780px,100%);
       max-height:88vh;
@@ -2494,7 +2704,7 @@
           </div>
           <div class="meta-block">
             <span class="meta-label">Uniform Code</span>
-            <span class="meta-value">White & Black Tone</span>
+            <span class="meta-value">White · Black Tone</span>
           </div>
           <div class="meta-block">
             <span class="meta-label">Cumulative Executions</span>
@@ -2766,7 +2976,7 @@
             <article class="mini-panel">
               <h3>유니폼 규정</h3>
               <p>
-                검정·회색·백색만 허용되는 완전 무채색 체계. 요원들은 공통적으로
+                검정·회색·백색만 허용되는 무채색 체계. 요원들은 공통적으로
                 블랙 톤 유니폼을 착용한다.
               </p>
             </article>
@@ -2979,8 +3189,8 @@
           <div class="section-index">BULLETIN</div>
           <h2 class="section-title">내부 게시판</h2>
           <p class="section-desc">
-            공지·작전 기록·자유 기록을 나누는 C.E.T. 내부 게시판입니다.
-            게시글을 눌러 본문과 첨부 이미지, 댓글을 확인할 수 있습니다.
+            공지·작전 기록·정보 공유·자유 기록을 분류해 열람하는 C.E.T. 내부 게시판입니다.
+            상단 분류를 선택하거나 게시글을 눌러 본문과 첨부 이미지, 댓글을 확인할 수 있습니다.
           </p>
         </div>
         <button class="register-btn" id="openPostComposerBtn" type="button" style="display:none">
@@ -2994,10 +3204,26 @@
       </div>
 
       <div id="bulletinArea" style="display:none">
+        <nav class="board-category-tabs" id="boardCategoryTabs" aria-label="게시판 분류">
+          <button class="board-category-tab active" type="button" data-category="전체">전체 <em id="boardCountAll">0</em></button>
+          <button class="board-category-tab" type="button" data-category="공지">공지 <em id="boardCountNotice">0</em></button>
+          <button class="board-category-tab" type="button" data-category="작전 기록">작전 기록 <em id="boardCountOperation">0</em></button>
+          <button class="board-category-tab" type="button" data-category="정보 공유">정보 공유 <em id="boardCountInfo">0</em></button>
+          <button class="board-category-tab" type="button" data-category="자유">자유 <em id="boardCountFree">0</em></button>
+        </nav>
+
+        <section class="pinned-notice-board" id="pinnedNoticeBoard" aria-label="고정 공지" style="display:none">
+          <div class="pinned-notice-head">
+            <strong>고정 공지</strong>
+            <span>관리자 작성</span>
+          </div>
+          <div id="pinnedNoticeList"></div>
+        </section>
+
         <section class="cafe-board" aria-label="게시글 목록">
           <div class="cafe-board-toolbar">
-            <strong>전체 글</strong>
-            <span>최신 게시글 50개</span>
+            <strong id="boardSectionTitle">전체 글</strong>
+            <span id="boardSectionCount">최신 게시글 50개</span>
           </div>
           <div class="cafe-board-head" aria-hidden="true">
             <span>분류</span>
@@ -3225,7 +3451,7 @@
         </div>
         <div class="cafe-write-grid">
           <select id="postCategory" aria-label="게시글 분류">
-            <option value="공지">공지</option>
+            <option value="공지">공지 (관리자 전용)</option>
             <option value="작전 기록">작전 기록</option>
             <option value="정보 공유">정보 공유</option>
             <option value="자유">자유</option>
@@ -3448,6 +3674,8 @@
       let unsubscribeComments = null;
       let activePostId = null;
       let selectedPostFiles = [];
+      let activeBoardCategory = '전체';
+      let allBoardPosts = [];
       const postsCache = new Map();
 
       const adminBtn = document.getElementById('adminBtn');
@@ -3462,9 +3690,20 @@
       const postComposeModal = document.getElementById('postComposeModal');
       const postComposeClose = document.getElementById('postComposeClose');
       const postForm = document.getElementById('postForm');
+      const postCategory = document.getElementById('postCategory');
       const postAuthorName = document.getElementById('postAuthorName');
       const postError = document.getElementById('postError');
       const postList = document.getElementById('postList');
+      const boardCategoryTabs = document.getElementById('boardCategoryTabs');
+      const pinnedNoticeBoard = document.getElementById('pinnedNoticeBoard');
+      const pinnedNoticeList = document.getElementById('pinnedNoticeList');
+      const boardSectionTitle = document.getElementById('boardSectionTitle');
+      const boardSectionCount = document.getElementById('boardSectionCount');
+      const boardCountAll = document.getElementById('boardCountAll');
+      const boardCountNotice = document.getElementById('boardCountNotice');
+      const boardCountOperation = document.getElementById('boardCountOperation');
+      const boardCountInfo = document.getElementById('boardCountInfo');
+      const boardCountFree = document.getElementById('boardCountFree');
       const postImages = document.getElementById('postImages');
       const postImagePreview = document.getElementById('postImagePreview');
       const postFileCount = document.getElementById('postFileCount');
@@ -3581,6 +3820,31 @@
         });
       }
 
+      const BOARD_CATEGORIES = ['공지', '작전 기록', '정보 공유', '자유'];
+
+      function normalizePostCategory(value){
+        return BOARD_CATEGORIES.includes(value) ? value : '자유';
+      }
+
+      function postCategoryKey(value){
+        const category = normalizePostCategory(value);
+        if (category === '공지') return 'notice';
+        if (category === '작전 기록') return 'operation';
+        if (category === '정보 공유') return 'info';
+        return 'free';
+      }
+
+      function updatePostCategoryOptions(){
+        if (!postCategory) return;
+        const isAdminUser = !!(currentUserDoc && currentUserDoc.role === 'admin');
+        const previous = postCategory.value;
+        const options = isAdminUser ? BOARD_CATEGORIES : BOARD_CATEGORIES.filter((item) => item !== '공지');
+        postCategory.innerHTML = options.map((item) =>
+          `<option value="${escapeHtml(item)}">${escapeHtml(item)}${item === '공지' ? ' (관리자 전용)' : ''}</option>`
+        ).join('');
+        postCategory.value = options.includes(previous) ? previous : (options.includes('자유') ? '자유' : options[0]);
+      }
+
       function updatePermissionUI(){
         const loggedIn = !!currentUserDoc;
 
@@ -3604,6 +3868,7 @@
         }
 
         const isAdminUser = !!(loggedIn && currentUserDoc.role === 'admin');
+        updatePostCategoryOptions();
         if (adminBtn) {
           adminBtn.style.display = isAdminUser ? 'inline-block' : 'none';
         }
@@ -3647,6 +3912,7 @@
 
       function openPostComposer(){
         if (!auth.currentUser || !currentUserDoc || !currentUserDoc.canPost) return;
+        updatePostCategoryOptions();
         postError.textContent = '';
         if (!postAuthorName.value.trim()) {
           postAuthorName.value = localStorage.getItem('cetPostAuthorName')
@@ -3869,34 +4135,114 @@
         startCommentsListener(postId);
       }
 
-      function renderPosts(snapshot){
+      function createBoardRow(item, pinned = false){
+        const p = item.data;
+        const category = normalizePostCategory(p.category);
+        const key = postCategoryKey(category);
+
+        if (pinned) {
+          const row = document.createElement('button');
+          row.className = 'pinned-notice-row';
+          row.type = 'button';
+          row.innerHTML = `
+            <span class="cafe-category category-notice">공지</span>
+            <span class="pinned-notice-title">${escapeHtml(p.title || '')}</span>
+            <span class="pinned-notice-author">${escapeHtml(p.authorName || '익명')}</span>
+            <span class="pinned-notice-date">${escapeHtml(formatPostDate(p.createdAt, true))}</span>
+          `;
+          row.addEventListener('click', () => openPostDetail(item.id));
+          return row;
+        }
+
+        const row = document.createElement('button');
+        row.className = `cafe-post-row category-${key}`;
+        row.type = 'button';
+        row.innerHTML = `
+          <span class="cafe-category category-${key}">${escapeHtml(category)}</span>
+          <span class="cafe-title-cell">
+            <span class="cafe-title-line"><strong>${escapeHtml(p.title || '')}</strong></span>
+            <small>${escapeHtml(postSnippet(p.body))}</small>
+          </span>
+          <span class="cafe-author">${escapeHtml(p.authorName || '익명')}</span>
+          <span class="cafe-date">${escapeHtml(formatPostDate(p.createdAt, true))}</span>
+          <span class="cafe-attach${Array.isArray(p.imageUrls) && p.imageUrls.length ? ' has-image' : ''}">${Array.isArray(p.imageUrls) && p.imageUrls.length ? `▣ ${p.imageUrls.length}` : '—'}</span>
+        `;
+        row.addEventListener('click', () => openPostDetail(item.id));
+        return row;
+      }
+
+      function updateBoardCounts(){
+        const count = (category) => allBoardPosts.filter((item) => normalizePostCategory(item.data.category) === category).length;
+        boardCountAll.textContent = String(allBoardPosts.length);
+        boardCountNotice.textContent = String(count('공지'));
+        boardCountOperation.textContent = String(count('작전 기록'));
+        boardCountInfo.textContent = String(count('정보 공유'));
+        boardCountFree.textContent = String(count('자유'));
+      }
+
+      function renderActiveBoardCategory(){
         postList.innerHTML = '';
-        postsCache.clear();
-        if (snapshot.empty) {
-          postList.innerHTML = '<p class="post-empty">아직 게시된 글이 없습니다.</p>';
+        pinnedNoticeList.innerHTML = '';
+        updateBoardCounts();
+
+        boardCategoryTabs.querySelectorAll('.board-category-tab').forEach((button) => {
+          const active = button.dataset.category === activeBoardCategory;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-current', active ? 'page' : 'false');
+        });
+
+        const notices = allBoardPosts.filter((item) => normalizePostCategory(item.data.category) === '공지');
+        const showPinned = activeBoardCategory === '전체' && notices.length > 0;
+        pinnedNoticeBoard.style.display = showPinned ? 'block' : 'none';
+        if (showPinned) notices.forEach((item) => pinnedNoticeList.appendChild(createBoardRow(item, true)));
+
+        let visiblePosts;
+        if (activeBoardCategory === '전체') {
+          visiblePosts = allBoardPosts.filter((item) => normalizePostCategory(item.data.category) !== '공지');
+          boardSectionTitle.textContent = '전체 글';
+          boardSectionCount.textContent = `공지 ${notices.length}개 · 일반 글 ${visiblePosts.length}개`;
+        } else {
+          visiblePosts = allBoardPosts.filter((item) => normalizePostCategory(item.data.category) === activeBoardCategory);
+          boardSectionTitle.textContent = `${activeBoardCategory} 게시판`;
+          boardSectionCount.textContent = `${visiblePosts.length}개의 게시글`;
+        }
+
+        if (!visiblePosts.length) {
+          postList.innerHTML = `<div class="board-empty-state">${activeBoardCategory === '전체' && notices.length ? '공지 외에 등록된 글이 없습니다.' : '이 분류에 등록된 글이 없습니다.'}</div>`;
           return;
         }
 
-        snapshot.forEach((doc) => {
-          const p = doc.data();
-          postsCache.set(doc.id, p);
-          const row = document.createElement('button');
-          row.className = 'cafe-post-row';
-          row.type = 'button';
-          row.innerHTML = `
-            <span class="cafe-category">${escapeHtml(p.category || '자유')}</span>
-            <span class="cafe-title-cell">
-              <span class="cafe-title-line"><strong>${escapeHtml(p.title || '')}</strong></span>
-              <small>${escapeHtml(postSnippet(p.body))}</small>
-            </span>
-            <span class="cafe-author">${escapeHtml(p.authorName || '익명')}</span>
-            <span class="cafe-date">${escapeHtml(formatPostDate(p.createdAt, true))}</span>
-            <span class="cafe-attach${Array.isArray(p.imageUrls) && p.imageUrls.length ? ' has-image' : ''}">${Array.isArray(p.imageUrls) && p.imageUrls.length ? `▣ ${p.imageUrls.length}` : '—'}</span>
-          `;
-          row.addEventListener('click', () => openPostDetail(doc.id));
-          postList.appendChild(row);
-        });
+        visiblePosts.forEach((item) => postList.appendChild(createBoardRow(item)));
       }
+
+      function renderPosts(snapshot){
+        postsCache.clear();
+        allBoardPosts = [];
+
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          postsCache.set(doc.id, data);
+          allBoardPosts.push({ id: doc.id, data });
+        });
+
+        if (snapshot.empty) {
+          pinnedNoticeBoard.style.display = 'none';
+          updateBoardCounts();
+          postList.innerHTML = '<div class="board-empty-state">아직 게시된 글이 없습니다.</div>';
+          boardSectionTitle.textContent = '전체 글';
+          boardSectionCount.textContent = '게시글 0개';
+          return;
+        }
+
+        renderActiveBoardCategory();
+      }
+
+      boardCategoryTabs.addEventListener('click', (event) => {
+        const button = event.target.closest('.board-category-tab');
+        if (!button) return;
+        activeBoardCategory = button.dataset.category || '전체';
+        renderActiveBoardCategory();
+      });
 
       function startPostsListener(){
         if (unsubscribePosts) return;
@@ -3916,10 +4262,15 @@
           postError.textContent = '현재 계정에는 게시 권한이 없습니다.';
           return;
         }
-        const category = document.getElementById('postCategory').value;
+        const category = postCategory.value;
         const title = document.getElementById('postTitle').value.trim();
         const authorName = postAuthorName.value.trim();
         const body = document.getElementById('postBody').value.trim();
+        if (category === '공지' && currentUserDoc.role !== 'admin') {
+          postError.textContent = '공지 게시글은 관리자만 작성할 수 있습니다.';
+          updatePostCategoryOptions();
+          return;
+        }
         if (!authorName) {
           postError.textContent = '글에 표시할 요원 이름을 입력해주세요.';
           postAuthorName.focus();
@@ -4819,6 +5170,10 @@
           if (unsubscribeComments) { unsubscribeComments(); unsubscribeComments = null; }
           closePostDetail();
           postsCache.clear();
+          allBoardPosts = [];
+          activeBoardCategory = '전체';
+          if (pinnedNoticeBoard) pinnedNoticeBoard.style.display = 'none';
+          if (postList) postList.innerHTML = '<p class="post-empty">로그인 후 이용할 수 있습니다.</p>';
           dynamicAgents.innerHTML = '';
           resetAgentForm();
           agentModal.classList.remove('open');
