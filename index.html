@@ -2643,6 +2643,139 @@
       .agent-order-foot{bottom:-24px;margin:18px -18px -24px;padding:14px 18px 18px}
     }
 
+
+    /* ---- Comment display name + post editing ---- */
+    .comment-form input{
+      width:100%;
+      margin-bottom:10px;
+      background:#060708;
+      border:1px solid var(--line);
+      border-radius:8px;
+      color:var(--text);
+      padding:11px 12px;
+      font-family:inherit;
+      font-size:.84rem;
+    }
+
+    .comment-form input:focus{outline:none;border-color:var(--red-bright)}
+
+    .post-image-preview-item{
+      position:relative;
+      width:88px;
+      height:88px;
+      flex:0 0 88px;
+    }
+
+    .post-image-preview-item img{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .post-image-remove{
+      position:absolute;
+      top:5px;
+      right:5px;
+      width:24px;
+      height:24px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.35);
+      border-radius:50%;
+      background:rgba(4,5,7,.88);
+      color:#fff;
+      cursor:pointer;
+      font-size:.72rem;
+      line-height:1;
+      box-shadow:0 3px 10px rgba(0,0,0,.45);
+    }
+
+    .post-image-remove:hover{border-color:var(--red-bright);background:var(--red-dark)}
+
+    .post-image-state{
+      position:absolute;
+      left:5px;
+      bottom:5px;
+      padding:2px 6px;
+      border-radius:999px;
+      background:rgba(4,5,7,.78);
+      color:#d6d9df;
+      font-size:.6rem;
+      pointer-events:none;
+    }
+
+    .post-edit-button{
+      margin-top:12px;
+      margin-right:8px;
+      border:1px solid var(--line-bright);
+      background:rgba(255,255,255,.025);
+      color:#d8dbe1;
+      font-size:.72rem;
+      padding:6px 12px;
+      border-radius:999px;
+      cursor:pointer;
+    }
+
+    .post-edit-button:hover{border-color:#7c94b9;background:rgba(88,118,163,.14)}
+
+
+    /* ---- Author-owned post/comment editing ---- */
+    .comment-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top:9px;
+      flex-wrap:wrap;
+    }
+
+    .comment-edit,
+    .comment-edit-cancel{
+      border:0;
+      background:transparent;
+      color:#8ea8c8;
+      font-size:.68rem;
+      cursor:pointer;
+      padding:0;
+      font-family:inherit;
+    }
+
+    .comment-edit:hover,
+    .comment-edit-cancel:hover{color:#c9ddf5}
+
+    .comment-edited{
+      color:#696f79;
+      font-size:.66rem;
+      margin-left:6px;
+    }
+
+    .comment-form.is-editing{
+      padding:14px;
+      border:1px solid rgba(79,124,173,.42);
+      border-radius:10px;
+      background:rgba(79,124,173,.055);
+    }
+
+    .comment-form-edit-note{
+      display:none;
+      margin:0 0 10px;
+      color:#9ab4d2;
+      font-size:.72rem;
+    }
+
+    .comment-form.is-editing .comment-form-edit-note{display:block}
+
+    .comment-form-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    @media (max-width:640px){
+      .comment-form-actions{width:100%;justify-content:flex-end}
+      .comment-form-foot{align-items:flex-end;flex-direction:column}
+      .comment-form-foot .form-error{width:100%}
+    }
+
   </style>
 </head>
 <body>
@@ -3079,8 +3212,8 @@
               <span>인가 등급 미달</span>
             </div>
             <div class="person-role">Hangman</div>
-            <h3>Cosmo</h3>
-            <div class="ko">코스모</div>
+            <h3>Cosmos</h3>
+            <div class="ko">코스모스</div>
             <p>
               포획 작전과 단독 집행을 수행하는 현장 요원.
               C.E.T. 특유의 원칙과 모순을 동시에 상징한다.
@@ -3446,7 +3579,7 @@
       <button class="modal-close" id="postComposeClose" type="button" aria-label="닫기">✕</button>
       <form class="post-form cafe-write-form" id="postForm">
         <div class="cafe-write-head">
-          <strong>새 글 작성</strong>
+          <strong id="postComposeTitle">새 글 작성</strong>
           <span>이미지는 최대 4장, 한 장당 5MB까지 첨부할 수 있습니다.</span>
         </div>
         <div class="cafe-write-grid">
@@ -3469,7 +3602,7 @@
         <div class="post-image-preview" id="postImagePreview"></div>
         <div class="post-form-foot">
           <div class="form-error" id="postError"></div>
-          <button class="form-submit" type="submit">게시하기</button>
+          <button class="form-submit" type="submit" id="postSubmitBtn">게시하기</button>
         </div>
       </form>
     </div>
@@ -3488,10 +3621,15 @@
           <p class="post-empty">게시글을 선택해주세요.</p>
         </div>
         <form class="comment-form" id="commentForm">
+          <p class="comment-form-edit-note">내가 작성한 댓글을 수정하고 있습니다.</p>
+          <input id="commentAuthorName" type="text" maxlength="30" placeholder="댓글에 표시할 요원 이름" required />
           <textarea id="commentBody" maxlength="500" placeholder="댓글을 입력하세요" required></textarea>
           <div class="comment-form-foot">
             <div class="form-error" id="commentError"></div>
-            <button class="form-submit" type="submit">댓글 등록</button>
+            <div class="comment-form-actions">
+              <button class="comment-edit-cancel" id="commentEditCancel" type="button" style="display:none">수정 취소</button>
+              <button class="form-submit" id="commentSubmitBtn" type="submit">댓글 등록</button>
+            </div>
           </div>
         </form>
       </section>
@@ -3674,6 +3812,11 @@
       let unsubscribeComments = null;
       let activePostId = null;
       let selectedPostFiles = [];
+      let editingPostId = null;
+      let editingPostOriginal = null;
+      let editingCommentId = null;
+      let editingCommentOriginal = null;
+      let retainedPostImageUrls = [];
       let activeBoardCategory = '전체';
       let allBoardPosts = [];
       const postsCache = new Map();
@@ -3692,6 +3835,8 @@
       const postForm = document.getElementById('postForm');
       const postCategory = document.getElementById('postCategory');
       const postAuthorName = document.getElementById('postAuthorName');
+      const postComposeTitle = document.getElementById('postComposeTitle');
+      const postSubmitBtn = document.getElementById('postSubmitBtn');
       const postError = document.getElementById('postError');
       const postList = document.getElementById('postList');
       const boardCategoryTabs = document.getElementById('boardCategoryTabs');
@@ -3713,8 +3858,11 @@
       const commentList = document.getElementById('commentList');
       const commentCount = document.getElementById('commentCount');
       const commentForm = document.getElementById('commentForm');
+      const commentAuthorName = document.getElementById('commentAuthorName');
       const commentBody = document.getElementById('commentBody');
       const commentError = document.getElementById('commentError');
+      const commentSubmitBtn = document.getElementById('commentSubmitBtn');
+      const commentEditCancel = document.getElementById('commentEditCancel');
 
       const agentForm = document.getElementById('agentForm');
       const agentError = document.getElementById('agentError');
@@ -3896,29 +4044,114 @@
 
       function renderSelectedPostImages(){
         postImagePreview.innerHTML = '';
-        postFileCount.textContent = selectedPostFiles.length
-          ? `${selectedPostFiles.length}장 선택됨`
+        const total = retainedPostImageUrls.length + selectedPostFiles.length;
+        postFileCount.textContent = total
+          ? `${total}장 첨부됨 (최대 4장)`
           : '선택된 사진 없음';
 
-        selectedPostFiles.forEach((file) => {
+        retainedPostImageUrls.forEach((url, index) => {
+          const item = document.createElement('div');
+          item.className = 'post-image-preview-item';
+
+          const img = document.createElement('img');
+          img.alt = `기존 첨부 이미지 ${index + 1}`;
+          img.src = url;
+
+          const badge = document.createElement('span');
+          badge.className = 'post-image-state';
+          badge.textContent = '기존';
+
+          const remove = document.createElement('button');
+          remove.className = 'post-image-remove';
+          remove.type = 'button';
+          remove.setAttribute('aria-label', '기존 이미지 제거');
+          remove.textContent = '✕';
+          remove.addEventListener('click', () => {
+            retainedPostImageUrls.splice(index, 1);
+            renderSelectedPostImages();
+          });
+
+          item.append(img, badge, remove);
+          postImagePreview.appendChild(item);
+        });
+
+        selectedPostFiles.forEach((file, index) => {
+          const item = document.createElement('div');
+          item.className = 'post-image-preview-item';
+
           const img = document.createElement('img');
           img.alt = file.name;
           const url = URL.createObjectURL(file);
           img.src = url;
           img.addEventListener('load', () => URL.revokeObjectURL(url), { once: true });
-          postImagePreview.appendChild(img);
+
+          const badge = document.createElement('span');
+          badge.className = 'post-image-state';
+          badge.textContent = '새 사진';
+
+          const remove = document.createElement('button');
+          remove.className = 'post-image-remove';
+          remove.type = 'button';
+          remove.setAttribute('aria-label', '선택한 이미지 제거');
+          remove.textContent = '✕';
+          remove.addEventListener('click', () => {
+            selectedPostFiles.splice(index, 1);
+            postImages.value = '';
+            renderSelectedPostImages();
+          });
+
+          item.append(img, badge, remove);
+          postImagePreview.appendChild(item);
         });
+      }
+
+      function resetPostComposerForCreate(){
+        editingPostId = null;
+        editingPostOriginal = null;
+        retainedPostImageUrls = [];
+        selectedPostFiles = [];
+        postForm.reset();
+        postImages.value = '';
+        postComposeTitle.textContent = '새 글 작성';
+        postSubmitBtn.textContent = '게시하기';
+        updatePostCategoryOptions();
+        postCategory.value = postCategory.querySelector('option[value="자유"]') ? '자유' : postCategory.value;
+        postAuthorName.value = localStorage.getItem('cetPostAuthorName')
+          || (currentUserDoc && currentUserDoc.username)
+          || (auth.currentUser ? emailToId(auth.currentUser.email) : '');
+        renderSelectedPostImages();
       }
 
       function openPostComposer(){
         if (!auth.currentUser || !currentUserDoc || !currentUserDoc.canPost) return;
-        updatePostCategoryOptions();
+        resetPostComposerForCreate();
         postError.textContent = '';
-        if (!postAuthorName.value.trim()) {
-          postAuthorName.value = localStorage.getItem('cetPostAuthorName')
-            || currentUserDoc.username
-            || emailToId(auth.currentUser.email);
-        }
+        postComposeModal.classList.add('open');
+        requestAnimationFrame(() => {
+          const panel = postComposeModal.querySelector('.modal');
+          if (panel) panel.scrollTop = 0;
+          postComposeModal.scrollTop = 0;
+        });
+        window.setTimeout(() => document.getElementById('postTitle').focus(), 0);
+      }
+
+      function openPostEditor(postId, post){
+        if (!auth.currentUser || !currentUserDoc || !canEditPost(post)) return;
+        editingPostId = postId;
+        editingPostOriginal = { ...post, imageUrls: Array.isArray(post.imageUrls) ? [...post.imageUrls] : [] };
+        retainedPostImageUrls = [...editingPostOriginal.imageUrls];
+        selectedPostFiles = [];
+        postForm.reset();
+        postImages.value = '';
+        updatePostCategoryOptions();
+        postCategory.value = normalizePostCategory(post.category);
+        document.getElementById('postTitle').value = post.title || '';
+        postAuthorName.value = post.authorName || '';
+        document.getElementById('postBody').value = post.body || '';
+        postComposeTitle.textContent = '게시글 수정';
+        postSubmitBtn.textContent = '수정 저장';
+        postError.textContent = '';
+        renderSelectedPostImages();
         postComposeModal.classList.add('open');
         requestAnimationFrame(() => {
           const panel = postComposeModal.querySelector('.modal');
@@ -3931,6 +4164,15 @@
       function closePostComposer(){
         postComposeModal.classList.remove('open');
         postError.textContent = '';
+        editingPostId = null;
+        editingPostOriginal = null;
+        retainedPostImageUrls = [];
+        selectedPostFiles = [];
+        postImages.value = '';
+        postForm.reset();
+        postComposeTitle.textContent = '새 글 작성';
+        postSubmitBtn.textContent = '게시하기';
+        renderSelectedPostImages();
       }
 
       openPostComposerBtn.addEventListener('click', openPostComposer);
@@ -3947,8 +4189,8 @@
       postImages.addEventListener('change', () => {
         postError.textContent = '';
         const files = Array.from(postImages.files || []);
-        if (files.length > 4) {
-          postError.textContent = '사진은 최대 4장까지 첨부할 수 있습니다.';
+        if (retainedPostImageUrls.length + files.length > 4) {
+          postError.textContent = `기존 사진을 포함해 최대 4장까지 첨부할 수 있습니다. 현재 추가 가능한 사진은 ${Math.max(0, 4 - retainedPostImageUrls.length)}장입니다.`;
           postImages.value = '';
           selectedPostFiles = [];
           renderSelectedPostImages();
@@ -3966,9 +4208,9 @@
         renderSelectedPostImages();
       });
 
-      async function uploadPostImages(files){
+      async function uploadPostImages(files, ownerUid = auth.currentUser.uid){
         if (!files.length) return [];
-        const uid = auth.currentUser.uid;
+        const uid = ownerUid;
         const urls = [];
         for (let index = 0; index < files.length; index += 1) {
           const file = files[index];
@@ -3980,11 +4222,59 @@
         return urls;
       }
 
-      function canModeratePost(post){
-        return !!(currentUserDoc && (
-          currentUserDoc.role === 'admin' ||
-          (auth.currentUser && post.authorUid === auth.currentUser.uid)
+      function isCurrentAdmin(){
+        return !!(currentUserDoc && currentUserDoc.role === 'admin');
+      }
+
+      function isPostOwner(post){
+        return !!(auth.currentUser && post && post.authorUid === auth.currentUser.uid);
+      }
+
+      function canEditPost(post){
+        if (!auth.currentUser || !currentUserDoc || !post) return false;
+        if (isCurrentAdmin()) return true;
+        return normalizePostCategory(post.category) !== '공지' && isPostOwner(post);
+      }
+
+      function canDeletePost(post){
+        return !!(auth.currentUser && currentUserDoc && (isCurrentAdmin() || isPostOwner(post)));
+      }
+
+      function canEditComment(comment){
+        return !!(auth.currentUser && currentUserDoc && comment && (
+          isCurrentAdmin() || comment.authorUid === auth.currentUser.uid
         ));
+      }
+
+      function defaultCommentAuthorName(){
+        return localStorage.getItem('cetCommentAuthorName')
+          || (currentUserDoc && currentUserDoc.username)
+          || (auth.currentUser ? emailToId(auth.currentUser.email) : '');
+      }
+
+      function resetCommentEditor({ keepName = true } = {}){
+        editingCommentId = null;
+        editingCommentOriginal = null;
+        commentForm.classList.remove('is-editing');
+        commentEditCancel.style.display = 'none';
+        commentSubmitBtn.textContent = '댓글 등록';
+        commentBody.value = '';
+        if (!keepName) commentAuthorName.value = defaultCommentAuthorName();
+        commentError.textContent = '';
+      }
+
+      function openCommentEditor(commentId, comment){
+        if (!canEditComment(comment)) return;
+        editingCommentId = commentId;
+        editingCommentOriginal = { ...comment };
+        commentAuthorName.value = comment.authorName || defaultCommentAuthorName();
+        commentBody.value = comment.body || '';
+        commentForm.classList.add('is-editing');
+        commentEditCancel.style.display = '';
+        commentSubmitBtn.textContent = '댓글 수정 저장';
+        commentError.textContent = '';
+        commentForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        window.setTimeout(() => commentBody.focus(), 150);
       }
 
       function closePostDetail(){
@@ -3993,8 +4283,8 @@
         postDetailBody.innerHTML = '';
         commentList.innerHTML = '<p class="post-empty">게시글을 선택해주세요.</p>';
         commentCount.textContent = '0';
-        commentError.textContent = '';
         commentForm.reset();
+        resetCommentEditor({ keepName: false });
         if (unsubscribeComments) {
           unsubscribeComments();
           unsubscribeComments = null;
@@ -4012,8 +4302,9 @@
         const activePost = postsCache.get(activePostId) || {};
         snapshot.forEach((doc) => {
           const c = doc.data();
+          const canEdit = canEditComment(c);
           const canDelete = currentUserDoc && (
-            currentUserDoc.role === 'admin' ||
+            isCurrentAdmin() ||
             (auth.currentUser && c.authorUid === auth.currentUser.uid) ||
             (auth.currentUser && activePost.authorUid === auth.currentUser.uid)
           );
@@ -4023,22 +4314,44 @@
           item.innerHTML = `
             <div class="comment-meta">
               <strong>${escapeHtml(c.authorName || '익명')}</strong>
-              <span>${escapeHtml(formatPostDate(c.createdAt))}</span>
+              <span>
+                ${escapeHtml(formatPostDate(c.createdAt))}
+                ${c.updatedAt ? '<span class="comment-edited">수정됨</span>' : ''}
+              </span>
             </div>
             <p>${escapeHtml(c.body || '')}</p>
           `;
 
-          if (canDelete) {
-            const del = document.createElement('button');
-            del.className = 'comment-delete';
-            del.type = 'button';
-            del.textContent = '댓글 삭제';
-            del.addEventListener('click', () => {
-              if (!confirm('이 댓글을 삭제할까요?')) return;
-              db.collection('posts').doc(activePostId).collection('comments').doc(doc.id).delete()
-                .catch((err) => { commentError.textContent = `댓글 삭제 오류: ${describeDataError(err)}`; });
-            });
-            item.appendChild(del);
+          if (canEdit || canDelete) {
+            const actions = document.createElement('div');
+            actions.className = 'comment-actions';
+
+            if (canEdit) {
+              const edit = document.createElement('button');
+              edit.className = 'comment-edit';
+              edit.type = 'button';
+              edit.textContent = '댓글 수정';
+              edit.addEventListener('click', () => openCommentEditor(doc.id, c));
+              actions.appendChild(edit);
+            }
+
+            if (canDelete) {
+              const del = document.createElement('button');
+              del.className = 'comment-delete';
+              del.type = 'button';
+              del.textContent = '댓글 삭제';
+              del.addEventListener('click', () => {
+                if (!confirm('이 댓글을 삭제할까요?')) return;
+                db.collection('posts').doc(activePostId).collection('comments').doc(doc.id).delete()
+                  .then(() => {
+                    if (editingCommentId === doc.id) resetCommentEditor({ keepName: true });
+                  })
+                  .catch((err) => { commentError.textContent = `댓글 삭제 오류: ${describeDataError(err)}`; });
+              });
+              actions.appendChild(del);
+            }
+
+            item.appendChild(actions);
           }
           commentList.appendChild(item);
         });
@@ -4084,6 +4397,7 @@
           <div class="post-detail-meta">
             <span>작성자 ${escapeHtml(p.authorName || '익명')}</span>
             <span>${escapeHtml(formatPostDate(p.createdAt))}</span>
+            ${p.updatedAt ? `<span>수정 ${escapeHtml(formatPostDate(p.updatedAt))}</span>` : ''}
           </div>
         `;
         postDetailBody.appendChild(head);
@@ -4109,28 +4423,47 @@
           postDetailBody.appendChild(gallery);
         }
 
-        if (canModeratePost(p)) {
+        const canEditCurrentPost = canEditPost(p);
+        const canDeleteCurrentPost = canDeletePost(p);
+        if (canEditCurrentPost || canDeleteCurrentPost) {
           const actions = document.createElement('div');
           actions.className = 'post-detail-actions';
-          const del = document.createElement('button');
-          del.className = 'post-delete';
-          del.type = 'button';
-          del.textContent = '게시글 삭제';
-          del.addEventListener('click', async () => {
-            if (!confirm('이 게시글과 댓글을 모두 삭제할까요?')) return;
-            del.disabled = true;
-            try {
-              await deletePostAndComments(postId, p);
+
+          if (canEditCurrentPost) {
+            const edit = document.createElement('button');
+            edit.className = 'post-edit-button';
+            edit.type = 'button';
+            edit.textContent = '게시글 수정';
+            edit.addEventListener('click', () => {
               closePostDetail();
-            } catch (err) {
-              del.disabled = false;
-              commentError.textContent = `게시글 삭제 오류: ${describeDataError(err)}`;
-            }
-          });
-          actions.appendChild(del);
+              openPostEditor(postId, p);
+            });
+            actions.appendChild(edit);
+          }
+
+          if (canDeleteCurrentPost) {
+            const del = document.createElement('button');
+            del.className = 'post-delete';
+            del.type = 'button';
+            del.textContent = '게시글 삭제';
+            del.addEventListener('click', async () => {
+              if (!confirm('이 게시글과 댓글을 모두 삭제할까요?')) return;
+              del.disabled = true;
+              try {
+                await deletePostAndComments(postId, p);
+                closePostDetail();
+              } catch (err) {
+                del.disabled = false;
+                commentError.textContent = `게시글 삭제 오류: ${describeDataError(err)}`;
+              }
+            });
+            actions.appendChild(del);
+          }
+
           postDetailBody.appendChild(actions);
         }
 
+        resetCommentEditor({ keepName: false });
         postDetailModal.classList.add('open');
         startCommentsListener(postId);
       }
@@ -4267,7 +4600,7 @@
         const authorName = postAuthorName.value.trim();
         const body = document.getElementById('postBody').value.trim();
         if (category === '공지' && currentUserDoc.role !== 'admin') {
-          postError.textContent = '공지 게시글은 관리자만 작성할 수 있습니다.';
+          postError.textContent = '공지 게시글은 관리자만 작성하거나 수정할 수 있습니다.';
           updatePostCategoryOptions();
           return;
         }
@@ -4277,56 +4610,114 @@
           return;
         }
         if (!title || !body) return;
+        if (retainedPostImageUrls.length + selectedPostFiles.length > 4) {
+          postError.textContent = '이미지는 기존 사진을 포함해 최대 4장까지 첨부할 수 있습니다.';
+          return;
+        }
 
-        const submitBtn = postForm.querySelector('.form-submit');
+        const submitBtn = postSubmitBtn;
+        const isEditing = !!editingPostId;
         submitBtn.disabled = true;
-        submitBtn.textContent = selectedPostFiles.length ? '사진 업로드 중…' : '게시 중…';
+        submitBtn.textContent = selectedPostFiles.length
+          ? '사진 업로드 중…'
+          : (isEditing ? '수정 저장 중…' : '게시 중…');
         postError.textContent = '';
 
+        let newlyUploadedUrls = [];
         try {
-          const imageUrls = await uploadPostImages(selectedPostFiles);
-          await db.collection('posts').add({
-            authorUid: auth.currentUser.uid,
-            authorName,
-            category,
-            title,
-            body,
-            imageUrls,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
+          const uploadOwnerUid = isEditing && editingPostOriginal && editingPostOriginal.authorUid
+            ? editingPostOriginal.authorUid
+            : auth.currentUser.uid;
+          newlyUploadedUrls = await uploadPostImages(selectedPostFiles, uploadOwnerUid);
+          const imageUrls = [...retainedPostImageUrls, ...newlyUploadedUrls];
+
+          if (isEditing) {
+            if (!editingPostOriginal || !canEditPost(editingPostOriginal)) {
+              throw new Error('수정 권한이 없습니다.');
+            }
+            const removedUrls = (editingPostOriginal.imageUrls || []).filter((url) => !retainedPostImageUrls.includes(url));
+            await db.collection('posts').doc(editingPostId).update({
+              authorName,
+              category,
+              title,
+              body,
+              imageUrls,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            await Promise.all(removedUrls.map((url) =>
+              storage.refFromURL(url).delete().catch(() => {})
+            ));
+          } else {
+            await db.collection('posts').add({
+              authorUid: auth.currentUser.uid,
+              authorName,
+              category,
+              title,
+              body,
+              imageUrls,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          }
+
           localStorage.setItem('cetPostAuthorName', authorName);
-          postForm.reset();
-          selectedPostFiles = [];
-          renderSelectedPostImages();
           closePostComposer();
         } catch (err) {
-          postError.textContent = `게시 중 오류가 발생했습니다: ${describeDataError(err)}`;
+          await Promise.all(newlyUploadedUrls.map((url) =>
+            storage.refFromURL(url).delete().catch(() => {})
+          ));
+          postError.textContent = `${isEditing ? '수정' : '게시'} 중 오류가 발생했습니다: ${describeDataError(err)}`;
         } finally {
           submitBtn.disabled = false;
-          submitBtn.textContent = '게시하기';
+          submitBtn.textContent = editingPostId ? '수정 저장' : '게시하기';
         }
+      });
+
+      commentEditCancel.addEventListener('click', () => {
+        resetCommentEditor({ keepName: false });
       });
 
       commentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (!activePostId || !auth.currentUser || !currentUserDoc) return;
+        const authorName = commentAuthorName.value.trim();
         const body = commentBody.value.trim();
+        const isEditing = !!editingCommentId;
+        if (!authorName) {
+          commentError.textContent = '댓글에 표시할 요원 이름을 입력해주세요.';
+          commentAuthorName.focus();
+          return;
+        }
         if (!body) return;
-        const submitBtn = commentForm.querySelector('.form-submit');
-        submitBtn.disabled = true;
+
+        commentSubmitBtn.disabled = true;
+        commentSubmitBtn.textContent = isEditing ? '수정 저장 중…' : '댓글 등록 중…';
         commentError.textContent = '';
         try {
-          await db.collection('posts').doc(activePostId).collection('comments').add({
-            authorUid: auth.currentUser.uid,
-            authorName: currentUserDoc.username || emailToId(auth.currentUser.email),
-            body,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          commentForm.reset();
+          if (isEditing) {
+            if (!editingCommentOriginal || !canEditComment(editingCommentOriginal)) {
+              throw new Error('댓글 수정 권한이 없습니다.');
+            }
+            await db.collection('posts').doc(activePostId).collection('comments').doc(editingCommentId).update({
+              authorName,
+              body,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          } else {
+            await db.collection('posts').doc(activePostId).collection('comments').add({
+              authorUid: auth.currentUser.uid,
+              authorName,
+              body,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          }
+          localStorage.setItem('cetCommentAuthorName', authorName);
+          resetCommentEditor({ keepName: true });
+          commentAuthorName.value = authorName;
         } catch (err) {
-          commentError.textContent = `댓글 등록 오류: ${describeDataError(err)}`;
+          commentError.textContent = `${isEditing ? '댓글 수정' : '댓글 등록'} 오류: ${describeDataError(err)}`;
         } finally {
-          submitBtn.disabled = false;
+          commentSubmitBtn.disabled = false;
+          commentSubmitBtn.textContent = editingCommentId ? '댓글 수정 저장' : '댓글 등록';
         }
       });
 
