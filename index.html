@@ -1757,6 +1757,426 @@
       .creed{min-height:300px}
       .footer-inner{display:grid}
     }
+
+
+    /* ---- Compact standalone pages + cafe bulletin ---- */
+    #pageBulletin,
+    #pageAgents{
+      padding:44px 0 100px;
+      min-height:calc(100vh - 64px);
+    }
+
+    .cafe-page-header{
+      margin-bottom:26px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+
+    .post-compose-modal{
+      width:min(760px,100%);
+      max-height:90vh;
+      overflow-y:auto;
+      padding:0;
+    }
+
+    .post-compose-modal .modal-close{
+      z-index:4;
+      background:#0c0d10;
+    }
+
+    .post-compose-modal .cafe-write-form{
+      margin:0;
+      border:0;
+      border-radius:0;
+      box-shadow:none;
+      background:transparent;
+    }
+
+    .post-compose-modal .cafe-write-head{padding-right:58px}
+
+    .cafe-write-form{
+      padding:0;
+      overflow:hidden;
+      border-radius:12px;
+      margin-bottom:28px;
+      gap:0;
+    }
+
+    .cafe-write-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:15px 18px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(90deg,rgba(143,23,32,.16),rgba(255,255,255,.015));
+    }
+
+    .cafe-write-head strong{font-size:.9rem;color:#f0f0f2}
+    .cafe-write-head span{font-size:.72rem;color:var(--dim)}
+
+    .cafe-write-grid{
+      display:grid;
+      grid-template-columns:150px minmax(0,1fr);
+      gap:10px;
+      padding:16px 18px 10px;
+    }
+
+    .cafe-write-form select,
+    .cafe-write-form input,
+    .cafe-write-form textarea{
+      background:#08090b;
+      border:1px solid var(--line);
+      border-radius:7px;
+      color:var(--text);
+      font-family:inherit;
+    }
+
+    .cafe-write-form select{
+      padding:10px 34px 10px 11px;
+      appearance:none;
+      background-image:linear-gradient(45deg,transparent 50%,#8f939c 50%),linear-gradient(135deg,#8f939c 50%,transparent 50%);
+      background-position:calc(100% - 17px) center,calc(100% - 12px) center;
+      background-size:5px 5px,5px 5px;
+      background-repeat:no-repeat;
+    }
+
+    .cafe-write-form > textarea{
+      margin:0 18px;
+      min-height:150px;
+      padding:14px;
+      resize:vertical;
+    }
+
+    .cafe-write-form select:focus,
+    .cafe-write-form input:focus,
+    .cafe-write-form textarea:focus{
+      outline:none;
+      border-color:var(--red-bright);
+    }
+
+    .post-upload-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:12px 18px 4px;
+    }
+
+    #postImages,
+    #agentPhotoFile{display:none}
+
+    .agent-photo-upload-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    #agentPhotoFileName{
+      color:var(--dim);
+      font-size:.72rem;
+    }
+
+    .agent-photo-preview{
+      margin-top:10px;
+      width:118px;
+      height:118px;
+      border:1px dashed var(--line-bright);
+      border-radius:12px;
+      background:#08090b;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      color:#3c4048;
+    }
+
+    .agent-photo-preview.has-photo{display:flex}
+
+    .agent-photo-preview img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .upload-help{
+      display:block;
+      margin-top:8px;
+      color:var(--dim);
+      font-size:.68rem;
+    }
+
+    .post-file-label{
+      display:inline-flex;
+      align-items:center;
+      border:1px solid var(--line-bright);
+      border-radius:7px;
+      background:rgba(255,255,255,.025);
+      color:#d9dce2;
+      padding:8px 12px;
+      cursor:pointer;
+      font-size:.78rem;
+    }
+
+    .post-file-label:hover{border-color:var(--red-bright);background:rgba(143,23,32,.13)}
+    #postFileCount{font-size:.72rem;color:var(--dim)}
+
+    .post-image-preview{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:10px 18px 0;
+    }
+
+    .post-image-preview:empty{display:none}
+
+    .post-image-preview img{
+      width:88px;
+      height:88px;
+      object-fit:cover;
+      border-radius:8px;
+      border:1px solid var(--line);
+    }
+
+    .post-form-foot,
+    .comment-form-foot{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 18px 18px;
+    }
+
+    .post-form-foot .form-error,
+    .comment-form-foot .form-error{flex:1}
+
+    .cafe-board{
+      border:1px solid var(--line);
+      border-radius:12px;
+      overflow:hidden;
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+
+    .cafe-board-toolbar{
+      min-height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:0 18px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.025),transparent);
+    }
+
+    .cafe-board-toolbar strong{font-size:.88rem;color:#f1f1f2}
+    .cafe-board-toolbar span{font-size:.7rem;color:var(--dim)}
+
+    .cafe-board-head,
+    .cafe-post-row{
+      display:grid;
+      grid-template-columns:105px minmax(0,1fr) 120px 110px 54px;
+      align-items:center;
+      gap:12px;
+    }
+
+    .cafe-board-head{
+      min-height:38px;
+      padding:0 16px;
+      color:#777c86;
+      font-size:.68rem;
+      text-align:center;
+      border-bottom:1px solid var(--line);
+      background:#0a0b0e;
+    }
+
+    .cafe-post-row{
+      width:100%;
+      padding:13px 16px;
+      border:0;
+      border-bottom:1px solid rgba(255,255,255,.065);
+      background:transparent;
+      color:inherit;
+      text-align:left;
+      font-family:inherit;
+      cursor:pointer;
+      transition:background .18s ease;
+    }
+
+    .cafe-post-row:last-child{border-bottom:0}
+    .cafe-post-row:hover{background:rgba(143,23,32,.1)}
+
+    .cafe-category{
+      justify-self:center;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:72px;
+      padding:4px 8px;
+      border:1px solid rgba(194,43,53,.35);
+      border-radius:999px;
+      color:#f19aa0;
+      background:rgba(143,23,32,.08);
+      font-size:.68rem;
+      white-space:nowrap;
+    }
+
+    .cafe-title-cell{min-width:0}
+    .cafe-title-line{display:flex;align-items:center;gap:8px;min-width:0}
+    .cafe-title-line strong{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      color:#ececef;
+      font-size:.9rem;
+      font-weight:600;
+    }
+
+    .cafe-title-cell small{
+      display:block;
+      margin-top:2px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      color:#777c85;
+      font-size:.7rem;
+    }
+
+    .cafe-author,
+    .cafe-date,
+    .cafe-attach{
+      color:#90959e;
+      font-size:.72rem;
+      text-align:center;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .cafe-attach.has-image{color:var(--red-bright);font-weight:700}
+
+    .board-detail-modal{
+      width:min(780px,100%);
+      max-height:88vh;
+      overflow-y:auto;
+      padding:0;
+    }
+
+    .board-detail-modal .modal-close{z-index:3;background:#0c0d10}
+
+    .post-detail-head{
+      padding:30px 32px 22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(135deg,rgba(143,23,32,.13),transparent 55%);
+    }
+
+    .post-detail-category{color:var(--red-bright);font-size:.7rem;letter-spacing:.12em}
+    .post-detail-head h3{margin:9px 40px 12px 0;font-size:1.45rem;line-height:1.35}
+    .post-detail-meta{display:flex;gap:14px;flex-wrap:wrap;color:var(--dim);font-size:.74rem}
+
+    .post-detail-content{
+      padding:28px 32px 34px;
+      color:#c6c9cf;
+      font-size:.93rem;
+      line-height:1.9;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .post-detail-images{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      padding:0 32px 32px;
+    }
+
+    .post-detail-images img{
+      width:100%;
+      max-height:430px;
+      object-fit:contain;
+      background:#050607;
+      border:1px solid var(--line);
+      border-radius:10px;
+      cursor:zoom-in;
+    }
+
+    .post-detail-actions{display:flex;justify-content:flex-end;padding:0 32px 24px}
+
+    .comment-section{
+      border-top:1px solid var(--line);
+      background:#090a0d;
+      padding:24px 32px 30px;
+    }
+
+    .comment-section-head{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .comment-section-head strong{font-size:.9rem}
+    .comment-section-head span{color:var(--red-bright);font-size:.76rem}
+    .comment-list{display:grid;gap:8px}
+
+    .comment-item{
+      padding:13px 15px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:var(--panel);
+    }
+
+    .comment-meta{display:flex;justify-content:space-between;gap:12px;color:var(--dim);font-size:.68rem;margin-bottom:6px}
+    .comment-item p{margin:0;color:#bfc3ca;font-size:.83rem;white-space:pre-wrap;word-break:break-word}
+    .comment-delete{margin-top:8px;border:0;background:transparent;color:#b96a71;font-size:.68rem;cursor:pointer;padding:0}
+    .comment-delete:hover{color:#ef8b94}
+
+    .comment-form{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+    .comment-form textarea{
+      width:100%;
+      min-height:82px;
+      resize:vertical;
+      background:#060708;
+      border:1px solid var(--line);
+      border-radius:8px;
+      color:var(--text);
+      padding:11px 12px;
+      font-family:inherit;
+    }
+    .comment-form textarea:focus{outline:none;border-color:var(--red-bright)}
+    .comment-form-foot{padding:10px 0 0}
+
+    @media (max-width:760px){
+      #pageBulletin,#pageAgents{padding-top:28px}
+      .cafe-page-header{align-items:stretch}
+      .cafe-page-header .register-btn{justify-content:center}
+      .post-compose-modal{max-height:94vh}
+      .cafe-write-head{align-items:flex-start;flex-direction:column;gap:3px}
+      .cafe-write-grid{grid-template-columns:1fr}
+      .cafe-board-head{display:none}
+      .cafe-post-row{
+        grid-template-columns:auto minmax(0,1fr) auto;
+        grid-template-areas:
+          "category title attach"
+          "author title date";
+        gap:6px 10px;
+        padding:14px;
+      }
+      .cafe-category{grid-area:category;justify-self:start;min-width:0}
+      .cafe-title-cell{grid-area:title}
+      .cafe-author{grid-area:author;text-align:left}
+      .cafe-date{grid-area:date;text-align:right}
+      .cafe-attach{grid-area:attach;text-align:right}
+      .post-detail-head,.post-detail-content{padding-left:20px;padding-right:20px}
+      .post-detail-images{grid-template-columns:1fr;padding-left:20px;padding-right:20px}
+      .post-detail-actions{padding-left:20px;padding-right:20px}
+      .comment-section{padding-left:20px;padding-right:20px}
+    }
+
   </style>
 </head>
 <body>
@@ -1787,7 +2207,7 @@
     <a class="side-nav-link" href="#" data-page="pageAgents">요원 등록</a>
   </nav>
 
-  <section class="hero" id="top">
+  <section class="hero" id="top" data-home-only>
     <svg class="hero-rope" viewBox="0 0 150 340" aria-hidden="true">
       <path d="M75 0 C 60 40, 92 70, 75 108" fill="none" stroke="#4a4136" stroke-width="3" opacity=".55"/>
       <path d="M75 108 C 40 118, 30 150, 44 176 C 58 202, 40 214, 75 214 C 110 214, 92 202, 106 176 C 120 150, 110 118, 75 108 Z" fill="none" stroke="#4a4136" stroke-width="3" opacity=".6"/>
@@ -2298,13 +2718,18 @@
   <div id="pageBulletin" class="page-hidden">
     <div class="shell">
       <a href="#" class="back-home" data-page="pageHome">← 홈으로</a>
-      <div class="page-header">
-        <div class="section-index">BULLETIN</div>
-        <h2 class="section-title">내부 게시판</h2>
-        <p class="section-desc">
-          인가된 이용자만 열람·작성할 수 있는 내부 기록입니다.
-          게시 권한은 관리자가 개별적으로 부여하거나 회수할 수 있습니다.
-        </p>
+      <div class="page-header cafe-page-header">
+        <div>
+          <div class="section-index">BULLETIN</div>
+          <h2 class="section-title">내부 게시판</h2>
+          <p class="section-desc">
+            공지·작전 기록·자유 기록을 나누는 C.E.T. 내부 게시판입니다.
+            게시글을 눌러 본문과 첨부 이미지, 댓글을 확인할 수 있습니다.
+          </p>
+        </div>
+        <button class="register-btn" id="openPostComposerBtn" type="button" style="display:none">
+          <span class="register-btn-plus">＋</span> 새 글 작성
+        </button>
       </div>
 
       <div class="roster-gate" id="bulletinGate">
@@ -2313,15 +2738,22 @@
       </div>
 
       <div id="bulletinArea" style="display:none">
-        <form class="post-form" id="postForm">
-          <input id="postTitle" type="text" placeholder="제목" maxlength="60" required />
-          <textarea id="postBody" placeholder="내용을 입력하세요" maxlength="1000" required></textarea>
-          <div class="form-error" id="postError"></div>
-          <button class="form-submit" type="submit">게시하기</button>
-        </form>
-        <div class="post-list" id="postList">
-          <p class="post-empty">불러오는 중…</p>
-        </div>
+        <section class="cafe-board" aria-label="게시글 목록">
+          <div class="cafe-board-toolbar">
+            <strong>전체 글</strong>
+            <span>최신 게시글 50개</span>
+          </div>
+          <div class="cafe-board-head" aria-hidden="true">
+            <span>분류</span>
+            <span>제목</span>
+            <span>작성자</span>
+            <span>작성일</span>
+            <span>첨부</span>
+          </div>
+          <div class="post-list" id="postList">
+            <p class="post-empty">불러오는 중…</p>
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -2460,8 +2892,15 @@
         </div>
 
         <div class="form-field">
-          <label for="agentPhoto">프로필 사진 URL (선택)</label>
-          <input id="agentPhoto" type="url" placeholder="https://... (이미지 링크)" />
+          <label>프로필 사진 (선택)</label>
+          <div class="agent-photo-upload-row">
+            <label class="post-file-label" for="agentPhotoFile">＋ 사진 선택</label>
+            <input id="agentPhotoFile" type="file" accept="image/*" />
+            <button class="auth-btn" id="agentPhotoRemove" type="button" style="display:none">사진 제거</button>
+            <span id="agentPhotoFileName">선택된 사진 없음</span>
+          </div>
+          <div class="agent-photo-preview" id="agentPhotoPreview"></div>
+          <span class="upload-help">이미지 파일 1장, 최대 5MB까지 등록할 수 있습니다.</span>
         </div>
 
         <div class="form-field">
@@ -2501,10 +2940,66 @@
     </div>
   </div>
 
+  <div class="modal-backdrop" id="postComposeModal">
+    <div class="modal post-compose-modal">
+      <button class="modal-close" id="postComposeClose" type="button" aria-label="닫기">✕</button>
+      <form class="post-form cafe-write-form" id="postForm">
+        <div class="cafe-write-head">
+          <strong>새 글 작성</strong>
+          <span>이미지는 최대 4장, 한 장당 5MB까지 첨부할 수 있습니다.</span>
+        </div>
+        <div class="cafe-write-grid">
+          <select id="postCategory" aria-label="게시글 분류">
+            <option value="공지">공지</option>
+            <option value="작전 기록">작전 기록</option>
+            <option value="정보 공유">정보 공유</option>
+            <option value="자유">자유</option>
+          </select>
+          <input id="postTitle" type="text" placeholder="제목" maxlength="60" required />
+        </div>
+        <textarea id="postBody" placeholder="내용을 입력하세요" maxlength="3000" required></textarea>
+        <div class="post-upload-row">
+          <label class="post-file-label" for="postImages">＋ 사진 첨부</label>
+          <input id="postImages" type="file" accept="image/*" multiple />
+          <span id="postFileCount">선택된 사진 없음</span>
+        </div>
+        <div class="post-image-preview" id="postImagePreview"></div>
+        <div class="post-form-foot">
+          <div class="form-error" id="postError"></div>
+          <button class="form-submit" type="submit">게시하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="postDetailModal">
+    <div class="modal board-detail-modal">
+      <button class="modal-close" id="postDetailClose" type="button" aria-label="닫기">✕</button>
+      <article id="postDetailBody"></article>
+      <section class="comment-section">
+        <div class="comment-section-head">
+          <strong>댓글</strong>
+          <span id="commentCount">0</span>
+        </div>
+        <div class="comment-list" id="commentList">
+          <p class="post-empty">게시글을 선택해주세요.</p>
+        </div>
+        <form class="comment-form" id="commentForm">
+          <textarea id="commentBody" maxlength="500" placeholder="댓글을 입력하세요" required></textarea>
+          <div class="comment-form-foot">
+            <div class="form-error" id="commentError"></div>
+            <button class="form-submit" type="submit">댓글 등록</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+
   <!-- Firebase Authentication — see setup instructions at bottom of file -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -2526,7 +3021,11 @@
         if (!el) return;
         el.classList.toggle('page-hidden', pid !== id);
       });
-      window.scrollTo(0, 0);
+
+      const homeHero = document.querySelector('[data-home-only]');
+      if (homeHero) homeHero.classList.toggle('page-hidden', id !== 'pageHome');
+      document.body.dataset.activePage = id;
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     }
     document.querySelectorAll('[data-page]').forEach((el) => {
       el.addEventListener('click', (e) => {
@@ -2662,11 +3161,16 @@
       firebase.initializeApp(firebaseConfig);
       const auth = firebase.auth();
       const db = firebase.firestore();
+      const storage = firebase.storage();
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(() => {});
 
       let currentUserDoc = null;
       let unsubscribePosts = null;
       let unsubscribeAgents = null;
+      let unsubscribeComments = null;
+      let activePostId = null;
+      let selectedPostFiles = [];
+      const postsCache = new Map();
 
       const adminBtn = document.getElementById('adminBtn');
       const adminModal = document.getElementById('adminModal');
@@ -2676,9 +3180,23 @@
       const bulletinGate = document.getElementById('bulletinGate');
       const bulletinAuthBtn = document.getElementById('bulletinAuthBtn');
       const bulletinArea = document.getElementById('bulletinArea');
+      const openPostComposerBtn = document.getElementById('openPostComposerBtn');
+      const postComposeModal = document.getElementById('postComposeModal');
+      const postComposeClose = document.getElementById('postComposeClose');
       const postForm = document.getElementById('postForm');
       const postError = document.getElementById('postError');
       const postList = document.getElementById('postList');
+      const postImages = document.getElementById('postImages');
+      const postImagePreview = document.getElementById('postImagePreview');
+      const postFileCount = document.getElementById('postFileCount');
+      const postDetailModal = document.getElementById('postDetailModal');
+      const postDetailClose = document.getElementById('postDetailClose');
+      const postDetailBody = document.getElementById('postDetailBody');
+      const commentList = document.getElementById('commentList');
+      const commentCount = document.getElementById('commentCount');
+      const commentForm = document.getElementById('commentForm');
+      const commentBody = document.getElementById('commentBody');
+      const commentError = document.getElementById('commentError');
 
       const agentForm = document.getElementById('agentForm');
       const agentError = document.getElementById('agentError');
@@ -2705,6 +3223,23 @@
       };
       function describeError(err){
         return ERROR_MESSAGES[err.code] || `오류가 발생했습니다 (${err.code || err.message}).`;
+      }
+
+      function describeDataError(err){
+        const code = err && err.code ? String(err.code) : '';
+        if (code.includes('permission-denied') || code === 'storage/unauthorized') {
+          return '권한이 거부되었습니다. 함께 제공된 Firestore·Storage 규칙을 각각 게시했는지 확인해주세요.';
+        }
+        if (code === 'storage/bucket-not-found' || code === 'storage/object-not-found') {
+          return 'Storage 저장소를 찾지 못했습니다. Firebase Storage 생성과 storageBucket 설정을 확인해주세요.';
+        }
+        if (code === 'storage/quota-exceeded') {
+          return 'Storage 사용 한도를 초과했습니다.';
+        }
+        if (code.includes('unavailable') || code === 'storage/retry-limit-exceeded') {
+          return '네트워크 연결이 불안정합니다. 잠시 후 다시 시도해주세요.';
+        }
+        return err && err.message ? err.message : '알 수 없는 오류가 발생했습니다.';
       }
 
       function setButtonsBusy(busy, label){
@@ -2772,11 +3307,15 @@
 
         if (loggedIn) {
           const canPost = !!currentUserDoc.canPost;
-          postForm.style.display = canPost ? 'flex' : 'none';
-          postError.textContent = canPost ? '' : '게시 권한이 없습니다. 관리자에게 문의해주세요.';
+          postForm.style.display = 'flex';
+          postError.textContent = '';
+          openPostComposerBtn.style.display = canPost ? 'inline-flex' : 'none';
           openAgentModalBtn.style.display = canPost ? 'inline-flex' : 'none';
+          if (!canPost) postComposeModal.classList.remove('open');
         } else {
+          openPostComposerBtn.style.display = 'none';
           openAgentModalBtn.style.display = 'none';
+          postComposeModal.classList.remove('open');
         }
 
         if (adminBtn) {
@@ -2784,35 +3323,276 @@
         }
       }
 
+      function formatPostDate(timestamp, short = false){
+        if (!timestamp || !timestamp.toDate) return '방금 전';
+        const date = timestamp.toDate();
+        if (short) {
+          return date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' });
+        }
+        return date.toLocaleString('ko-KR');
+      }
+
+      function postSnippet(body){
+        const compact = String(body || '').replace(/\s+/g, ' ').trim();
+        return compact.length > 72 ? `${compact.slice(0, 72)}…` : compact;
+      }
+
+      function renderSelectedPostImages(){
+        postImagePreview.innerHTML = '';
+        postFileCount.textContent = selectedPostFiles.length
+          ? `${selectedPostFiles.length}장 선택됨`
+          : '선택된 사진 없음';
+
+        selectedPostFiles.forEach((file) => {
+          const img = document.createElement('img');
+          img.alt = file.name;
+          const url = URL.createObjectURL(file);
+          img.src = url;
+          img.addEventListener('load', () => URL.revokeObjectURL(url), { once: true });
+          postImagePreview.appendChild(img);
+        });
+      }
+
+      function openPostComposer(){
+        if (!auth.currentUser || !currentUserDoc || !currentUserDoc.canPost) return;
+        postError.textContent = '';
+        postComposeModal.classList.add('open');
+        window.setTimeout(() => document.getElementById('postTitle').focus(), 0);
+      }
+
+      function closePostComposer(){
+        postComposeModal.classList.remove('open');
+        postError.textContent = '';
+      }
+
+      openPostComposerBtn.addEventListener('click', openPostComposer);
+      postComposeClose.addEventListener('click', closePostComposer);
+      postComposeModal.addEventListener('click', (e) => {
+        if (e.target === postComposeModal) closePostComposer();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && postComposeModal.classList.contains('open')) {
+          closePostComposer();
+        }
+      });
+
+      postImages.addEventListener('change', () => {
+        postError.textContent = '';
+        const files = Array.from(postImages.files || []);
+        if (files.length > 4) {
+          postError.textContent = '사진은 최대 4장까지 첨부할 수 있습니다.';
+          postImages.value = '';
+          selectedPostFiles = [];
+          renderSelectedPostImages();
+          return;
+        }
+        const invalid = files.find((file) => !file.type.startsWith('image/') || file.size > 5 * 1024 * 1024);
+        if (invalid) {
+          postError.textContent = '이미지 파일만 가능하며, 한 장당 크기는 5MB 이하여야 합니다.';
+          postImages.value = '';
+          selectedPostFiles = [];
+          renderSelectedPostImages();
+          return;
+        }
+        selectedPostFiles = files;
+        renderSelectedPostImages();
+      });
+
+      async function uploadPostImages(files){
+        if (!files.length) return [];
+        const uid = auth.currentUser.uid;
+        const urls = [];
+        for (let index = 0; index < files.length; index += 1) {
+          const file = files[index];
+          const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+          const ref = storage.ref(`post-images/${uid}/${Date.now()}_${index}_${safeName}`);
+          const snap = await ref.put(file, { contentType: file.type });
+          urls.push(await snap.ref.getDownloadURL());
+        }
+        return urls;
+      }
+
+      function canModeratePost(post){
+        return !!(currentUserDoc && (
+          currentUserDoc.role === 'admin' ||
+          (auth.currentUser && post.authorUid === auth.currentUser.uid)
+        ));
+      }
+
+      function closePostDetail(){
+        postDetailModal.classList.remove('open');
+        activePostId = null;
+        postDetailBody.innerHTML = '';
+        commentList.innerHTML = '<p class="post-empty">게시글을 선택해주세요.</p>';
+        commentCount.textContent = '0';
+        commentError.textContent = '';
+        commentForm.reset();
+        if (unsubscribeComments) {
+          unsubscribeComments();
+          unsubscribeComments = null;
+        }
+      }
+
+      function renderComments(snapshot){
+        commentList.innerHTML = '';
+        commentCount.textContent = String(snapshot.size);
+        if (snapshot.empty) {
+          commentList.innerHTML = '<p class="post-empty">아직 댓글이 없습니다. 첫 댓글을 남겨보세요.</p>';
+          return;
+        }
+
+        const activePost = postsCache.get(activePostId) || {};
+        snapshot.forEach((doc) => {
+          const c = doc.data();
+          const canDelete = currentUserDoc && (
+            currentUserDoc.role === 'admin' ||
+            (auth.currentUser && c.authorUid === auth.currentUser.uid) ||
+            (auth.currentUser && activePost.authorUid === auth.currentUser.uid)
+          );
+
+          const item = document.createElement('article');
+          item.className = 'comment-item';
+          item.innerHTML = `
+            <div class="comment-meta">
+              <strong>${escapeHtml(c.authorName || '익명')}</strong>
+              <span>${escapeHtml(formatPostDate(c.createdAt))}</span>
+            </div>
+            <p>${escapeHtml(c.body || '')}</p>
+          `;
+
+          if (canDelete) {
+            const del = document.createElement('button');
+            del.className = 'comment-delete';
+            del.type = 'button';
+            del.textContent = '댓글 삭제';
+            del.addEventListener('click', () => {
+              if (!confirm('이 댓글을 삭제할까요?')) return;
+              db.collection('posts').doc(activePostId).collection('comments').doc(doc.id).delete()
+                .catch((err) => { commentError.textContent = `댓글 삭제 오류: ${describeDataError(err)}`; });
+            });
+            item.appendChild(del);
+          }
+          commentList.appendChild(item);
+        });
+      }
+
+      function startCommentsListener(postId){
+        if (unsubscribeComments) unsubscribeComments();
+        commentList.innerHTML = '<p class="post-empty">댓글을 불러오는 중…</p>';
+        unsubscribeComments = db.collection('posts').doc(postId).collection('comments')
+          .orderBy('createdAt', 'asc').limit(200)
+          .onSnapshot(renderComments, (err) => {
+            commentList.innerHTML = `<p class="post-empty">댓글을 불러오지 못했습니다 (${escapeHtml(err.message)}).</p>`;
+          });
+      }
+
+      async function deletePostAndComments(postId, post){
+        const postRef = db.collection('posts').doc(postId);
+        const comments = await postRef.collection('comments').get();
+        const refs = comments.docs.map((doc) => doc.ref);
+        for (let i = 0; i < refs.length; i += 400) {
+          const batch = db.batch();
+          refs.slice(i, i + 400).forEach((ref) => batch.delete(ref));
+          await batch.commit();
+        }
+        await postRef.delete();
+
+        await Promise.all((post.imageUrls || []).map((url) =>
+          storage.refFromURL(url).delete().catch(() => {})
+        ));
+      }
+
+      function openPostDetail(postId){
+        const p = postsCache.get(postId);
+        if (!p) return;
+        activePostId = postId;
+        postDetailBody.innerHTML = '';
+
+        const head = document.createElement('header');
+        head.className = 'post-detail-head';
+        head.innerHTML = `
+          <div class="post-detail-category">${escapeHtml(p.category || '자유')}</div>
+          <h3>${escapeHtml(p.title || '')}</h3>
+          <div class="post-detail-meta">
+            <span>작성자 ${escapeHtml(p.authorName || '익명')}</span>
+            <span>${escapeHtml(formatPostDate(p.createdAt))}</span>
+          </div>
+        `;
+        postDetailBody.appendChild(head);
+
+        const content = document.createElement('div');
+        content.className = 'post-detail-content';
+        content.textContent = p.body || '';
+        postDetailBody.appendChild(content);
+
+        if (Array.isArray(p.imageUrls) && p.imageUrls.length) {
+          const gallery = document.createElement('div');
+          gallery.className = 'post-detail-images';
+          p.imageUrls.forEach((url, index) => {
+            const img = document.createElement('img');
+            img.loading = 'lazy';
+            img.alt = `${p.title || '게시글'} 첨부 이미지 ${index + 1}`;
+            img.src = url;
+            if (/^https:\/\//i.test(url)) {
+              img.addEventListener('click', () => window.open(url, '_blank', 'noopener,noreferrer'));
+            }
+            gallery.appendChild(img);
+          });
+          postDetailBody.appendChild(gallery);
+        }
+
+        if (canModeratePost(p)) {
+          const actions = document.createElement('div');
+          actions.className = 'post-detail-actions';
+          const del = document.createElement('button');
+          del.className = 'post-delete';
+          del.type = 'button';
+          del.textContent = '게시글 삭제';
+          del.addEventListener('click', async () => {
+            if (!confirm('이 게시글과 댓글을 모두 삭제할까요?')) return;
+            del.disabled = true;
+            try {
+              await deletePostAndComments(postId, p);
+              closePostDetail();
+            } catch (err) {
+              del.disabled = false;
+              commentError.textContent = `게시글 삭제 오류: ${describeDataError(err)}`;
+            }
+          });
+          actions.appendChild(del);
+          postDetailBody.appendChild(actions);
+        }
+
+        postDetailModal.classList.add('open');
+        startCommentsListener(postId);
+      }
+
       function renderPosts(snapshot){
         postList.innerHTML = '';
+        postsCache.clear();
         if (snapshot.empty) {
           postList.innerHTML = '<p class="post-empty">아직 게시된 글이 없습니다.</p>';
           return;
         }
+
         snapshot.forEach((doc) => {
           const p = doc.data();
-          const canModerate = currentUserDoc && (currentUserDoc.role === 'admin' || (auth.currentUser && p.authorUid === auth.currentUser.uid));
-          const date = p.createdAt && p.createdAt.toDate ? p.createdAt.toDate().toLocaleString('ko-KR') : '';
-
-          const item = document.createElement('article');
-          item.className = 'post-item';
-          item.innerHTML = `
-            <div class="post-meta"><span>${escapeHtml(p.authorName || '익명')}</span><span>${escapeHtml(date)}</span></div>
-            <h4>${escapeHtml(p.title)}</h4>
-            <p>${escapeHtml(p.body)}</p>
+          postsCache.set(doc.id, p);
+          const row = document.createElement('button');
+          row.className = 'cafe-post-row';
+          row.type = 'button';
+          row.innerHTML = `
+            <span class="cafe-category">${escapeHtml(p.category || '자유')}</span>
+            <span class="cafe-title-cell">
+              <span class="cafe-title-line"><strong>${escapeHtml(p.title || '')}</strong></span>
+              <small>${escapeHtml(postSnippet(p.body))}</small>
+            </span>
+            <span class="cafe-author">${escapeHtml(p.authorName || '익명')}</span>
+            <span class="cafe-date">${escapeHtml(formatPostDate(p.createdAt, true))}</span>
+            <span class="cafe-attach${Array.isArray(p.imageUrls) && p.imageUrls.length ? ' has-image' : ''}">${Array.isArray(p.imageUrls) && p.imageUrls.length ? `▣ ${p.imageUrls.length}` : '—'}</span>
           `;
-          if (canModerate) {
-            const delBtn = document.createElement('button');
-            delBtn.className = 'post-delete';
-            delBtn.type = 'button';
-            delBtn.textContent = '삭제';
-            delBtn.addEventListener('click', () => {
-              if (confirm('이 글을 삭제할까요?')) db.collection('posts').doc(doc.id).delete();
-            });
-            item.appendChild(delBtn);
-          }
-          postList.appendChild(item);
+          row.addEventListener('click', () => openPostDetail(doc.id));
+          postList.appendChild(row);
         });
       }
 
@@ -2820,30 +3600,82 @@
         if (unsubscribePosts) return;
         unsubscribePosts = db.collection('posts').orderBy('createdAt', 'desc').limit(50)
           .onSnapshot(renderPosts, (err) => {
-            postList.innerHTML = `<p class="post-empty">게시글을 불러오지 못했습니다 (${err.message}).</p>`;
+            postList.innerHTML = `<p class="post-empty">게시글을 불러오지 못했습니다 (${escapeHtml(err.message)}).</p>`;
           });
       }
 
-      postForm.addEventListener('submit', (e) => {
+      postForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (!currentUserDoc || !currentUserDoc.canPost || !auth.currentUser) return;
+        if (!auth.currentUser) {
+          postError.textContent = '로그인 후 게시글을 작성할 수 있습니다.';
+          return;
+        }
+        if (!currentUserDoc || !currentUserDoc.canPost) {
+          postError.textContent = '현재 계정에는 게시 권한이 없습니다.';
+          return;
+        }
+        const category = document.getElementById('postCategory').value;
         const title = document.getElementById('postTitle').value.trim();
         const body = document.getElementById('postBody').value.trim();
         if (!title || !body) return;
 
         const submitBtn = postForm.querySelector('.form-submit');
         submitBtn.disabled = true;
-        db.collection('posts').add({
-          authorUid: auth.currentUser.uid,
-          authorName: currentUserDoc.username,
-          title, body,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        }).then(() => {
+        submitBtn.textContent = selectedPostFiles.length ? '사진 업로드 중…' : '게시 중…';
+        postError.textContent = '';
+
+        try {
+          const imageUrls = await uploadPostImages(selectedPostFiles);
+          await db.collection('posts').add({
+            authorUid: auth.currentUser.uid,
+            authorName: currentUserDoc.username || emailToId(auth.currentUser.email),
+            category,
+            title,
+            body,
+            imageUrls,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
           postForm.reset();
-          postError.textContent = '';
-        }).catch((err) => {
-          postError.textContent = `게시 중 오류가 발생했습니다: ${err.message}`;
-        }).finally(() => { submitBtn.disabled = false; });
+          selectedPostFiles = [];
+          renderSelectedPostImages();
+          closePostComposer();
+        } catch (err) {
+          postError.textContent = `게시 중 오류가 발생했습니다: ${describeDataError(err)}`;
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = '게시하기';
+        }
+      });
+
+      commentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!activePostId || !auth.currentUser || !currentUserDoc) return;
+        const body = commentBody.value.trim();
+        if (!body) return;
+        const submitBtn = commentForm.querySelector('.form-submit');
+        submitBtn.disabled = true;
+        commentError.textContent = '';
+        try {
+          await db.collection('posts').doc(activePostId).collection('comments').add({
+            authorUid: auth.currentUser.uid,
+            authorName: currentUserDoc.username || emailToId(auth.currentUser.email),
+            body,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          commentForm.reset();
+        } catch (err) {
+          commentError.textContent = `댓글 등록 오류: ${describeDataError(err)}`;
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+
+      postDetailClose.addEventListener('click', closePostDetail);
+      postDetailModal.addEventListener('click', (e) => {
+        if (e.target === postDetailModal) closePostDetail();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && postDetailModal.classList.contains('open')) closePostDetail();
       });
 
       if (bulletinAuthBtn) bulletinAuthBtn.addEventListener('click', () => openModal());
@@ -2867,13 +3699,21 @@
       const agentRoleSelect = document.getElementById('agentRole');
       const agentRoleOtherWrap = document.getElementById('agentRoleOtherWrap');
       const agentRoleOther = document.getElementById('agentRoleOther');
-      const agentPhoto = document.getElementById('agentPhoto');
+      const agentPhotoFile = document.getElementById('agentPhotoFile');
+      const agentPhotoRemove = document.getElementById('agentPhotoRemove');
+      const agentPhotoFileName = document.getElementById('agentPhotoFileName');
+      const agentPhotoPreview = document.getElementById('agentPhotoPreview');
       const agentSubmitBtn = document.getElementById('agentSubmitBtn');
       const agentCancelEdit = document.getElementById('agentCancelEdit');
       const agentFormTitle = document.getElementById('agentFormTitle');
       const agentFormEyebrow = document.getElementById('agentFormEyebrow');
 
       let editingAgentId = null;
+      let editingAgentAuthorUid = null;
+      let selectedAgentPhotoFile = null;
+      let existingAgentPhotoUrl = '';
+      let existingAgentPhotoPath = '';
+      let removeExistingAgentPhoto = false;
       let agentsCache = [];
 
       agentRoleSelect.addEventListener('change', () => {
@@ -2882,10 +3722,92 @@
         agentRoleOther.required = isOther;
       });
 
+      function renderAgentPhotoPreview(){
+        agentPhotoPreview.innerHTML = '';
+        let previewUrl = '';
+        let revokeAfterLoad = false;
+
+        if (selectedAgentPhotoFile) {
+          previewUrl = URL.createObjectURL(selectedAgentPhotoFile);
+          revokeAfterLoad = true;
+          agentPhotoFileName.textContent = selectedAgentPhotoFile.name;
+        } else if (!removeExistingAgentPhoto && existingAgentPhotoUrl) {
+          previewUrl = existingAgentPhotoUrl;
+          agentPhotoFileName.textContent = '현재 등록된 사진';
+        } else {
+          agentPhotoFileName.textContent = '선택된 사진 없음';
+        }
+
+        if (previewUrl) {
+          const img = document.createElement('img');
+          img.alt = '요원 프로필 사진 미리보기';
+          img.src = previewUrl;
+          if (revokeAfterLoad) {
+            img.addEventListener('load', () => URL.revokeObjectURL(previewUrl), { once: true });
+          }
+          agentPhotoPreview.appendChild(img);
+          agentPhotoPreview.classList.add('has-photo');
+          agentPhotoRemove.style.display = 'inline-block';
+        } else {
+          agentPhotoPreview.classList.remove('has-photo');
+          agentPhotoRemove.style.display = 'none';
+        }
+      }
+
+      agentPhotoFile.addEventListener('change', () => {
+        agentError.textContent = '';
+        const file = agentPhotoFile.files && agentPhotoFile.files[0];
+        if (!file) {
+          selectedAgentPhotoFile = null;
+          renderAgentPhotoPreview();
+          return;
+        }
+        if (!file.type.startsWith('image/') || file.size > 5 * 1024 * 1024) {
+          agentError.textContent = '이미지 파일만 가능하며, 크기는 5MB 이하여야 합니다.';
+          agentPhotoFile.value = '';
+          selectedAgentPhotoFile = null;
+          renderAgentPhotoPreview();
+          return;
+        }
+        selectedAgentPhotoFile = file;
+        removeExistingAgentPhoto = false;
+        renderAgentPhotoPreview();
+      });
+
+      agentPhotoRemove.addEventListener('click', () => {
+        selectedAgentPhotoFile = null;
+        agentPhotoFile.value = '';
+        removeExistingAgentPhoto = true;
+        renderAgentPhotoPreview();
+      });
+
+      async function uploadAgentPhoto(file, ownerUid){
+        if (!file) return null;
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const path = `agent-images/${ownerUid}/${Date.now()}_${safeName}`;
+        const ref = storage.ref(path);
+        const snap = await ref.put(file, { contentType: file.type });
+        return { url: await snap.ref.getDownloadURL(), path };
+      }
+
+      async function deleteStoredImage(path, url){
+        if (path) {
+          await storage.ref(path).delete().catch(() => {});
+          return;
+        }
+        if (url) await storage.refFromURL(url).delete().catch(() => {});
+      }
+
       function resetAgentForm(){
         agentForm.reset();
         agentRoleOtherWrap.style.display = 'none';
         editingAgentId = null;
+        editingAgentAuthorUid = null;
+        selectedAgentPhotoFile = null;
+        existingAgentPhotoUrl = '';
+        existingAgentPhotoPath = '';
+        removeExistingAgentPhoto = false;
+        renderAgentPhotoPreview();
         agentFormEyebrow.textContent = 'Register New Hangman';
         agentFormTitle.textContent = '신규 요원 등록';
         agentSubmitBtn.textContent = '요원 등록하기';
@@ -2914,7 +3836,13 @@
         document.getElementById('agentName').value = a.name || '';
         document.getElementById('agentKo').value = a.ko || '';
         document.getElementById('agentSummary').value = a.summary || '';
-        agentPhoto.value = a.photoUrl || '';
+        editingAgentAuthorUid = a.authorUid || (auth.currentUser && auth.currentUser.uid) || '';
+        selectedAgentPhotoFile = null;
+        existingAgentPhotoUrl = a.photoUrl || '';
+        existingAgentPhotoPath = a.photoPath || '';
+        removeExistingAgentPhoto = false;
+        agentPhotoFile.value = '';
+        renderAgentPhotoPreview();
 
         const knownRoles = ['Hangman', 'Team Leader', 'Dedicated Guide'];
         if (knownRoles.includes(a.role)) {
@@ -2999,10 +3927,16 @@
           delBtn.className = 'post-delete';
           delBtn.type = 'button';
           delBtn.textContent = '요원 삭제';
-          delBtn.addEventListener('click', () => {
-            if (confirm(`'${a.name}' 요원 카드를 삭제할까요?`)) {
-              db.collection('agents').doc(id).delete();
+          delBtn.addEventListener('click', async () => {
+            if (!confirm(`'${a.name}' 요원 카드를 삭제할까요?`)) return;
+            delBtn.disabled = true;
+            try {
+              await db.collection('agents').doc(id).delete();
+              await deleteStoredImage(a.photoPath || '', a.photoUrl || '');
               closeAgentDetail();
+            } catch (err) {
+              delBtn.disabled = false;
+              alert(`요원 삭제 오류: ${describeDataError(err)}`);
             }
           });
 
@@ -3088,41 +4022,79 @@
           });
       }
 
-      agentForm.addEventListener('submit', (e) => {
+      agentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (!currentUserDoc || !currentUserDoc.canPost || !auth.currentUser) return;
+        if (!auth.currentUser) {
+          agentError.textContent = '로그인 후 요원을 등록할 수 있습니다.';
+          return;
+        }
+        if (!currentUserDoc || !currentUserDoc.canPost) {
+          agentError.textContent = '현재 계정에는 요원 등록 권한이 없습니다.';
+          return;
+        }
 
         const name = document.getElementById('agentName').value.trim();
         const ko = document.getElementById('agentKo').value.trim();
         const roleChoice = agentRoleSelect.value;
         const role = roleChoice === 'Other' ? agentRoleOther.value.trim() : roleChoice;
         const summary = document.getElementById('agentSummary').value.trim();
-        const photoUrl = agentPhoto.value.trim();
-        if (!name || !ko || !role || !summary) return;
+        if (!name || !ko || !role || !summary) {
+          agentError.textContent = '이름, 직책, 소개를 모두 입력해주세요.';
+          return;
+        }
 
         const dossier = [1, 2, 3].map((n) => ({
           label: document.getElementById(`agentRow${n}Label`).value.trim(),
           value: document.getElementById(`agentRow${n}Value`).value.trim()
         })).filter((r) => r.label && r.value);
 
-        const payload = { name, ko, role, summary, photoUrl, dossier };
-
         agentSubmitBtn.disabled = true;
+        agentSubmitBtn.textContent = selectedAgentPhotoFile ? '사진 업로드 중…' : (editingAgentId ? '수정 중…' : '등록 중…');
         agentError.textContent = '';
 
-        const request = editingAgentId
-          ? db.collection('agents').doc(editingAgentId).update(payload)
-          : db.collection('agents').add(Object.assign({
+        const oldPhotoUrl = existingAgentPhotoUrl;
+        const oldPhotoPath = existingAgentPhotoPath;
+        let uploaded = null;
+
+        try {
+          const photoOwnerUid = editingAgentAuthorUid || auth.currentUser.uid;
+          if (selectedAgentPhotoFile) {
+            uploaded = await uploadAgentPhoto(selectedAgentPhotoFile, photoOwnerUid);
+          }
+
+          let photoUrl = oldPhotoUrl;
+          let photoPath = oldPhotoPath;
+          if (uploaded) {
+            photoUrl = uploaded.url;
+            photoPath = uploaded.path;
+          } else if (removeExistingAgentPhoto) {
+            photoUrl = '';
+            photoPath = '';
+          }
+
+          const payload = { name, ko, role, summary, photoUrl, photoPath, dossier };
+
+          if (editingAgentId) {
+            await db.collection('agents').doc(editingAgentId).update(payload);
+          } else {
+            await db.collection('agents').add(Object.assign({
               authorUid: auth.currentUser.uid,
-              authorName: currentUserDoc.username,
+              authorName: currentUserDoc.username || emailToId(auth.currentUser.email),
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             }, payload));
+          }
 
-        request.then(() => {
+          if ((uploaded || removeExistingAgentPhoto) && (oldPhotoPath || oldPhotoUrl)) {
+            await deleteStoredImage(oldPhotoPath, oldPhotoUrl);
+          }
           closeAgentModal();
-        }).catch((err) => {
-          agentError.textContent = `저장 중 오류가 발생했습니다: ${err.message}`;
-        }).finally(() => { agentSubmitBtn.disabled = false; });
+        } catch (err) {
+          if (uploaded) await deleteStoredImage(uploaded.path, uploaded.url);
+          agentError.textContent = `저장 중 오류가 발생했습니다: ${describeDataError(err)}`;
+        } finally {
+          agentSubmitBtn.disabled = false;
+          agentSubmitBtn.textContent = editingAgentId ? '수정 완료' : '요원 등록하기';
+        }
       });
 
       // ---- Admin console ----
@@ -3265,6 +4237,9 @@
           currentUserDoc = null;
           if (unsubscribePosts) { unsubscribePosts(); unsubscribePosts = null; }
           if (unsubscribeAgents) { unsubscribeAgents(); unsubscribeAgents = null; }
+          if (unsubscribeComments) { unsubscribeComments(); unsubscribeComments = null; }
+          closePostDetail();
+          postsCache.clear();
           dynamicAgents.innerHTML = '';
           resetAgentForm();
           agentModal.classList.remove('open');
