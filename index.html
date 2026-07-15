@@ -2882,6 +2882,8 @@
     .evaluation-zone-head span{color:var(--dim);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}
 
     .evaluation-leader-frame{
+      display:flex;
+      justify-content:center;
       padding:18px;
       border:1px solid rgba(194,43,53,.42);
       border-radius:18px;
@@ -2894,14 +2896,53 @@
 
     .evaluation-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
-      gap:16px;
+      grid-template-columns:repeat(auto-fill,minmax(250px,250px));
+      justify-content:start;
+      gap:18px;
+    }
+
+    .evaluation-card-stack{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      width:100%;
+      min-width:0;
+    }
+
+    .evaluation-card-stack.leader{
+      width:min(340px,100%);
+    }
+
+    .evaluation-card-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .evaluation-card-action{
+      border:1px solid var(--line-bright);
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      color:#d7dae0;
+      font-size:.71rem;
+      letter-spacing:.04em;
+      padding:7px 12px;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .evaluation-card-action:hover{
+      border-color:var(--red-bright);
+      color:#fff;
+      background:rgba(143,23,32,.16);
     }
 
     .evaluation-profile-card{
       --eval-accent:#727986;
       position:relative;
       width:100%;
+      max-width:340px;
       min-height:248px;
       overflow:hidden;
       display:flex;
@@ -2928,9 +2969,11 @@
       box-shadow:0 20px 48px rgba(0,0,0,.48),0 0 0 1px rgba(194,43,53,.2);
     }
 
+
+
     .evaluation-profile-card.is-leader{
       --eval-accent:var(--red-bright);
-      min-height:268px;
+      min-height:248px;
       border-color:rgba(194,43,53,.58);
     }
 
@@ -3045,10 +3088,174 @@
     .evaluation-request-form textarea:focus,
     .evaluation-write-form textarea:focus{outline:none;border-color:var(--red-bright)}
 
-    .evaluation-detail-profile{margin:6px 0 24px}
-    .evaluation-detail-profile .evaluation-profile-card{min-height:226px;cursor:default;transform:none}
+    .evaluation-record-sheet{
+      padding:20px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:
+        linear-gradient(145deg,rgba(143,23,32,.06),transparent 42%),
+        #07080b;
+    }
+
+    .evaluation-sheet-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      padding:0 0 16px;
+      margin-bottom:18px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .evaluation-sheet-head span{
+      display:block;
+      color:var(--red-bright);
+      font-size:.62rem;
+      font-weight:800;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .evaluation-sheet-head strong{
+      display:block;
+      margin-top:4px;
+      color:#f1f1f3;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.15rem;
+      font-weight:500;
+    }
+
+    .evaluation-sheet-code{
+      color:#777d87;
+      font-family:monospace;
+      font-size:.72rem;
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+
+    .evaluation-detail-profile{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin:6px 0 24px;
+    }
+    .evaluation-detail-profile .evaluation-profile-card{min-height:226px;max-width:340px;cursor:default;transform:none}
     .evaluation-detail-profile .evaluation-profile-card:hover{transform:none;box-shadow:0 16px 38px rgba(0,0,0,.34)}
-    .evaluation-detail-tools{display:flex;justify-content:flex-end;margin-top:10px}
+    .evaluation-detail-note{
+      width:min(340px,100%);
+      margin:12px auto 0;
+      padding:12px 14px;
+      border-left:2px solid rgba(194,43,53,.55);
+      background:rgba(255,255,255,.018);
+      color:#8f949e;
+      font-size:.74rem;
+      line-height:1.7;
+      text-align:left;
+    }
+    .evaluation-detail-tools{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+    .leader-review-section{
+      margin:26px 0 20px;
+      padding:16px;
+      border:1px solid rgba(194,43,53,.42);
+      border-radius:12px;
+      background:
+        linear-gradient(135deg,rgba(143,23,32,.12),transparent 48%),
+        rgba(255,255,255,.012);
+    }
+
+    .leader-review-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      padding-bottom:12px;
+      margin-bottom:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .leader-review-head span{
+      display:block;
+      color:var(--red-bright);
+      font-size:.58rem;
+      font-weight:800;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .leader-review-head strong{
+      display:block;
+      margin-top:3px;
+      color:#f0f0f2;
+      font-size:.98rem;
+    }
+
+    .leader-review-badge{
+      color:#ef8d95;
+      font-size:.61rem;
+      letter-spacing:.12em;
+      white-space:nowrap;
+    }
+
+    .leader-review-display{
+      padding:14px 15px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:#090a0d;
+    }
+
+    .leader-review-display.is-empty{
+      color:#696f79;
+      text-align:center;
+      font-size:.78rem;
+    }
+
+    .leader-review-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:8px;
+      color:#777d87;
+      font-size:.66rem;
+    }
+
+    .leader-review-display p{
+      margin:0;
+      color:#c3c6cc;
+      font-size:.83rem;
+      line-height:1.8;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .leader-review-form{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .leader-review-form label{
+      color:#d6d8dd;
+      font-size:.72rem;
+    }
+
+    .leader-review-form textarea{
+      width:100%;
+      min-height:105px;
+      resize:vertical;
+      background:#060708;
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:11px 12px;
+      color:var(--text);
+      font:inherit;
+      font-size:.84rem;
+    }
+
+    .leader-review-form textarea:focus{outline:none;border-color:var(--red-bright)}
+    .leader-review-form-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
 
     .evaluation-record-head{
       display:flex;
@@ -3102,7 +3309,7 @@
     .evaluation-write-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .evaluation-write-title strong{font-size:.9rem;color:#f0f0f2}
     .evaluation-write-title span{font-size:.65rem;color:#777d87;letter-spacing:.1em}
-    .evaluation-write-grid{display:grid;grid-template-columns:1fr 1fr 120px;gap:10px}
+    .evaluation-write-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .evaluation-write-form input,
     .evaluation-write-form select{
       width:100%;
@@ -3129,10 +3336,13 @@
       .evaluation-security-banner{grid-template-columns:auto minmax(0,1fr);padding:14px}
       .evaluation-security-level{grid-column:2}
       .evaluation-security-banner::after{right:-20px;font-size:2.3rem}
-      .evaluation-grid{grid-template-columns:1fr}
+      .evaluation-grid{grid-template-columns:1fr;justify-content:stretch}
       .evaluation-leader-frame{padding:10px}
-      .evaluation-profile-card{min-height:235px}
+      .evaluation-card-stack.leader{width:100%}
+      .evaluation-profile-card{max-width:none;min-height:235px}
       .evaluation-write-grid{grid-template-columns:1fr}
+      .evaluation-record-sheet{padding:14px}
+      .evaluation-sheet-head{align-items:flex-start;flex-direction:column;gap:6px}
       .evaluation-modal,.evaluation-request-modal{
         width:100% !important;
         max-height:calc(100dvh - 32px);
@@ -3212,7 +3422,7 @@
           </div>
           <div class="meta-block">
             <span class="meta-label">Uniform Code</span>
-            <span class="meta-value">White · Black Tone</span>
+            <span class="meta-value">완전 무채색 · Black Tone</span>
           </div>
           <div class="meta-block">
             <span class="meta-label">Cumulative Executions</span>
@@ -3484,7 +3694,7 @@
             <article class="mini-panel">
               <h3>유니폼 규정</h3>
               <p>
-                검정·회색·백색만 허용되는 무채색 체계. 요원들은 공통적으로
+                검정·회색·백색만 허용되는 완전 무채색 체계. 요원들은 공통적으로
                 블랙 톤 유니폼을 착용한다.
               </p>
             </article>
@@ -3587,8 +3797,8 @@
               <span>인가 등급 미달</span>
             </div>
             <div class="person-role">Hangman</div>
-            <h3>Cosmo</h3>
-            <div class="ko">코스모</div>
+            <h3>Cosmos</h3>
+            <div class="ko">코스모스</div>
             <p>
               포획 작전과 단독 집행을 수행하는 현장 요원.
               C.E.T. 특유의 원칙과 모순을 동시에 상징한다.
@@ -3743,7 +3953,6 @@
                   <div class="evaluation-card-kicker">Mandatory Leadership Review</div>
                   <div class="evaluation-card-name">Dilemma</div>
                   <div class="evaluation-card-role">Team Leader · 팀장</div>
-                  <p class="evaluation-card-note">부서 전체의 지휘권자. 모든 인가 요원은 팀장에 대한 내부 평가 기록을 남길 수 있습니다.</p>
                 </div>
               </div>
               <div class="evaluation-card-footer">
@@ -4133,14 +4342,46 @@
       <h3>내부 평가 기록</h3>
       <p class="modal-sub">평가 작성자는 표시 이름을 자유롭게 설정할 수 있지만, 실제 작성·수정 권한은 로그인 계정으로 판별됩니다.</p>
 
-      <div class="evaluation-detail-profile" id="evaluationDetailProfile"></div>
-      <div class="evaluation-record-head">
-        <strong>누적 평가 기록</strong>
-        <span id="evaluationRecordCount">0 RECORDS</span>
+      <div class="evaluation-record-sheet" id="evaluationRecordSheet">
+        <div class="evaluation-sheet-head">
+          <div>
+            <span>Personnel Assessment Record</span>
+            <strong id="evaluationSheetTargetName">C.E.T. Personnel</strong>
+          </div>
+          <div class="evaluation-sheet-code" id="evaluationSheetTargetCode">CLASSIFIED</div>
+        </div>
+        <div class="evaluation-detail-profile" id="evaluationDetailProfile"></div>
+
+        <section class="leader-review-section" id="leaderReviewSection" style="display:none">
+          <div class="leader-review-head">
+            <div>
+              <span>Command Assessment</span>
+              <strong>팀장 평가</strong>
+            </div>
+            <div class="leader-review-badge">ADMINISTRATOR ONLY</div>
+          </div>
+          <div class="leader-review-display is-empty" id="leaderReviewDisplay">팀장 평가가 아직 등록되지 않았습니다.</div>
+          <form class="leader-review-form no-export" id="leaderReviewForm" style="display:none">
+            <label for="leaderReviewBody">팀장 평가 작성 · 관리자 전용</label>
+            <textarea id="leaderReviewBody" maxlength="1200" placeholder="해당 요원에 대한 팀장 평가를 기록하세요."></textarea>
+            <div class="form-error" id="leaderReviewError"></div>
+            <div class="leader-review-form-actions">
+              <button class="auth-btn" id="leaderReviewDelete" type="button" style="display:none">팀장 평가 삭제</button>
+              <button class="form-submit" id="leaderReviewSubmit" type="submit">팀장 평가 저장</button>
+            </div>
+          </form>
+        </section>
+
+        <div class="evaluation-record-head">
+          <strong>누적 평가 기록</strong>
+          <span id="evaluationRecordCount">0 RECORDS</span>
+        </div>
+        <div class="evaluation-record-list" id="evaluationRecordList">
+          <p class="post-empty">평가 기록을 불러오는 중…</p>
+        </div>
       </div>
-      <div class="evaluation-record-list" id="evaluationRecordList">
-        <p class="post-empty">평가 기록을 불러오는 중…</p>
-      </div>
+
+      <div class="evaluation-detail-tools no-export" id="evaluationExportTools"></div>
 
       <form class="evaluation-write-form" id="evaluationForm">
         <div class="evaluation-write-title">
@@ -4152,19 +4393,10 @@
           <input id="evaluationAuthorName" type="text" maxlength="30" placeholder="평가자 표시 이름" required />
           <select id="evaluationRelation" required>
             <option value="작전 동행">작전 동행</option>
-            <option value="동일 부서">동일 부서</option>
             <option value="직속 관계">직속 관계</option>
             <option value="가이딩">가이딩</option>
             <option value="관찰 기록">관찰 기록</option>
             <option value="기타">기타</option>
-          </select>
-          <select id="evaluationGrade" required>
-            <option value="S">S 등급</option>
-            <option value="A" selected>A 등급</option>
-            <option value="B">B 등급</option>
-            <option value="C">C 등급</option>
-            <option value="D">D 등급</option>
-            <option value="보류">판정 보류</option>
           </select>
         </div>
         <textarea id="evaluationBody" maxlength="1200" placeholder="현장 판단, 협업 태도, 명령 이행, 통제 가능성, 신뢰도 등을 자유롭게 기록하세요." required></textarea>
@@ -4186,6 +4418,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -4362,6 +4596,7 @@
       let editingEvaluationTargetOriginal = null;
       let editingEvaluationId = null;
       let editingEvaluationOriginal = null;
+      let activeLeaderReview = null;
       let activePostId = null;
       let selectedPostFiles = [];
       let editingPostId = null;
@@ -4450,13 +4685,23 @@
       const evaluationDetailModal = document.getElementById('evaluationDetailModal');
       const evaluationDetailClose = document.getElementById('evaluationDetailClose');
       const evaluationDetailProfile = document.getElementById('evaluationDetailProfile');
+      const evaluationRecordSheet = document.getElementById('evaluationRecordSheet');
+      const evaluationExportTools = document.getElementById('evaluationExportTools');
+      const evaluationSheetTargetName = document.getElementById('evaluationSheetTargetName');
+      const evaluationSheetTargetCode = document.getElementById('evaluationSheetTargetCode');
+      const leaderReviewSection = document.getElementById('leaderReviewSection');
+      const leaderReviewDisplay = document.getElementById('leaderReviewDisplay');
+      const leaderReviewForm = document.getElementById('leaderReviewForm');
+      const leaderReviewBody = document.getElementById('leaderReviewBody');
+      const leaderReviewError = document.getElementById('leaderReviewError');
+      const leaderReviewSubmit = document.getElementById('leaderReviewSubmit');
+      const leaderReviewDelete = document.getElementById('leaderReviewDelete');
       const evaluationRecordCount = document.getElementById('evaluationRecordCount');
       const evaluationRecordList = document.getElementById('evaluationRecordList');
       const evaluationForm = document.getElementById('evaluationForm');
       const evaluationFormTitle = document.getElementById('evaluationFormTitle');
       const evaluationAuthorName = document.getElementById('evaluationAuthorName');
       const evaluationRelation = document.getElementById('evaluationRelation');
-      const evaluationGrade = document.getElementById('evaluationGrade');
       const evaluationBody = document.getElementById('evaluationBody');
       const evaluationError = document.getElementById('evaluationError');
       const evaluationSubmit = document.getElementById('evaluationSubmit');
@@ -4624,7 +4869,7 @@
         id: 'dilemma',
         name: 'Dilemma',
         role: 'Team Leader · 팀장',
-        code: 'CET-000 / Ω',
+        code: 'CET-666 / Ω',
         note: '부서 전체의 지휘권자. 모든 인가 요원은 팀장에 대한 내부 평가 기록을 남길 수 있습니다.',
         fixed: true,
         authorUid: '__system__'
@@ -4660,7 +4905,6 @@
         const name = escapeHtml(target.name);
         const role = escapeHtml(target.role);
         const code = escapeHtml(target.code);
-        const note = escapeHtml(target.note);
         const kicker = leader ? 'Mandatory Leadership Review' : 'Requested Personnel Review';
         const stripe = leader ? 'TOP PRIORITY' : 'EYES ONLY';
         return `
@@ -4674,7 +4918,6 @@
               <div class="evaluation-card-kicker">${kicker}</div>
               <div class="evaluation-card-name">${name}</div>
               <div class="evaluation-card-role">${role}</div>
-              <p class="evaluation-card-note">${note}</p>
             </div>
           </div>
           <div class="evaluation-card-footer">
@@ -4682,6 +4925,75 @@
             <div class="evaluation-card-barcode" aria-hidden="true"></div>
           </div>
         `;
+      }
+
+      function sanitizeFileName(value){
+        return String(value || 'cet-record')
+          .replace(/[\/:*?"<>|]+/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .slice(0, 60) || 'cet-record';
+      }
+
+      async function captureNodePngBlob(node){
+        if (!node) throw new Error('저장할 화면을 찾지 못했습니다.');
+        if (!window.html2canvas) throw new Error('PNG 저장 모듈을 불러오지 못했습니다.');
+        const hiddenNodes = Array.from(node.querySelectorAll('.no-export'));
+        hiddenNodes.forEach((el) => { el.dataset.prevDisplay = el.style.display || ''; el.style.display = 'none'; });
+        try {
+          const canvas = await window.html2canvas(node, {
+            backgroundColor: '#07080b',
+            scale: Math.max(2, Math.min(3, window.devicePixelRatio || 2)),
+            useCORS: true,
+            logging: false
+          });
+          return await new Promise((resolve, reject) => {
+            canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error('이미지 변환에 실패했습니다.')), 'image/png');
+          });
+        } finally {
+          hiddenNodes.forEach((el) => { el.style.display = el.dataset.prevDisplay; delete el.dataset.prevDisplay; });
+        }
+      }
+
+      function downloadBlob(blob, fileName){
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1500);
+      }
+
+      async function exportNodeToPng(node, fileName){
+        try {
+          const blob = await captureNodePngBlob(node);
+          downloadBlob(blob, `${sanitizeFileName(fileName)}.png`);
+        } catch (err) {
+          console.error(err);
+          alert(err.message || 'PNG 저장에 실패했습니다. 다시 시도해주세요.');
+        }
+      }
+
+      async function exportProfileAndSheet(card, sheet, targetName){
+        if (!window.JSZip) {
+          alert('묶음 저장 모듈을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+          return;
+        }
+        try {
+          const safeName = sanitizeFileName(targetName || 'CET-요원');
+          const cardBlob = await captureNodePngBlob(card);
+          const sheetBlob = await captureNodePngBlob(sheet);
+          const zip = new window.JSZip();
+          zip.file(`${safeName}-프로필카드.png`, cardBlob);
+          zip.file(`${safeName}-내부평가기록지.png`, sheetBlob);
+          const zipBlob = await zip.generateAsync({ type: 'blob' });
+          downloadBlob(zipBlob, `${safeName}-내부평가-PNG.zip`);
+        } catch (err) {
+          console.error(err);
+          alert(err.message || '두 이미지를 저장하지 못했습니다. 다시 시도해주세요.');
+        }
       }
 
       function makeEvaluationTargetCard(target){
@@ -4814,7 +5126,6 @@
         evaluationEditCancel.style.display = 'none';
         evaluationBody.value = '';
         evaluationRelation.value = '작전 동행';
-        evaluationGrade.value = 'A';
         if (!keepName) evaluationAuthorName.value = defaultEvaluationAuthorName();
         evaluationError.textContent = '';
       }
@@ -4827,6 +5138,16 @@
           unsubscribeEvaluationRecords = null;
         }
         evaluationDetailProfile.innerHTML = '';
+        if (evaluationExportTools) evaluationExportTools.innerHTML = '';
+        activeLeaderReview = null;
+        if (leaderReviewSection) leaderReviewSection.style.display = 'none';
+        if (leaderReviewDisplay) {
+          leaderReviewDisplay.className = 'leader-review-display is-empty';
+          leaderReviewDisplay.textContent = '팀장 평가가 아직 등록되지 않았습니다.';
+        }
+        if (leaderReviewForm) leaderReviewForm.style.display = 'none';
+        if (leaderReviewBody) leaderReviewBody.value = '';
+        if (leaderReviewError) leaderReviewError.textContent = '';
         evaluationRecordList.innerHTML = '<p class="post-empty">평가 대상을 선택해주세요.</p>';
         evaluationRecordCount.textContent = '0 RECORDS';
         resetEvaluationEditor({ keepName: true });
@@ -4834,14 +5155,50 @@
 
       function renderEvaluationDetailProfile(target){
         evaluationDetailProfile.innerHTML = '';
+        evaluationExportTools.innerHTML = '';
+        evaluationSheetTargetName.textContent = target.name;
+        evaluationSheetTargetCode.textContent = target.code;
+
         const card = document.createElement('div');
         card.className = `evaluation-profile-card${target.fixed ? ' is-leader' : ''}`;
         card.innerHTML = evaluationCardHtml(target, { leader: !!target.fixed });
         evaluationDetailProfile.appendChild(card);
 
+        if (target.note) {
+          const note = document.createElement('p');
+          note.className = 'evaluation-detail-note';
+          note.textContent = target.note;
+          evaluationDetailProfile.appendChild(note);
+        }
+
+        const cardExportButton = document.createElement('button');
+        cardExportButton.type = 'button';
+        cardExportButton.className = 'auth-btn';
+        cardExportButton.textContent = '프로필 카드 PNG 저장';
+        cardExportButton.addEventListener('click', () => {
+          exportNodeToPng(card, `${target.name}-평가프로필카드`);
+        });
+        evaluationExportTools.appendChild(cardExportButton);
+
+        const sheetExportButton = document.createElement('button');
+        sheetExportButton.type = 'button';
+        sheetExportButton.className = 'auth-btn';
+        sheetExportButton.textContent = '평가기록지 PNG 저장';
+        sheetExportButton.addEventListener('click', () => {
+          exportNodeToPng(evaluationRecordSheet, `${target.name}-내부평가기록지`);
+        });
+        evaluationExportTools.appendChild(sheetExportButton);
+
+        const bothExportButton = document.createElement('button');
+        bothExportButton.type = 'button';
+        bothExportButton.className = 'auth-btn';
+        bothExportButton.textContent = '두 PNG 한 번에 저장';
+        bothExportButton.addEventListener('click', () => {
+          exportProfileAndSheet(card, evaluationRecordSheet, target.name);
+        });
+        evaluationExportTools.appendChild(bothExportButton);
+
         if (canEditEvaluationTarget(target)) {
-          const tools = document.createElement('div');
-          tools.className = 'evaluation-detail-tools';
           const editButton = document.createElement('button');
           editButton.type = 'button';
           editButton.className = 'auth-btn';
@@ -4850,8 +5207,82 @@
             closeEvaluationDetail();
             openEvaluationRequest(target);
           });
-          tools.appendChild(editButton);
-          evaluationDetailProfile.appendChild(tools);
+          evaluationExportTools.appendChild(editButton);
+        }
+      }
+
+      function renderLeaderReview(review){
+        activeLeaderReview = review || null;
+        const isLeaderTarget = !!activeEvaluationTarget?.fixed;
+        if (leaderReviewSection) leaderReviewSection.style.display = isLeaderTarget ? 'none' : 'block';
+        if (isLeaderTarget) return;
+
+        if (review?.data) {
+          const data = review.data;
+          const edited = data.updatedAt ? ' · 수정됨' : '';
+          leaderReviewDisplay.className = 'leader-review-display';
+          leaderReviewDisplay.innerHTML = `
+            <div class="leader-review-meta">
+              <span>${escapeHtml(data.authorName || '팀장')}</span>
+              <span>${escapeHtml(formatEvaluationDate(data.createdAt))}${edited}</span>
+            </div>
+            <p>${escapeHtml(data.body || '')}</p>
+          `;
+        } else {
+          leaderReviewDisplay.className = 'leader-review-display is-empty';
+          leaderReviewDisplay.textContent = '팀장 평가가 아직 등록되지 않았습니다.';
+        }
+
+        const isAdmin = currentUserDoc?.role === 'admin';
+        leaderReviewForm.style.display = isAdmin ? 'grid' : 'none';
+        leaderReviewBody.value = review?.data?.body || '';
+        leaderReviewDelete.style.display = isAdmin && review ? 'inline-block' : 'none';
+        leaderReviewSubmit.textContent = review ? '팀장 평가 수정' : '팀장 평가 저장';
+        leaderReviewError.textContent = '';
+      }
+
+      async function saveLeaderReview(event){
+        event.preventDefault();
+        if (!auth.currentUser || currentUserDoc?.role !== 'admin' || !activeEvaluationTarget || activeEvaluationTarget.fixed) return;
+        const body = leaderReviewBody.value.trim();
+        leaderReviewError.textContent = '';
+        if (!body) {
+          leaderReviewError.textContent = '팀장 평가 내용을 입력해주세요.';
+          return;
+        }
+        leaderReviewSubmit.disabled = true;
+        leaderReviewSubmit.textContent = '저장 중…';
+        try {
+          const ref = db.collection('evaluationTargets').doc(activeEvaluationTarget.id).collection('evaluations').doc('leader-review');
+          const payload = {
+            authorUid: activeLeaderReview?.data?.authorUid || auth.currentUser.uid,
+            authorName: activeLeaderReview?.data?.authorName || currentUserDoc.username || emailToId(auth.currentUser.email),
+            relation: '팀장 평가',
+            recordType: 'leaderReview',
+            body,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          };
+          if (activeLeaderReview?.data?.createdAt) payload.createdAt = activeLeaderReview.data.createdAt;
+          else payload.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          await ref.set(payload);
+        } catch (err) {
+          leaderReviewError.textContent = `팀장 평가를 저장하지 못했습니다: ${describeDataError(err)}`;
+        } finally {
+          leaderReviewSubmit.disabled = false;
+          leaderReviewSubmit.textContent = activeLeaderReview ? '팀장 평가 수정' : '팀장 평가 저장';
+        }
+      }
+
+      async function deleteLeaderReview(){
+        if (!auth.currentUser || currentUserDoc?.role !== 'admin' || !activeEvaluationTarget || !activeLeaderReview) return;
+        if (!confirm('이 팀장 평가를 삭제할까요?')) return;
+        leaderReviewDelete.disabled = true;
+        try {
+          await db.collection('evaluationTargets').doc(activeEvaluationTarget.id).collection('evaluations').doc('leader-review').delete();
+        } catch (err) {
+          alert(`팀장 평가 삭제에 실패했습니다: ${describeDataError(err)}`);
+        } finally {
+          leaderReviewDelete.disabled = false;
         }
       }
 
@@ -4878,13 +5309,22 @@
                 <strong>${escapeHtml(data.authorName || '익명 요원')}</strong>
                 <span>${escapeHtml(data.relation || '관계 미상')} · ${escapeHtml(formatEvaluationDate(data.createdAt))}${edited}</span>
               </div>
-              <div class="evaluation-grade">${escapeHtml(data.grade || '보류')}</div>
             </div>
             <p>${escapeHtml(data.body || '')}</p>
           `;
+          const actions = document.createElement('div');
+          actions.className = 'evaluation-record-actions no-export';
+
+          const exportButton = document.createElement('button');
+          exportButton.type = 'button';
+          exportButton.className = 'evaluation-record-action';
+          exportButton.textContent = 'PNG 저장';
+          exportButton.addEventListener('click', () => {
+            exportNodeToPng(record, `${activeEvaluationTarget?.name || '대상'}-${data.authorName || '익명'}-평가`);
+          });
+          actions.appendChild(exportButton);
+
           if (canEditEvaluationRecord(data)) {
-            const actions = document.createElement('div');
-            actions.className = 'evaluation-record-actions';
             const edit = document.createElement('button');
             edit.type = 'button';
             edit.className = 'evaluation-record-action';
@@ -4895,8 +5335,7 @@
               evaluationForm.classList.add('is-editing');
               evaluationFormTitle.textContent = '내부 평가 수정';
               evaluationAuthorName.value = data.authorName || defaultEvaluationAuthorName();
-              evaluationRelation.value = data.relation || '작전 동행';
-              evaluationGrade.value = data.grade || 'A';
+              evaluationRelation.value = ['작전 동행', '직속 관계', '가이딩', '관찰 기록', '기타'].includes(data.relation) ? data.relation : '기타';
               evaluationBody.value = data.body || '';
               evaluationSubmit.textContent = '수정 저장';
               evaluationEditCancel.style.display = 'inline-block';
@@ -4918,8 +5357,9 @@
               }
             });
             actions.append(edit, remove);
-            record.appendChild(actions);
           }
+
+          record.appendChild(actions);
           evaluationRecordList.appendChild(record);
         });
       }
@@ -4930,8 +5370,13 @@
         unsubscribeEvaluationRecords = db.collection('evaluationTargets').doc(targetId).collection('evaluations')
           .orderBy('createdAt', 'desc')
           .onSnapshot((snapshot) => {
-            renderEvaluationRecords(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+            const allRecords = snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }));
+            const leaderReview = allRecords.find((item) => item.id === 'leader-review' || item.data.recordType === 'leaderReview') || null;
+            const regularRecords = allRecords.filter((item) => item !== leaderReview && item.data.recordType !== 'leaderReview');
+            renderLeaderReview(leaderReview);
+            renderEvaluationRecords(regularRecords);
           }, (err) => {
+            renderLeaderReview(null);
             evaluationRecordList.innerHTML = `<p class="post-empty">평가 기록을 불러오지 못했습니다 (${escapeHtml(describeDataError(err))}).</p>`;
           });
       }
@@ -4943,6 +5388,7 @@
         }
         activeEvaluationTarget = target;
         renderEvaluationDetailProfile(target);
+        renderLeaderReview(null);
         evaluationAuthorName.value = defaultEvaluationAuthorName();
         resetEvaluationEditor({ keepName: true });
         evaluationDetailModal.classList.add('open');
@@ -4955,7 +5401,6 @@
         if (!auth.currentUser || !currentUserDoc || !activeEvaluationTarget) return;
         const authorName = evaluationAuthorName.value.trim();
         const relation = evaluationRelation.value;
-        const grade = evaluationGrade.value;
         const body = evaluationBody.value.trim();
         evaluationError.textContent = '';
         if (!authorName || !body) {
@@ -4971,13 +5416,13 @@
             if (!canEditEvaluationRecord(editingEvaluationOriginal)) throw new Error('이 평가를 수정할 권한이 없습니다.');
             await ref.doc(editingEvaluationId).update({
               authorUid: editingEvaluationOriginal.authorUid,
-              authorName, relation, grade, body,
+              authorName, relation, body, recordType: 'peerReview',
               updatedAt: firebase.firestore.FieldValue.serverTimestamp()
             });
           } else {
             await ref.add({
               authorUid: auth.currentUser.uid,
-              authorName, relation, grade, body,
+              authorName, relation, body, recordType: 'peerReview',
               createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
           }
@@ -4998,6 +5443,8 @@
       if (evaluationRequestModal) evaluationRequestModal.addEventListener('click', (event) => { if (event.target === evaluationRequestModal) closeEvaluationRequest(); });
       if (evaluationDetailClose) evaluationDetailClose.addEventListener('click', closeEvaluationDetail);
       if (evaluationDetailModal) evaluationDetailModal.addEventListener('click', (event) => { if (event.target === evaluationDetailModal) closeEvaluationDetail(); });
+      if (leaderReviewForm) leaderReviewForm.addEventListener('submit', saveLeaderReview);
+      if (leaderReviewDelete) leaderReviewDelete.addEventListener('click', deleteLeaderReview);
       if (evaluationEditCancel) evaluationEditCancel.addEventListener('click', () => resetEvaluationEditor({ keepName: true }));
 
       function formatPostDate(timestamp, short = false){
