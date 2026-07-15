@@ -2776,6 +2776,380 @@
       .comment-form-foot .form-error{width:100%}
     }
 
+
+
+    /* ---- C.E.T. confidential internal evaluation ---- */
+    #pageEvaluation{
+      padding:44px 0 110px;
+      min-height:calc(100vh - 64px);
+      position:relative;
+    }
+
+    #pageEvaluation::before{
+      content:"LEVEL OMEGA / EYES ONLY";
+      position:fixed;
+      right:-42px;
+      bottom:96px;
+      z-index:-1;
+      color:rgba(194,43,53,.035);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(3rem,9vw,8.5rem);
+      font-weight:700;
+      letter-spacing:.08em;
+      transform:rotate(-90deg);
+      transform-origin:right bottom;
+      white-space:nowrap;
+      pointer-events:none;
+    }
+
+    .evaluation-page-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+      margin-bottom:24px;
+    }
+
+    .evaluation-page-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .evaluation-security-banner{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      gap:16px;
+      align-items:center;
+      margin:0 0 30px;
+      padding:16px 18px;
+      border:1px solid rgba(194,43,53,.46);
+      border-radius:12px;
+      background:
+        linear-gradient(90deg,rgba(143,23,32,.22),rgba(143,23,32,.035) 62%,rgba(255,255,255,.015)),
+        #0a0b0e;
+      box-shadow:0 16px 44px rgba(0,0,0,.3);
+    }
+
+    .evaluation-security-banner::after{
+      content:"CLASSIFIED";
+      position:absolute;
+      right:120px;
+      top:50%;
+      color:rgba(194,43,53,.08);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:3.2rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      transform:translateY(-50%) rotate(-7deg);
+      pointer-events:none;
+    }
+
+    .evaluation-security-mark{
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--red-bright);
+      color:var(--red-bright);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.15rem;
+      transform:rotate(45deg);
+    }
+
+    .evaluation-security-mark span{transform:rotate(-45deg)}
+    .evaluation-security-copy{min-width:0;position:relative;z-index:1}
+    .evaluation-security-copy strong{display:block;color:#f0f0f2;font-size:.87rem;letter-spacing:.08em}
+    .evaluation-security-copy span{display:block;margin-top:2px;color:#858a94;font-size:.73rem}
+    .evaluation-security-level{position:relative;z-index:1;color:#ff777f;font-size:.68rem;font-weight:800;letter-spacing:.16em;white-space:nowrap}
+
+    .evaluation-zone{margin-top:34px}
+    .evaluation-zone + .evaluation-zone{margin-top:52px}
+    .evaluation-zone-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+      padding-bottom:12px;
+      border-bottom:1px solid var(--line);
+    }
+    .evaluation-zone-head h3{margin:0;color:#f0f0f2;font-size:1.18rem;letter-spacing:-.03em}
+    .evaluation-zone-head span{color:var(--dim);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}
+
+    .evaluation-leader-frame{
+      padding:18px;
+      border:1px solid rgba(194,43,53,.42);
+      border-radius:18px;
+      background:
+        linear-gradient(135deg,rgba(143,23,32,.16),transparent 50%),
+        repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 8px),
+        #0a0b0e;
+      box-shadow:var(--shadow);
+    }
+
+    .evaluation-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+      gap:16px;
+    }
+
+    .evaluation-profile-card{
+      --eval-accent:#727986;
+      position:relative;
+      width:100%;
+      min-height:248px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:0;
+      border:1px solid #343945;
+      border-radius:15px;
+      background:
+        radial-gradient(circle at 88% 18%,rgba(255,255,255,.055),transparent 27%),
+        linear-gradient(145deg,#151820,#090a0d 68%);
+      color:inherit;
+      text-align:left;
+      font-family:inherit;
+      cursor:pointer;
+      box-shadow:0 16px 38px rgba(0,0,0,.34);
+      transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+      isolation:isolate;
+    }
+
+    .evaluation-profile-card:hover{
+      transform:translateY(-4px);
+      border-color:var(--eval-accent);
+      box-shadow:0 20px 48px rgba(0,0,0,.48),0 0 0 1px rgba(194,43,53,.2);
+    }
+
+    .evaluation-profile-card.is-leader{
+      --eval-accent:var(--red-bright);
+      min-height:268px;
+      border-color:rgba(194,43,53,.58);
+    }
+
+    .evaluation-card-stripe{
+      height:38px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:0 16px;
+      background:
+        repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 7px),
+        #050607;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .evaluation-card-stripe strong{color:#d9dce2;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase}
+    .evaluation-card-stripe span{color:var(--eval-accent);font-size:.62rem;font-weight:800;letter-spacing:.13em}
+
+    .evaluation-card-body{
+      position:relative;
+      z-index:1;
+      flex:1;
+      display:grid;
+      grid-template-columns:54px minmax(0,1fr);
+      gap:16px;
+      padding:22px 20px 16px;
+    }
+
+    .evaluation-card-chip{
+      width:52px;
+      height:42px;
+      margin-top:3px;
+      border:1px solid #77705d;
+      border-radius:7px;
+      background:
+        linear-gradient(90deg,transparent 31%,rgba(0,0,0,.3) 32%,rgba(0,0,0,.3) 35%,transparent 36%,transparent 65%,rgba(0,0,0,.3) 66%,rgba(0,0,0,.3) 69%,transparent 70%),
+        linear-gradient(transparent 45%,rgba(0,0,0,.3) 46%,rgba(0,0,0,.3) 53%,transparent 54%),
+        linear-gradient(145deg,#b9a978,#6e6449);
+      opacity:.72;
+    }
+
+    .evaluation-card-data{min-width:0}
+    .evaluation-card-kicker{color:var(--eval-accent);font-size:.63rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    .evaluation-card-name{margin:5px 0 1px;color:#f4f4f5;font-family:Georgia,"Times New Roman",serif;font-size:1.48rem;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .evaluation-card-role{color:#b9bdc5;font-size:.78rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .evaluation-card-note{margin:13px 0 0;color:#868b95;font-size:.74rem;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    .evaluation-card-footer{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:12px;
+      align-items:end;
+      padding:0 20px 18px;
+    }
+    .evaluation-card-code small{display:block;color:#555b66;font-size:.57rem;letter-spacing:.12em;text-transform:uppercase}
+    .evaluation-card-code strong{display:block;color:#aeb3bc;font-family:monospace;font-size:.73rem;letter-spacing:.1em}
+    .evaluation-card-barcode{
+      width:88px;
+      height:27px;
+      opacity:.52;
+      background:repeating-linear-gradient(90deg,#c9ccd2 0,#c9ccd2 1px,transparent 1px,transparent 3px,#c9ccd2 3px,#c9ccd2 5px,transparent 5px,transparent 8px);
+    }
+
+    .evaluation-profile-card::after{
+      content:"C.E.T.";
+      position:absolute;
+      right:-8px;
+      bottom:26px;
+      z-index:0;
+      color:rgba(255,255,255,.025);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:4.8rem;
+      font-weight:700;
+      letter-spacing:-.08em;
+      pointer-events:none;
+    }
+
+    .evaluation-empty{
+      grid-column:1/-1;
+      padding:46px 20px;
+      border:1px dashed var(--line-bright);
+      border-radius:14px;
+      color:#747a85;
+      text-align:center;
+      font-size:.83rem;
+      background:rgba(255,255,255,.012);
+    }
+
+    .evaluation-modal{
+      width:min(760px,100%);
+      max-height:90vh;
+      overflow-y:auto;
+      overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .evaluation-request-modal{width:min(520px,100%)}
+    .evaluation-request-form textarea,
+    .evaluation-write-form textarea{
+      min-height:120px;
+      resize:vertical;
+      background:#08090b;
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:11px 12px;
+      color:var(--text);
+      font:inherit;
+      font-size:.88rem;
+    }
+    .evaluation-request-form textarea:focus,
+    .evaluation-write-form textarea:focus{outline:none;border-color:var(--red-bright)}
+
+    .evaluation-detail-profile{margin:6px 0 24px}
+    .evaluation-detail-profile .evaluation-profile-card{min-height:226px;cursor:default;transform:none}
+    .evaluation-detail-profile .evaluation-profile-card:hover{transform:none;box-shadow:0 16px 38px rgba(0,0,0,.34)}
+    .evaluation-detail-tools{display:flex;justify-content:flex-end;margin-top:10px}
+
+    .evaluation-record-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:16px 0 11px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .evaluation-record-head strong{font-size:.9rem;color:#ececef}
+    .evaluation-record-head span{font-size:.7rem;color:var(--red-bright);letter-spacing:.08em}
+    .evaluation-record-list{display:grid;gap:10px;margin:14px 0 24px}
+
+    .evaluation-record{
+      position:relative;
+      padding:16px 17px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      background:linear-gradient(180deg,rgba(255,255,255,.018),transparent),var(--panel);
+    }
+    .evaluation-record-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:9px}
+    .evaluation-record-author strong{display:block;color:#eceef1;font-size:.86rem}
+    .evaluation-record-author span{display:block;color:#707681;font-size:.67rem;margin-top:2px}
+    .evaluation-grade{
+      min-width:50px;
+      padding:5px 9px;
+      border:1px solid rgba(194,43,53,.45);
+      border-radius:999px;
+      color:#ff959c;
+      background:rgba(143,23,32,.1);
+      font-family:Georgia,"Times New Roman",serif;
+      font-weight:700;
+      text-align:center;
+      font-size:.75rem;
+    }
+    .evaluation-record p{margin:0;color:#b7bbc3;font-size:.82rem;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+    .evaluation-record-actions{display:flex;gap:10px;margin-top:10px}
+    .evaluation-record-action{padding:0;border:0;background:transparent;color:#8e6570;font-family:inherit;font-size:.67rem;cursor:pointer}
+    .evaluation-record-action:hover{color:#ff9098}
+
+    .evaluation-write-form{
+      display:grid;
+      gap:12px;
+      margin-top:6px;
+      padding:18px;
+      border:1px solid rgba(194,43,53,.28);
+      border-radius:12px;
+      background:linear-gradient(135deg,rgba(143,23,32,.1),transparent 48%),#090a0d;
+    }
+    .evaluation-write-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .evaluation-write-title strong{font-size:.9rem;color:#f0f0f2}
+    .evaluation-write-title span{font-size:.65rem;color:#777d87;letter-spacing:.1em}
+    .evaluation-write-grid{display:grid;grid-template-columns:1fr 1fr 120px;gap:10px}
+    .evaluation-write-form input,
+    .evaluation-write-form select{
+      width:100%;
+      min-width:0;
+      background:#060708;
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:10px 11px;
+      color:var(--text);
+      font-family:inherit;
+    }
+    .evaluation-write-form input:focus,
+    .evaluation-write-form select:focus{outline:none;border-color:var(--red-bright)}
+    .evaluation-write-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .evaluation-write-actions{display:flex;gap:8px;align-items:center}
+
+    .evaluation-edit-note{display:none;margin:0;color:#d4858c;font-size:.7rem}
+    .evaluation-write-form.is-editing .evaluation-edit-note{display:block}
+
+    @media (max-width:760px){
+      #pageEvaluation{padding-top:28px}
+      .evaluation-page-header{align-items:stretch}
+      .evaluation-page-actions .register-btn{width:100%;justify-content:center}
+      .evaluation-security-banner{grid-template-columns:auto minmax(0,1fr);padding:14px}
+      .evaluation-security-level{grid-column:2}
+      .evaluation-security-banner::after{right:-20px;font-size:2.3rem}
+      .evaluation-grid{grid-template-columns:1fr}
+      .evaluation-leader-frame{padding:10px}
+      .evaluation-profile-card{min-height:235px}
+      .evaluation-write-grid{grid-template-columns:1fr}
+      .evaluation-modal,.evaluation-request-modal{
+        width:100% !important;
+        max-height:calc(100dvh - 32px);
+        margin:0;
+        border-radius:13px;
+      }
+      #evaluationRequestModal .modal-close,
+      #evaluationDetailModal .modal-close{
+        position:sticky;
+        top:10px;
+        float:right;
+        z-index:10;
+        margin-bottom:-28px;
+        background:#0c0d10;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -2802,6 +3176,7 @@
     <button class="side-nav-close" id="sideNavClose" type="button" aria-label="닫기">✕</button>
     <div class="side-nav-eyebrow">Navigate</div>
     <a class="side-nav-link" href="#top" data-page="pageHome">홈</a>
+    <a class="side-nav-link" href="#" data-page="pageEvaluation">CET 내부 평가</a>
     <a class="side-nav-link" href="#" data-page="pageBulletin">게시판</a>
     <a class="side-nav-link" href="#" data-page="pageAgents">요원 등록</a>
   </nav>
@@ -3314,6 +3689,84 @@
     </section>
   </main>
 
+
+
+  <div id="pageEvaluation" class="page-hidden">
+    <div class="shell">
+      <a href="#" class="back-home" data-page="pageHome">← 홈으로</a>
+
+      <div class="page-header evaluation-page-header">
+        <div>
+          <div class="section-index">INTERNAL ASSESSMENT / EYES ONLY</div>
+          <h2 class="section-title">C.E.T. 내부 평가</h2>
+          <p class="section-desc">
+            현장 판단·협업 성향·통제 가능성을 익명에 가까운 내부 기록으로 축적하는 최고 기밀 평가실입니다.
+            모든 열람과 작성 기록은 접속 계정에 귀속되며 외부 반출을 금합니다.
+          </p>
+        </div>
+        <div class="evaluation-page-actions">
+          <button class="register-btn" id="openEvaluationRequestBtn" type="button" style="display:none">
+            <span class="register-btn-plus">＋</span> 내부 평가 요청
+          </button>
+        </div>
+      </div>
+
+      <div class="evaluation-security-banner" aria-label="최고 기밀 경고">
+        <div class="evaluation-security-mark"><span>Ω</span></div>
+        <div class="evaluation-security-copy">
+          <strong>무단 열람 및 외부 전재 금지</strong>
+          <span>평가 내용은 인사 배치·작전 페어링·격리 심의에 참고될 수 있습니다.</span>
+        </div>
+        <div class="evaluation-security-level">CLEARANCE BLACK</div>
+      </div>
+
+      <div class="roster-gate" id="evaluationGate">
+        <p>C.E.T. 내부 평가는 로그인한 인가자만 열람하고 작성할 수 있습니다.</p>
+        <button class="auth-btn" id="evaluationAuthBtn" type="button">로그인 / 가입하기</button>
+      </div>
+
+      <div id="evaluationArea" style="display:none">
+        <section class="evaluation-zone">
+          <div class="evaluation-zone-head">
+            <h3>팀장 우선 평가</h3>
+            <span>Permanent Record · Fixed Priority</span>
+          </div>
+          <div class="evaluation-leader-frame">
+            <button class="evaluation-profile-card is-leader" id="dilemmaEvaluationCard" type="button" aria-label="팀장 딜레마 내부 평가 열기">
+              <div class="evaluation-card-stripe">
+                <strong>Capital Punishment Enforcement Team</strong>
+                <span>TOP PRIORITY</span>
+              </div>
+              <div class="evaluation-card-body">
+                <div class="evaluation-card-chip" aria-hidden="true"></div>
+                <div class="evaluation-card-data">
+                  <div class="evaluation-card-kicker">Mandatory Leadership Review</div>
+                  <div class="evaluation-card-name">Dilemma</div>
+                  <div class="evaluation-card-role">Team Leader · 팀장</div>
+                  <p class="evaluation-card-note">부서 전체의 지휘권자. 모든 인가 요원은 팀장에 대한 내부 평가 기록을 남길 수 있습니다.</p>
+                </div>
+              </div>
+              <div class="evaluation-card-footer">
+                <div class="evaluation-card-code"><small>Employee Code</small><strong>CET-666 / Ω</strong></div>
+                <div class="evaluation-card-barcode" aria-hidden="true"></div>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <section class="evaluation-zone">
+          <div class="evaluation-zone-head">
+            <h3>평가 요청 명부</h3>
+            <span>Requested Personnel Records</span>
+          </div>
+          <div class="evaluation-grid" id="evaluationTargetGrid">
+            <div class="evaluation-empty">등록된 내부 평가 요청이 없습니다.</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <div id="pageBulletin" class="page-hidden">
     <div class="shell">
       <a href="#" class="back-home" data-page="pageHome">← 홈으로</a>
@@ -3636,6 +4089,97 @@
     </div>
   </div>
 
+
+
+  <div class="modal-backdrop" id="evaluationRequestModal">
+    <div class="modal evaluation-modal evaluation-request-modal">
+      <button class="modal-close" id="evaluationRequestClose" type="button" aria-label="닫기">✕</button>
+      <div class="modal-eyebrow" id="evaluationRequestEyebrow">Confidential Review Request</div>
+      <h3 id="evaluationRequestTitle">내부 평가 요청서</h3>
+      <p class="modal-sub">사진 대신 사원증 뒷면 형식의 기밀 프로필 카드가 생성됩니다. 등록 후 인가 요원들이 카드를 눌러 평가를 작성할 수 있습니다.</p>
+
+      <form class="auth-form active evaluation-request-form" id="evaluationRequestForm">
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label for="evaluationTargetName">평가 대상 요원명</label>
+            <input id="evaluationTargetName" type="text" maxlength="40" placeholder="예: Pandora" required />
+          </div>
+          <div class="form-field">
+            <label for="evaluationTargetRole">직책 / 소속</label>
+            <input id="evaluationTargetRole" type="text" maxlength="40" placeholder="예: Hangman" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="evaluationTargetCode">사원 식별 코드</label>
+          <input id="evaluationTargetCode" type="text" maxlength="30" placeholder="예: CET-HM-017" required />
+        </div>
+        <div class="form-field">
+          <label for="evaluationTargetNote">평가 요청 안내</label>
+          <textarea id="evaluationTargetNote" maxlength="180" placeholder="함께 근무한 요원들에게 확인받고 싶은 내용이나 간단한 소개를 적어주세요." required></textarea>
+        </div>
+        <div class="form-error" id="evaluationRequestError"></div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button class="form-submit" id="evaluationRequestSubmit" type="submit">평가 요청 등록</button>
+          <button class="auth-btn" id="evaluationRequestCancelEdit" type="button" style="display:none">수정 취소</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="evaluationDetailModal">
+    <div class="modal evaluation-modal">
+      <button class="modal-close" id="evaluationDetailClose" type="button" aria-label="닫기">✕</button>
+      <div class="modal-eyebrow">Personnel Assessment Archive</div>
+      <h3>내부 평가 기록</h3>
+      <p class="modal-sub">평가 작성자는 표시 이름을 자유롭게 설정할 수 있지만, 실제 작성·수정 권한은 로그인 계정으로 판별됩니다.</p>
+
+      <div class="evaluation-detail-profile" id="evaluationDetailProfile"></div>
+      <div class="evaluation-record-head">
+        <strong>누적 평가 기록</strong>
+        <span id="evaluationRecordCount">0 RECORDS</span>
+      </div>
+      <div class="evaluation-record-list" id="evaluationRecordList">
+        <p class="post-empty">평가 기록을 불러오는 중…</p>
+      </div>
+
+      <form class="evaluation-write-form" id="evaluationForm">
+        <div class="evaluation-write-title">
+          <strong id="evaluationFormTitle">신규 내부 평가 작성</strong>
+          <span>CONFIDENTIAL ENTRY</span>
+        </div>
+        <p class="evaluation-edit-note">내가 작성한 내부 평가를 수정하고 있습니다.</p>
+        <div class="evaluation-write-grid">
+          <input id="evaluationAuthorName" type="text" maxlength="30" placeholder="평가자 표시 이름" required />
+          <select id="evaluationRelation" required>
+            <option value="작전 동행">작전 동행</option>
+            <option value="동일 부서">동일 부서</option>
+            <option value="직속 관계">직속 관계</option>
+            <option value="가이딩">가이딩</option>
+            <option value="관찰 기록">관찰 기록</option>
+            <option value="기타">기타</option>
+          </select>
+          <select id="evaluationGrade" required>
+            <option value="S">S 등급</option>
+            <option value="A" selected>A 등급</option>
+            <option value="B">B 등급</option>
+            <option value="C">C 등급</option>
+            <option value="D">D 등급</option>
+            <option value="보류">판정 보류</option>
+          </select>
+        </div>
+        <textarea id="evaluationBody" maxlength="1200" placeholder="현장 판단, 협업 태도, 명령 이행, 통제 가능성, 신뢰도 등을 자유롭게 기록하세요." required></textarea>
+        <div class="evaluation-write-foot">
+          <div class="form-error" id="evaluationError"></div>
+          <div class="evaluation-write-actions">
+            <button class="auth-btn" id="evaluationEditCancel" type="button" style="display:none">수정 취소</button>
+            <button class="form-submit" id="evaluationSubmit" type="submit">평가 등록</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
   <!-- Firebase Authentication — see setup instructions at bottom of file -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -3655,8 +4199,8 @@
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-    // Page switcher: home / bulletin / agent registry are separate top-level views
-    const PAGE_IDS = ['pageHome', 'pageBulletin', 'pageAgents'];
+    // Page switcher: home / internal evaluation / bulletin / agent registry are separate top-level views
+    const PAGE_IDS = ['pageHome', 'pageEvaluation', 'pageBulletin', 'pageAgents'];
     function showPage(id){
       PAGE_IDS.forEach((pid) => {
         const el = document.getElementById(pid);
@@ -3810,6 +4354,14 @@
       let unsubscribePosts = null;
       let unsubscribeAgents = null;
       let unsubscribeComments = null;
+      let unsubscribeEvaluationTargets = null;
+      let unsubscribeEvaluationRecords = null;
+      let evaluationTargetsCache = [];
+      let activeEvaluationTarget = null;
+      let editingEvaluationTargetId = null;
+      let editingEvaluationTargetOriginal = null;
+      let editingEvaluationId = null;
+      let editingEvaluationOriginal = null;
       let activePostId = null;
       let selectedPostFiles = [];
       let editingPostId = null;
@@ -3876,6 +4428,39 @@
       const agentOrderList = document.getElementById('agentOrderList');
       const agentOrderSave = document.getElementById('agentOrderSave');
       const agentOrderError = document.getElementById('agentOrderError');
+
+      const evaluationGate = document.getElementById('evaluationGate');
+      const evaluationAuthBtn = document.getElementById('evaluationAuthBtn');
+      const evaluationArea = document.getElementById('evaluationArea');
+      const openEvaluationRequestBtn = document.getElementById('openEvaluationRequestBtn');
+      const dilemmaEvaluationCard = document.getElementById('dilemmaEvaluationCard');
+      const evaluationTargetGrid = document.getElementById('evaluationTargetGrid');
+      const evaluationRequestModal = document.getElementById('evaluationRequestModal');
+      const evaluationRequestClose = document.getElementById('evaluationRequestClose');
+      const evaluationRequestForm = document.getElementById('evaluationRequestForm');
+      const evaluationRequestTitle = document.getElementById('evaluationRequestTitle');
+      const evaluationRequestEyebrow = document.getElementById('evaluationRequestEyebrow');
+      const evaluationTargetName = document.getElementById('evaluationTargetName');
+      const evaluationTargetRole = document.getElementById('evaluationTargetRole');
+      const evaluationTargetCode = document.getElementById('evaluationTargetCode');
+      const evaluationTargetNote = document.getElementById('evaluationTargetNote');
+      const evaluationRequestError = document.getElementById('evaluationRequestError');
+      const evaluationRequestSubmit = document.getElementById('evaluationRequestSubmit');
+      const evaluationRequestCancelEdit = document.getElementById('evaluationRequestCancelEdit');
+      const evaluationDetailModal = document.getElementById('evaluationDetailModal');
+      const evaluationDetailClose = document.getElementById('evaluationDetailClose');
+      const evaluationDetailProfile = document.getElementById('evaluationDetailProfile');
+      const evaluationRecordCount = document.getElementById('evaluationRecordCount');
+      const evaluationRecordList = document.getElementById('evaluationRecordList');
+      const evaluationForm = document.getElementById('evaluationForm');
+      const evaluationFormTitle = document.getElementById('evaluationFormTitle');
+      const evaluationAuthorName = document.getElementById('evaluationAuthorName');
+      const evaluationRelation = document.getElementById('evaluationRelation');
+      const evaluationGrade = document.getElementById('evaluationGrade');
+      const evaluationBody = document.getElementById('evaluationBody');
+      const evaluationError = document.getElementById('evaluationError');
+      const evaluationSubmit = document.getElementById('evaluationSubmit');
+      const evaluationEditCancel = document.getElementById('evaluationEditCancel');
 
       function escapeHtml(str){
         const div = document.createElement('div');
@@ -4002,6 +4587,12 @@
         agentsGate.style.display = loggedIn ? 'none' : 'flex';
         agentsArea.style.display = loggedIn ? 'block' : 'none';
 
+        if (evaluationGate) evaluationGate.style.display = loggedIn ? 'none' : 'flex';
+        if (evaluationArea) evaluationArea.style.display = loggedIn ? 'block' : 'none';
+        if (openEvaluationRequestBtn) openEvaluationRequestBtn.style.display = loggedIn ? 'inline-flex' : 'none';
+        if (!loggedIn && evaluationRequestModal) evaluationRequestModal.classList.remove('open');
+        if (!loggedIn && evaluationDetailModal) evaluationDetailModal.classList.remove('open');
+
         if (loggedIn) {
           const canPost = !!currentUserDoc.canPost;
           postForm.style.display = 'flex';
@@ -4027,6 +4618,387 @@
           agentOrderModal.classList.remove('open');
         }
       }
+
+
+      const DILEMMA_EVALUATION_TARGET = {
+        id: 'dilemma',
+        name: 'Dilemma',
+        role: 'Team Leader · 팀장',
+        code: 'CET-000 / Ω',
+        note: '부서 전체의 지휘권자. 모든 인가 요원은 팀장에 대한 내부 평가 기록을 남길 수 있습니다.',
+        fixed: true,
+        authorUid: '__system__'
+      };
+
+      function formatEvaluationDate(timestamp){
+        if (!timestamp || !timestamp.toDate) return '방금 전';
+        return timestamp.toDate().toLocaleString('ko-KR');
+      }
+
+      function defaultEvaluationAuthorName(){
+        return localStorage.getItem('cetEvaluationAuthorName')
+          || (currentUserDoc && currentUserDoc.username)
+          || (auth.currentUser ? emailToId(auth.currentUser.email) : '');
+      }
+
+      function normalizeEvaluationTarget(id, data){
+        return {
+          id,
+          name: String((data && data.name) || 'Unknown'),
+          role: String((data && data.role) || 'C.E.T. Personnel'),
+          code: String((data && data.code) || 'CET-CLASSIFIED'),
+          note: String((data && data.note) || '상세 기록 없음'),
+          authorUid: data && data.authorUid ? data.authorUid : '',
+          authorName: data && data.authorName ? data.authorName : '',
+          createdAt: data && data.createdAt ? data.createdAt : null,
+          updatedAt: data && data.updatedAt ? data.updatedAt : null,
+          fixed: id === 'dilemma'
+        };
+      }
+
+      function evaluationCardHtml(target, { leader = false } = {}){
+        const name = escapeHtml(target.name);
+        const role = escapeHtml(target.role);
+        const code = escapeHtml(target.code);
+        const note = escapeHtml(target.note);
+        const kicker = leader ? 'Mandatory Leadership Review' : 'Requested Personnel Review';
+        const stripe = leader ? 'TOP PRIORITY' : 'EYES ONLY';
+        return `
+          <div class="evaluation-card-stripe">
+            <strong>Capital Punishment Enforcement Team</strong>
+            <span>${stripe}</span>
+          </div>
+          <div class="evaluation-card-body">
+            <div class="evaluation-card-chip" aria-hidden="true"></div>
+            <div class="evaluation-card-data">
+              <div class="evaluation-card-kicker">${kicker}</div>
+              <div class="evaluation-card-name">${name}</div>
+              <div class="evaluation-card-role">${role}</div>
+              <p class="evaluation-card-note">${note}</p>
+            </div>
+          </div>
+          <div class="evaluation-card-footer">
+            <div class="evaluation-card-code"><small>Employee Code</small><strong>${code}</strong></div>
+            <div class="evaluation-card-barcode" aria-hidden="true"></div>
+          </div>
+        `;
+      }
+
+      function makeEvaluationTargetCard(target){
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'evaluation-profile-card';
+        button.setAttribute('aria-label', `${target.name} 내부 평가 열기`);
+        button.innerHTML = evaluationCardHtml(target);
+        button.addEventListener('click', () => openEvaluationDetail(target));
+        return button;
+      }
+
+      function renderEvaluationTargets(){
+        if (!evaluationTargetGrid) return;
+        evaluationTargetGrid.innerHTML = '';
+        const targets = evaluationTargetsCache.filter((target) => target.id !== 'dilemma');
+        if (!targets.length) {
+          evaluationTargetGrid.innerHTML = '<div class="evaluation-empty">등록된 내부 평가 요청이 없습니다.<br>상단의 ‘내부 평가 요청’ 버튼으로 기밀 프로필 카드를 생성할 수 있습니다.</div>';
+          return;
+        }
+        targets.forEach((target) => evaluationTargetGrid.appendChild(makeEvaluationTargetCard(target)));
+      }
+
+      function startEvaluationTargetsListener(){
+        if (!auth.currentUser || !currentUserDoc) return;
+        if (unsubscribeEvaluationTargets) unsubscribeEvaluationTargets();
+        unsubscribeEvaluationTargets = db.collection('evaluationTargets')
+          .orderBy('createdAt', 'asc')
+          .onSnapshot((snapshot) => {
+            evaluationTargetsCache = snapshot.docs.map((doc) => normalizeEvaluationTarget(doc.id, doc.data()));
+            renderEvaluationTargets();
+          }, (err) => {
+            console.error(err);
+            if (evaluationTargetGrid) {
+              evaluationTargetGrid.innerHTML = `<div class="evaluation-empty">평가 요청 명부를 불러오지 못했습니다.<br>${escapeHtml(describeDataError(err))}</div>`;
+            }
+          });
+      }
+
+      function resetEvaluationRequestForm(){
+        editingEvaluationTargetId = null;
+        editingEvaluationTargetOriginal = null;
+        evaluationRequestForm.reset();
+        evaluationTargetCode.value = `CET-${Math.random().toString(36).slice(2, 5).toUpperCase()}-${String(Date.now()).slice(-3)}`;
+        evaluationRequestTitle.textContent = '내부 평가 요청서';
+        evaluationRequestEyebrow.textContent = 'Confidential Review Request';
+        evaluationRequestSubmit.textContent = '평가 요청 등록';
+        evaluationRequestCancelEdit.style.display = 'none';
+        evaluationRequestError.textContent = '';
+      }
+
+      function openEvaluationRequest(target = null){
+        if (!auth.currentUser || !currentUserDoc) {
+          modal.classList.add('open');
+          return;
+        }
+        resetEvaluationRequestForm();
+        if (target) {
+          editingEvaluationTargetId = target.id;
+          editingEvaluationTargetOriginal = target;
+          evaluationTargetName.value = target.name;
+          evaluationTargetRole.value = target.role;
+          evaluationTargetCode.value = target.code;
+          evaluationTargetNote.value = target.note;
+          evaluationRequestTitle.textContent = '내부 평가 요청 정보 수정';
+          evaluationRequestEyebrow.textContent = 'Amend Confidential Record';
+          evaluationRequestSubmit.textContent = '요청 정보 수정';
+          evaluationRequestCancelEdit.style.display = 'inline-block';
+        }
+        evaluationRequestModal.classList.add('open');
+        evaluationRequestModal.scrollTop = 0;
+      }
+
+      function closeEvaluationRequest(){
+        evaluationRequestModal.classList.remove('open');
+        resetEvaluationRequestForm();
+      }
+
+      function canEditEvaluationTarget(target){
+        return !!(auth.currentUser && currentUserDoc && target && !target.fixed && (
+          currentUserDoc.role === 'admin' || target.authorUid === auth.currentUser.uid
+        ));
+      }
+
+      evaluationRequestForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!auth.currentUser || !currentUserDoc) return;
+        const name = evaluationTargetName.value.trim();
+        const role = evaluationTargetRole.value.trim();
+        const code = evaluationTargetCode.value.trim();
+        const note = evaluationTargetNote.value.trim();
+        evaluationRequestError.textContent = '';
+        if (!name || !role || !code || !note) {
+          evaluationRequestError.textContent = '모든 항목을 입력해주세요.';
+          return;
+        }
+        evaluationRequestSubmit.disabled = true;
+        evaluationRequestSubmit.textContent = editingEvaluationTargetId ? '수정 중…' : '등록 중…';
+        try {
+          if (editingEvaluationTargetId && editingEvaluationTargetOriginal) {
+            if (!canEditEvaluationTarget(editingEvaluationTargetOriginal)) throw new Error('이 요청 정보를 수정할 권한이 없습니다.');
+            await db.collection('evaluationTargets').doc(editingEvaluationTargetId).update({
+              name, role, code, note,
+              authorUid: editingEvaluationTargetOriginal.authorUid,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          } else {
+            await db.collection('evaluationTargets').add({
+              name, role, code, note,
+              authorUid: auth.currentUser.uid,
+              authorName: currentUserDoc.username || emailToId(auth.currentUser.email),
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          }
+          closeEvaluationRequest();
+        } catch (err) {
+          evaluationRequestError.textContent = `저장하지 못했습니다: ${describeDataError(err)}`;
+        } finally {
+          evaluationRequestSubmit.disabled = false;
+          evaluationRequestSubmit.textContent = editingEvaluationTargetId ? '요청 정보 수정' : '평가 요청 등록';
+        }
+      });
+
+      function resetEvaluationEditor({ keepName = true } = {}){
+        editingEvaluationId = null;
+        editingEvaluationOriginal = null;
+        evaluationForm.classList.remove('is-editing');
+        evaluationFormTitle.textContent = '신규 내부 평가 작성';
+        evaluationSubmit.textContent = '평가 등록';
+        evaluationEditCancel.style.display = 'none';
+        evaluationBody.value = '';
+        evaluationRelation.value = '작전 동행';
+        evaluationGrade.value = 'A';
+        if (!keepName) evaluationAuthorName.value = defaultEvaluationAuthorName();
+        evaluationError.textContent = '';
+      }
+
+      function closeEvaluationDetail(){
+        evaluationDetailModal.classList.remove('open');
+        activeEvaluationTarget = null;
+        if (unsubscribeEvaluationRecords) {
+          unsubscribeEvaluationRecords();
+          unsubscribeEvaluationRecords = null;
+        }
+        evaluationDetailProfile.innerHTML = '';
+        evaluationRecordList.innerHTML = '<p class="post-empty">평가 대상을 선택해주세요.</p>';
+        evaluationRecordCount.textContent = '0 RECORDS';
+        resetEvaluationEditor({ keepName: true });
+      }
+
+      function renderEvaluationDetailProfile(target){
+        evaluationDetailProfile.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = `evaluation-profile-card${target.fixed ? ' is-leader' : ''}`;
+        card.innerHTML = evaluationCardHtml(target, { leader: !!target.fixed });
+        evaluationDetailProfile.appendChild(card);
+
+        if (canEditEvaluationTarget(target)) {
+          const tools = document.createElement('div');
+          tools.className = 'evaluation-detail-tools';
+          const editButton = document.createElement('button');
+          editButton.type = 'button';
+          editButton.className = 'auth-btn';
+          editButton.textContent = '요청 카드 정보 수정';
+          editButton.addEventListener('click', () => {
+            closeEvaluationDetail();
+            openEvaluationRequest(target);
+          });
+          tools.appendChild(editButton);
+          evaluationDetailProfile.appendChild(tools);
+        }
+      }
+
+      function canEditEvaluationRecord(record){
+        return !!(auth.currentUser && currentUserDoc && record && (
+          currentUserDoc.role === 'admin' || record.authorUid === auth.currentUser.uid
+        ));
+      }
+
+      function renderEvaluationRecords(records){
+        evaluationRecordCount.textContent = `${records.length} RECORD${records.length === 1 ? '' : 'S'}`;
+        evaluationRecordList.innerHTML = '';
+        if (!records.length) {
+          evaluationRecordList.innerHTML = '<p class="post-empty">아직 등록된 평가가 없습니다. 첫 번째 기밀 기록을 남겨주세요.</p>';
+          return;
+        }
+        records.forEach(({ id, data }) => {
+          const record = document.createElement('article');
+          record.className = 'evaluation-record';
+          const edited = data.updatedAt ? ' · 수정됨' : '';
+          record.innerHTML = `
+            <div class="evaluation-record-top">
+              <div class="evaluation-record-author">
+                <strong>${escapeHtml(data.authorName || '익명 요원')}</strong>
+                <span>${escapeHtml(data.relation || '관계 미상')} · ${escapeHtml(formatEvaluationDate(data.createdAt))}${edited}</span>
+              </div>
+              <div class="evaluation-grade">${escapeHtml(data.grade || '보류')}</div>
+            </div>
+            <p>${escapeHtml(data.body || '')}</p>
+          `;
+          if (canEditEvaluationRecord(data)) {
+            const actions = document.createElement('div');
+            actions.className = 'evaluation-record-actions';
+            const edit = document.createElement('button');
+            edit.type = 'button';
+            edit.className = 'evaluation-record-action';
+            edit.textContent = '평가 수정';
+            edit.addEventListener('click', () => {
+              editingEvaluationId = id;
+              editingEvaluationOriginal = data;
+              evaluationForm.classList.add('is-editing');
+              evaluationFormTitle.textContent = '내부 평가 수정';
+              evaluationAuthorName.value = data.authorName || defaultEvaluationAuthorName();
+              evaluationRelation.value = data.relation || '작전 동행';
+              evaluationGrade.value = data.grade || 'A';
+              evaluationBody.value = data.body || '';
+              evaluationSubmit.textContent = '수정 저장';
+              evaluationEditCancel.style.display = 'inline-block';
+              evaluationError.textContent = '';
+              evaluationForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.className = 'evaluation-record-action';
+            remove.textContent = '평가 삭제';
+            remove.addEventListener('click', async () => {
+              if (!activeEvaluationTarget || !confirm('이 내부 평가 기록을 삭제할까요?')) return;
+              remove.disabled = true;
+              try {
+                await db.collection('evaluationTargets').doc(activeEvaluationTarget.id).collection('evaluations').doc(id).delete();
+              } catch (err) {
+                alert(`평가 삭제에 실패했습니다: ${describeDataError(err)}`);
+                remove.disabled = false;
+              }
+            });
+            actions.append(edit, remove);
+            record.appendChild(actions);
+          }
+          evaluationRecordList.appendChild(record);
+        });
+      }
+
+      function startEvaluationRecordsListener(targetId){
+        if (unsubscribeEvaluationRecords) unsubscribeEvaluationRecords();
+        evaluationRecordList.innerHTML = '<p class="post-empty">평가 기록을 불러오는 중…</p>';
+        unsubscribeEvaluationRecords = db.collection('evaluationTargets').doc(targetId).collection('evaluations')
+          .orderBy('createdAt', 'desc')
+          .onSnapshot((snapshot) => {
+            renderEvaluationRecords(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })));
+          }, (err) => {
+            evaluationRecordList.innerHTML = `<p class="post-empty">평가 기록을 불러오지 못했습니다 (${escapeHtml(describeDataError(err))}).</p>`;
+          });
+      }
+
+      function openEvaluationDetail(target){
+        if (!auth.currentUser || !currentUserDoc) {
+          modal.classList.add('open');
+          return;
+        }
+        activeEvaluationTarget = target;
+        renderEvaluationDetailProfile(target);
+        evaluationAuthorName.value = defaultEvaluationAuthorName();
+        resetEvaluationEditor({ keepName: true });
+        evaluationDetailModal.classList.add('open');
+        evaluationDetailModal.scrollTop = 0;
+        startEvaluationRecordsListener(target.id);
+      }
+
+      evaluationForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!auth.currentUser || !currentUserDoc || !activeEvaluationTarget) return;
+        const authorName = evaluationAuthorName.value.trim();
+        const relation = evaluationRelation.value;
+        const grade = evaluationGrade.value;
+        const body = evaluationBody.value.trim();
+        evaluationError.textContent = '';
+        if (!authorName || !body) {
+          evaluationError.textContent = '평가자 이름과 평가 내용을 입력해주세요.';
+          return;
+        }
+        localStorage.setItem('cetEvaluationAuthorName', authorName);
+        evaluationSubmit.disabled = true;
+        evaluationSubmit.textContent = editingEvaluationId ? '수정 중…' : '등록 중…';
+        try {
+          const ref = db.collection('evaluationTargets').doc(activeEvaluationTarget.id).collection('evaluations');
+          if (editingEvaluationId && editingEvaluationOriginal) {
+            if (!canEditEvaluationRecord(editingEvaluationOriginal)) throw new Error('이 평가를 수정할 권한이 없습니다.');
+            await ref.doc(editingEvaluationId).update({
+              authorUid: editingEvaluationOriginal.authorUid,
+              authorName, relation, grade, body,
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          } else {
+            await ref.add({
+              authorUid: auth.currentUser.uid,
+              authorName, relation, grade, body,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+          }
+          resetEvaluationEditor({ keepName: true });
+          evaluationAuthorName.value = authorName;
+        } catch (err) {
+          evaluationError.textContent = `평가를 저장하지 못했습니다: ${describeDataError(err)}`;
+        } finally {
+          evaluationSubmit.disabled = false;
+          evaluationSubmit.textContent = editingEvaluationId ? '수정 저장' : '평가 등록';
+        }
+      });
+
+      if (dilemmaEvaluationCard) dilemmaEvaluationCard.addEventListener('click', () => openEvaluationDetail(DILEMMA_EVALUATION_TARGET));
+      if (openEvaluationRequestBtn) openEvaluationRequestBtn.addEventListener('click', () => openEvaluationRequest());
+      if (evaluationRequestClose) evaluationRequestClose.addEventListener('click', closeEvaluationRequest);
+      if (evaluationRequestCancelEdit) evaluationRequestCancelEdit.addEventListener('click', closeEvaluationRequest);
+      if (evaluationRequestModal) evaluationRequestModal.addEventListener('click', (event) => { if (event.target === evaluationRequestModal) closeEvaluationRequest(); });
+      if (evaluationDetailClose) evaluationDetailClose.addEventListener('click', closeEvaluationDetail);
+      if (evaluationDetailModal) evaluationDetailModal.addEventListener('click', (event) => { if (event.target === evaluationDetailModal) closeEvaluationDetail(); });
+      if (evaluationEditCancel) evaluationEditCancel.addEventListener('click', () => resetEvaluationEditor({ keepName: true }));
 
       function formatPostDate(timestamp, short = false){
         if (!timestamp || !timestamp.toDate) return '방금 전';
@@ -5497,6 +6469,7 @@
 
       authBtn.addEventListener('click', openModal);
       if (rosterAuthBtn) rosterAuthBtn.addEventListener('click', openModal);
+      if (evaluationAuthBtn) evaluationAuthBtn.addEventListener('click', openModal);
       modalClose.addEventListener('click', closeModal);
       modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
@@ -5553,12 +6526,19 @@
             updatePermissionUI();
             startPostsListener();
             startAgentsListener();
+            startEvaluationTargetsListener();
           });
         } else {
           currentUserDoc = null;
           if (unsubscribePosts) { unsubscribePosts(); unsubscribePosts = null; }
           if (unsubscribeAgents) { unsubscribeAgents(); unsubscribeAgents = null; }
           if (unsubscribeComments) { unsubscribeComments(); unsubscribeComments = null; }
+          if (unsubscribeEvaluationTargets) { unsubscribeEvaluationTargets(); unsubscribeEvaluationTargets = null; }
+          if (unsubscribeEvaluationRecords) { unsubscribeEvaluationRecords(); unsubscribeEvaluationRecords = null; }
+          evaluationTargetsCache = [];
+          if (evaluationTargetGrid) evaluationTargetGrid.innerHTML = '<div class="evaluation-empty">로그인 후 이용할 수 있습니다.</div>';
+          if (evaluationRequestModal) evaluationRequestModal.classList.remove('open');
+          closeEvaluationDetail();
           closePostDetail();
           postsCache.clear();
           allBoardPosts = [];
