@@ -1675,6 +1675,203 @@
     .detail-ko{color:#858a93;font-size:.86rem;margin-bottom:14px}
     .detail-summary{color:#b4b8c0;font-size:.9rem;line-height:1.8}
 
+    .agent-detail-modal{
+      width:min(440px,calc(100vw - 40px));
+      max-height:90vh;
+      overflow:visible;
+      padding:28px;
+      transition:width .28s ease;
+    }
+
+    .agent-detail-modal.notes-open{
+      width:min(900px,calc(100vw - 54px));
+    }
+
+    .agent-detail-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:0;
+      max-height:calc(90vh - 56px);
+      overflow-y:auto;
+      overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .agent-detail-modal.notes-open .agent-detail-layout{
+      grid-template-columns:minmax(320px,390px) minmax(0,1fr);
+      gap:24px;
+    }
+
+    .agent-detail-main{min-width:0}
+
+    .agent-notes-toggle{
+      position:absolute;
+      top:50%;
+      right:-43px;
+      z-index:5;
+      transform:translateY(-50%);
+      width:43px;
+      min-height:142px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border:1px solid var(--line-bright);
+      border-left-color:rgba(194,43,53,.42);
+      border-radius:0 12px 12px 0;
+      background:linear-gradient(180deg,#151820,#090a0d);
+      color:#cfd2d8;
+      font-family:inherit;
+      cursor:pointer;
+      box-shadow:12px 0 30px rgba(0,0,0,.32);
+    }
+
+    .agent-notes-toggle:hover{
+      color:#fff;
+      border-color:var(--red-bright);
+      background:linear-gradient(180deg,rgba(143,23,32,.34),#090a0d);
+    }
+
+    .agent-notes-toggle strong{
+      writing-mode:vertical-rl;
+      font-size:.68rem;
+      letter-spacing:.12em;
+      font-weight:700;
+    }
+
+    .agent-notes-toggle span{
+      color:var(--red-bright);
+      font-size:1rem;
+      line-height:1;
+      transition:transform .25s ease;
+    }
+
+    .agent-detail-modal.notes-open .agent-notes-toggle span{transform:rotate(180deg)}
+
+    .agent-notes-panel{
+      display:none;
+      min-width:0;
+      padding:22px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:
+        linear-gradient(145deg,rgba(143,23,32,.08),transparent 45%),
+        #090a0d;
+      overflow-y:auto;
+    }
+
+    .agent-detail-modal.notes-open .agent-notes-panel{display:block}
+
+    .agent-notes-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:16px;
+      padding-bottom:13px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .agent-notes-head span{
+      display:block;
+      color:var(--red-bright);
+      font-size:.61rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .agent-notes-head strong{
+      display:block;
+      margin-top:4px;
+      color:#f0f0f2;
+      font-size:1rem;
+    }
+
+    .agent-notes-view{
+      min-height:210px;
+      color:#c2c6cd;
+      font-size:.86rem;
+      line-height:1.85;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .agent-notes-view.is-empty{
+      display:grid;
+      place-items:center;
+      color:#666c76;
+      text-align:center;
+      border:1px dashed var(--line-bright);
+      border-radius:11px;
+      padding:24px;
+    }
+
+    .agent-notes-form{display:none;gap:10px}
+    .agent-notes-form.open{display:grid}
+
+    .agent-notes-editor,
+    #agentProfileNotes{
+      width:100%;
+      min-height:250px;
+      resize:vertical;
+      background:#060708;
+      border:1px solid var(--line);
+      border-radius:9px;
+      padding:13px 14px;
+      color:var(--text);
+      font-family:inherit;
+      font-size:.86rem;
+      line-height:1.75;
+    }
+
+    .agent-notes-editor:focus,
+    #agentProfileNotes:focus{outline:none;border-color:var(--red-bright)}
+
+    .agent-notes-count{
+      color:var(--dim);
+      font-size:.68rem;
+      text-align:right;
+    }
+
+    .agent-notes-form-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:760px){
+      .agent-detail-modal,
+      .agent-detail-modal.notes-open{
+        width:100%;
+        max-height:calc(100dvh - 28px);
+        overflow-y:auto;
+        padding:22px 18px 18px;
+      }
+      .agent-detail-layout,
+      .agent-detail-modal.notes-open .agent-detail-layout{
+        display:block;
+        max-height:none;
+        overflow:visible;
+      }
+      .agent-notes-toggle{
+        position:sticky;
+        top:0;
+        right:auto;
+        transform:none;
+        width:100%;
+        min-height:42px;
+        margin:10px 0 0;
+        flex-direction:row;
+        border-radius:10px;
+        writing-mode:horizontal-tb;
+      }
+      .agent-notes-toggle strong{writing-mode:horizontal-tb}
+      .agent-notes-panel{margin-top:10px}
+      .agent-notes-view{min-height:150px}
+    }
+
     @media (max-width:640px){
       .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
       .agents-page-header{align-items:stretch}
@@ -1777,6 +1974,7 @@
       .process-step{padding-top:0}
       .process-dot{display:none}
       .roster{grid-template-columns:1fr 1fr}
+      .evaluation-grid{grid-template-columns:repeat(2,1fr)}
     }
 
     @media (max-width:640px){
@@ -2949,11 +3147,68 @@
       box-shadow:var(--shadow);
     }
 
+    #pageEvaluation > .shell{
+      width:min(1480px,calc(100% - 38px));
+    }
+
     .evaluation-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(250px,250px));
-      justify-content:start;
+      grid-template-columns:repeat(4,minmax(0,1fr));
       gap:18px;
+    }
+
+    .evaluation-grid .evaluation-profile-card{
+      min-height:214px;
+      border-radius:16px;
+    }
+
+    .evaluation-grid .evaluation-card-stripe{
+      height:34px;
+      padding:0 13px;
+    }
+
+    .evaluation-grid .evaluation-card-stripe strong{
+      max-width:72%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      font-size:.58rem;
+    }
+
+    .evaluation-grid .evaluation-card-body{
+      grid-template-columns:44px minmax(0,1fr);
+      gap:12px;
+      padding:16px 15px 10px;
+    }
+
+    .evaluation-grid .evaluation-card-chip{
+      width:42px;
+      height:34px;
+      border-radius:6px;
+    }
+
+    .evaluation-grid .evaluation-card-kicker{font-size:.57rem}
+    .evaluation-grid .evaluation-card-name{font-size:1.28rem}
+    .evaluation-grid .evaluation-card-role{font-size:.71rem}
+    .evaluation-grid .evaluation-card-note{
+      margin-top:8px;
+      font-size:.68rem;
+      line-height:1.48;
+      -webkit-line-clamp:2;
+    }
+
+    .evaluation-grid .evaluation-card-footer{
+      padding:0 15px 14px;
+    }
+
+    .evaluation-grid .evaluation-card-barcode{
+      width:62px;
+      height:23px;
+    }
+
+    .evaluation-grid .evaluation-profile-card::after{
+      font-size:3.7rem;
+      bottom:19px;
     }
 
     .evaluation-card-stack{
@@ -2998,8 +3253,8 @@
       --card-glow:var(--eval-accent);
       position:relative;
       width:100%;
-      max-width:340px;
-      min-height:248px;
+      max-width:none;
+      min-height:270px;
       overflow:hidden;
       display:flex;
       flex-direction:column;
@@ -3034,7 +3289,7 @@
 
     .evaluation-profile-card.is-leader{
       --eval-accent:var(--red-bright);
-      min-height:248px;
+      min-height:270px;
       border-color:rgba(194,43,53,.58);
       animation:leader-glow-pulse 3.2s ease-in-out infinite;
     }
@@ -3403,6 +3658,7 @@
       .evaluation-security-level{grid-column:2}
       .evaluation-security-banner::after{right:-20px;font-size:2.3rem}
       .evaluation-grid{grid-template-columns:1fr;justify-content:stretch}
+      .evaluation-grid .evaluation-profile-card{min-height:220px}
       .evaluation-leader-frame{padding:10px}
       .evaluation-card-stack.leader{width:100%}
       .evaluation-profile-card{max-width:none;min-height:235px}
@@ -4271,6 +4527,12 @@
         </div>
 
         <div class="form-field">
+          <label for="agentProfileNotes">요원 정보 · 설정 (선택)</label>
+          <textarea id="agentProfileNotes" maxlength="5000" placeholder="성격, 능력 설정, 과거, 관계, 습관, 말투, 작전 메모 등 자유롭게 기록하세요."></textarea>
+          <span class="upload-help"><span id="agentProfileNotesCount">0</span> / 5000자 · 상세 화면의 기밀 기록 패널에 표시됩니다.</span>
+        </div>
+
+        <div class="form-field">
           <label>기밀 정보 (선택, 최대 3개)</label>
           <div class="dossier-input-row">
             <input id="agentRow1Label" type="text" placeholder="항목명 (예: 각성 능력)" maxlength="12" />
@@ -4296,9 +4558,34 @@
   </div>
 
   <div class="modal-backdrop" id="agentDetailModal">
-    <div class="modal" style="width:min(420px,100%)">
+    <div class="modal agent-detail-modal" id="agentDetailPanel">
       <button class="modal-close" id="agentDetailClose" type="button" aria-label="닫기">✕</button>
-      <div id="agentDetailBody"></div>
+      <button class="agent-notes-toggle" id="agentNotesToggle" type="button" aria-expanded="false">
+        <strong id="agentNotesToggleText">기밀 기록 열기</strong>
+        <span aria-hidden="true">›</span>
+      </button>
+      <div class="agent-detail-layout">
+        <div class="agent-detail-main" id="agentDetailBody"></div>
+        <aside class="agent-notes-panel" id="agentNotesPanel">
+          <div class="agent-notes-head">
+            <div>
+              <span>Classified Personnel File</span>
+              <strong>요원 정보 · 설정</strong>
+            </div>
+            <button class="auth-btn" id="agentNotesEditBtn" type="button" style="display:none">기록 수정</button>
+          </div>
+          <div class="agent-notes-view is-empty" id="agentNotesView">등록된 요원 정보가 없습니다.</div>
+          <form class="agent-notes-form" id="agentNotesForm">
+            <textarea class="agent-notes-editor" id="agentNotesEditor" maxlength="5000" placeholder="요원 정보와 설정을 입력하세요."></textarea>
+            <div class="agent-notes-count"><span id="agentNotesEditorCount">0</span> / 5000자</div>
+            <div class="form-error" id="agentNotesError"></div>
+            <div class="agent-notes-form-actions">
+              <button class="auth-btn" id="agentNotesCancel" type="button">취소</button>
+              <button class="form-submit" id="agentNotesSave" type="submit">기록 저장</button>
+            </div>
+          </form>
+        </aside>
+      </div>
     </div>
   </div>
 
@@ -6253,8 +6540,22 @@
       const agentModal = document.getElementById('agentModal');
       const agentModalClose = document.getElementById('agentModalClose');
       const agentDetailModal = document.getElementById('agentDetailModal');
+      const agentDetailPanel = document.getElementById('agentDetailPanel');
       const agentDetailClose = document.getElementById('agentDetailClose');
       const agentDetailBody = document.getElementById('agentDetailBody');
+      const agentNotesToggle = document.getElementById('agentNotesToggle');
+      const agentNotesToggleText = document.getElementById('agentNotesToggleText');
+      const agentNotesPanel = document.getElementById('agentNotesPanel');
+      const agentNotesView = document.getElementById('agentNotesView');
+      const agentNotesEditBtn = document.getElementById('agentNotesEditBtn');
+      const agentNotesForm = document.getElementById('agentNotesForm');
+      const agentNotesEditor = document.getElementById('agentNotesEditor');
+      const agentNotesEditorCount = document.getElementById('agentNotesEditorCount');
+      const agentNotesError = document.getElementById('agentNotesError');
+      const agentNotesCancel = document.getElementById('agentNotesCancel');
+      const agentNotesSave = document.getElementById('agentNotesSave');
+      const agentProfileNotes = document.getElementById('agentProfileNotes');
+      const agentProfileNotesCount = document.getElementById('agentProfileNotesCount');
 
       const agentRoleSelect = document.getElementById('agentRole');
       const agentRoleOtherWrap = document.getElementById('agentRoleOtherWrap');
@@ -6274,6 +6575,8 @@
       let existingAgentPhotoUrl = '';
       let existingAgentPhotoPath = '';
       let removeExistingAgentPhoto = false;
+      let activeAgentDetailId = null;
+      let activeAgentDetailData = null;
       let agentsCache = [];
       let agentOrderDraft = { leaders: [], guides: [], field: [] };
 
@@ -6282,6 +6585,18 @@
         agentRoleOtherWrap.style.display = isOther ? 'flex' : 'none';
         agentRoleOther.required = isOther;
       });
+
+      function updateAgentNotesCount(input, output){
+        if (!input || !output) return;
+        output.textContent = String(input.value.length);
+      }
+
+      if (agentProfileNotes) {
+        agentProfileNotes.addEventListener('input', () => updateAgentNotesCount(agentProfileNotes, agentProfileNotesCount));
+      }
+      if (agentNotesEditor) {
+        agentNotesEditor.addEventListener('input', () => updateAgentNotesCount(agentNotesEditor, agentNotesEditorCount));
+      }
 
       function renderAgentPhotoPreview(){
         agentPhotoPreview.innerHTML = '';
@@ -6368,6 +6683,8 @@
         existingAgentPhotoUrl = '';
         existingAgentPhotoPath = '';
         removeExistingAgentPhoto = false;
+        if (agentProfileNotes) agentProfileNotes.value = '';
+        updateAgentNotesCount(agentProfileNotes, agentProfileNotesCount);
         renderAgentPhotoPreview();
         agentFormEyebrow.textContent = 'Register New Hangman';
         agentFormTitle.textContent = '신규 요원 등록';
@@ -6385,14 +6702,36 @@
         });
       }
       function closeAgentModal(){ agentModal.classList.remove('open'); resetAgentForm(); }
-      function openAgentDetail(){ agentDetailModal.classList.add('open'); }
-      function closeAgentDetail(){ agentDetailModal.classList.remove('open'); agentDetailBody.innerHTML = ''; }
+      function setAgentNotesOpen(open){
+        if (!agentDetailPanel) return;
+        agentDetailPanel.classList.toggle('notes-open', !!open);
+        agentNotesToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        agentNotesToggleText.textContent = open ? '기밀 기록 닫기' : '기밀 기록 열기';
+      }
+      function openAgentDetail(){
+        setAgentNotesOpen(false);
+        agentDetailModal.classList.add('open');
+      }
+      function closeAgentDetail(){
+        agentDetailModal.classList.remove('open');
+        setAgentNotesOpen(false);
+        activeAgentDetailId = null;
+        activeAgentDetailData = null;
+        agentDetailBody.innerHTML = '';
+        agentNotesView.textContent = '등록된 요원 정보가 없습니다.';
+        agentNotesView.classList.add('is-empty');
+        agentNotesForm.classList.remove('open');
+        agentNotesError.textContent = '';
+      }
 
       openAgentModalBtn.addEventListener('click', () => { resetAgentForm(); openAgentModal(); });
       agentModalClose.addEventListener('click', closeAgentModal);
       agentModal.addEventListener('click', (e) => { if (e.target === agentModal) closeAgentModal(); });
       agentDetailClose.addEventListener('click', closeAgentDetail);
       agentDetailModal.addEventListener('click', (e) => { if (e.target === agentDetailModal) closeAgentDetail(); });
+      agentNotesToggle.addEventListener('click', () => {
+        setAgentNotesOpen(!agentDetailPanel.classList.contains('notes-open'));
+      });
       document.addEventListener('keydown', (e) => {
         if (e.key !== 'Escape') return;
         closeAgentModal();
@@ -6405,6 +6744,8 @@
         document.getElementById('agentName').value = a.name || '';
         document.getElementById('agentKo').value = a.ko || '';
         document.getElementById('agentSummary').value = a.summary || '';
+        if (agentProfileNotes) agentProfileNotes.value = a.profileNotes || '';
+        updateAgentNotesCount(agentProfileNotes, agentProfileNotesCount);
         editingAgentAuthorUid = a.authorUid || (auth.currentUser && auth.currentUser.uid) || '';
         selectedAgentPhotoFile = null;
         existingAgentPhotoUrl = a.photoUrl || '';
@@ -6465,9 +6806,62 @@
         return img;
       }
 
+      function renderAgentNotesPanel(){
+        const data = activeAgentDetailData || {};
+        const notes = String(data.profileNotes || '').trim();
+        agentNotesView.textContent = notes || '아직 등록된 요원 정보와 설정이 없습니다.';
+        agentNotesView.classList.toggle('is-empty', !notes);
+        agentNotesView.style.display = 'block';
+        agentNotesForm.classList.remove('open');
+        agentNotesEditor.value = notes;
+        updateAgentNotesCount(agentNotesEditor, agentNotesEditorCount);
+        agentNotesError.textContent = '';
+        agentNotesEditBtn.style.display = canModerateAgent(data) ? 'inline-flex' : 'none';
+      }
+
+      function beginAgentNotesEdit(){
+        if (!activeAgentDetailData || !canModerateAgent(activeAgentDetailData)) return;
+        agentNotesEditor.value = activeAgentDetailData.profileNotes || '';
+        updateAgentNotesCount(agentNotesEditor, agentNotesEditorCount);
+        agentNotesView.style.display = 'none';
+        agentNotesForm.classList.add('open');
+        agentNotesError.textContent = '';
+        agentNotesEditor.focus();
+      }
+
+      function cancelAgentNotesEdit(){
+        renderAgentNotesPanel();
+      }
+
+      agentNotesEditBtn.addEventListener('click', beginAgentNotesEdit);
+      agentNotesCancel.addEventListener('click', cancelAgentNotesEdit);
+      agentNotesForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!activeAgentDetailId || !activeAgentDetailData || !canModerateAgent(activeAgentDetailData)) {
+          agentNotesError.textContent = '이 기록을 수정할 권한이 없습니다.';
+          return;
+        }
+        const profileNotes = agentNotesEditor.value.trim();
+        agentNotesSave.disabled = true;
+        agentNotesSave.textContent = '저장 중…';
+        agentNotesError.textContent = '';
+        try {
+          await db.collection('agents').doc(activeAgentDetailId).update({ profileNotes });
+          activeAgentDetailData = Object.assign({}, activeAgentDetailData, { profileNotes });
+          renderAgentNotesPanel();
+        } catch (err) {
+          agentNotesError.textContent = `기록 저장 오류: ${describeDataError(err)}`;
+        } finally {
+          agentNotesSave.disabled = false;
+          agentNotesSave.textContent = '기록 저장';
+        }
+      });
+
       function openAgentDetailFor(id, a){
         const rows = Array.isArray(a.dossier) ? a.dossier : [];
         const canModerate = canModerateAgent(a);
+        activeAgentDetailId = id;
+        activeAgentDetailData = a;
 
         agentDetailBody.innerHTML = '';
         agentDetailBody.appendChild(makePhotoElement(a.photoUrl, a.name, 'detail-photo', 'detail-placeholder'));
@@ -6514,6 +6908,7 @@
           agentDetailBody.appendChild(actions);
         }
 
+        renderAgentNotesPanel();
         openAgentDetail();
       }
 
@@ -6797,6 +7192,7 @@
         const roleChoice = agentRoleSelect.value;
         const role = roleChoice === 'Other' ? agentRoleOther.value.trim() : roleChoice;
         const summary = document.getElementById('agentSummary').value.trim();
+        const profileNotes = agentProfileNotes ? agentProfileNotes.value.trim() : '';
         if (!name || !ko || !role || !summary) {
           agentError.textContent = '이름, 직책, 소개를 모두 입력해주세요.';
           return;
@@ -6831,7 +7227,7 @@
             photoPath = '';
           }
 
-          const payload = { name, ko, role, summary, photoUrl, photoPath, dossier };
+          const payload = { name, ko, role, summary, profileNotes, photoUrl, photoPath, dossier };
 
           if (editingAgentId) {
             await db.collection('agents').doc(editingAgentId).update(payload);
